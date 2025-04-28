@@ -1,0 +1,305 @@
+.container {
+	min-height: 100vh;
+	background-color: var(--white);
+	padding: 0 80px 0 80px;
+}
+
+/* NAVBAR */
+header {
+	padding: 40px 0 8px 0;
+	display: flex;
+	justify-content: space-between;
+	height: auto;
+	position: sticky;
+	top: 0px;
+	background-color: var(--white);
+
+/*	border: 1px solid blue;*/
+}
+
+.navLogo {
+	display: flex;
+	gap: 18px;
+}
+
+.logo {
+	height: 100px;
+	width: 100px;
+	border-radius: 18px;
+	cursor: pointer;
+}
+
+.nameContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding-bottom: 8px;
+}
+
+.nameContainer h2 {
+	color: var(--light-blue);
+	cursor: pointer;
+	font-size: 38px;
+}
+
+.nameContainer h3 {
+	color: var(--dark-blue);
+	cursor: pointer;
+	font-size: 23px;
+}
+
+.navItems {
+	display: flex;
+	align-items: center;
+	gap: 30px;
+}
+
+header a {
+	text-decoration: none;
+	color: var(--dark-blue);
+	font-size: 23px;
+}
+
+.active, .navItems a:hover {
+	border-bottom: 3px solid var(--dark-blue);
+}
+
+
+
+.mainContainer {
+	overflow-y: scroll;	
+}
+
+section {
+	min-height: 90vh;
+}
+
+
+
+/* HOME */
+.home {
+	display: flex;
+	justify-content: space-between;
+}
+
+.homeLeft, .homeImg {
+	flex: 1 1 0;
+	width: 0;
+}
+
+.homeLeft {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+
+/*	border: 1px solid red;*/
+}
+
+.homeLeft div {
+	display: flex;
+	gap: 30px;
+}
+
+.homeText {
+	flex-direction: column;
+}
+
+.homeText h1 {
+	font-size: 70px;
+	color: var(--dark-blue);
+}
+
+.homeText h4 {
+	width: 80%;
+	font-size: 23px;
+	color: var(--light-blue);
+}
+
+.homeBtn {
+	height: 80px;
+	width: 75%;
+
+/*	border: 1px solid red;*/
+}
+
+.homeImg, .aboutImg{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+/*	border: 1px solid green;*/
+}
+
+.homeImg img, .aboutImg img {
+	width: 90%
+
+/*	border: 1px solid blue;*/
+}
+
+
+
+/* ABOUT */
+.about {
+	display: flex;
+	justify-content: space-between;
+}
+
+.aboutImg {
+	width: 35%;
+
+/*	border: 1px solid yellow;*/
+}
+
+.aboutText {
+	width: 65%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 25px;
+	padding-left: 50px;
+
+/*	border: 1px solid green;*/
+}
+
+.aboutText h2 {
+	font-size: 85px;
+	color: var(--dark-blue);
+}
+
+.aboutText p {
+	font-size: 25px;
+	word-spacing: 2px;
+	color: var(--dark-blue);
+}
+
+.aboutText div {
+	height: 30px;
+	width: 260px;
+}
+
+
+
+/* TREATMENTS */
+.treatments {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 50px;
+}
+
+.treatments h1 {
+	font-size: 80px;
+	color: var(--dark-blue);
+}
+
+.treatments_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 80px;
+}
+
+.treatments_container div {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--dark-blue);
+	border-radius: 10px;
+	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.treatments_container img {
+	width: 300px;
+	height: 180px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.treatments_container p {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	font-size: 18px;
+	color: var(--white);
+}
+
+
+/* CLINIC HOURS */
+.clinicHours {
+	display: flex;
+	justify-content: space-between;
+	gap: 50px;
+	margin: 0 100px;
+	padding: 80px 0;
+
+}
+
+.clinicHoursText {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 30%;
+	padding: 30px;
+/*	gap: 30px;*/
+	border-radius: 30px;
+	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+/*	border: 1px solid red;*/
+}
+
+.clinicSchedule {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: 20px;
+	width: 100%;
+}
+
+.clinicHoursText h3 {
+	font-size: 48px;
+	color: var(--dark-blue);
+}
+
+.clinicSchedule h4 {
+	font-size: 18px;
+	color: var(--dark-blue);
+}
+
+.clinicDay div {
+	display: flex;
+	justify-content: space-between;
+	font-size: 23px;
+	color: var(--dark-blue);
+	padding: 13px 10px;
+	border-collapse: collapse;
+	border-top: 1px solid var(--dark-blue);
+	border-bottom: 1px solid var(--dark-blue);
+}
+
+.clinicHoursTextFooter {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 13px;
+	color: var(--dark-blue);
+}
+
+.clinicHoursTextFooter div {
+	display: flex;
+	gap: 30px;
+}
+
+.clinicHoursTextFooter i {
+	font-size: 30px;
+}
+
+.clinicHoursMap {
+	width: 70%;
+	border-radius: 30px;
+
+	border: 1px solid red;
+}
