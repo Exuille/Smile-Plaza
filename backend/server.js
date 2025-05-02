@@ -5,6 +5,7 @@ import cors from "cors"
 import authRoutes from "./routes/authRoutes.js"
 import appointmentRoutes from "./routes/appointmentRoutes.js"
 import announcementRoutes from "./routes/announcementRoutes.js"
+import holidayRoutes from "./routes/holidayRoutes.js"
 
 dotenv.config()
 
@@ -22,6 +23,7 @@ app.use(express.json())
 app.use("/auth", authRoutes)
 app.use("/appointment", appointmentRoutes)
 app.use("/announcement", announcementRoutes)
+app.use("/holiday", holidayRoutes)
 
 // Error handling middleware
 app.use((err, req, res, next) => {
