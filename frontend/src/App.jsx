@@ -4,6 +4,7 @@ import './App.css';
 
 // Public pages
 import Home from './pages/Home';
+import Contact from './pages/Contact';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 
@@ -30,6 +31,7 @@ function App() {
       {/* Public and Patient Routes */}
       <Route path="/" element={<PatientLayout />}>
         <Route index element={<Home />} />
+        <Route path="contact" element={<Contact />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="dashboard" element={<PatientDashboard />} />

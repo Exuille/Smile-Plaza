@@ -37,6 +37,12 @@ const NavBar = () => {
         >
           Appointments
         </NavLink>
+        <NavLink 
+          to="/contact" 
+          className={({ isActive }) => (isActive ? "nav-link active-link" : "nav-link")}
+        >
+          Contact Us
+        </NavLink>
       </div>
       <div className="nav-end">
         <NavLink 
