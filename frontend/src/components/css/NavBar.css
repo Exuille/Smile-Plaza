@@ -24,17 +24,17 @@ nav {
     flex-direction: column;
 }
 
-h2, h3 {
+.text-container h2, .text-container h3 {
     margin: 0;
     padding: 0;
     line-height: 1;
 }
 
-h2 {
+.text-container h2 {
     color: #3D90D7;
 }
 
-h3 {
+.text-container h3 {
     color: #547792;
 }
 
@@ -44,7 +44,7 @@ h3 {
 }
 
 .nav-link {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 550;
     color: #3A59D1;
     text-decoration: none;
@@ -62,7 +62,7 @@ h3 {
 }
 
 .login-btn, .signup-btn {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: bold;
     text-decoration: none;
     padding: 6px 12px;
