@@ -13,9 +13,9 @@ const AppointmentSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: ['pending', 'completed', 'cancelled'],
-        default: 'pending'
+        default: 'pending'   
     },
 }, { timestamps: true });
 
 const Appointment = mongoose.model("Appointment", AppointmentSchema);
-export default Appointment;
+export default Appointment; 
