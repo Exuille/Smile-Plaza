@@ -25,7 +25,6 @@ hr {
     border: 1px solid #e0e0e0;
     margin: 12px 0;
 }
-  
 
 form {
     display: flex;
@@ -44,6 +43,21 @@ input {
     border-radius: 6px;
     border: 3px solid #3A59D1;
     box-shadow: 0px 2px 0px 1px rgba(58,89,209,1);
+    padding: 12px;
+}
+
+.names-container {
+    display: flex;
+    width: 90%;
+    gap: 12px;
+}
+
+.names-container label {
+    margin-left: 0;
+}
+
+.names-container div input {
+    width: 100%;
 }
 
 button {
@@ -53,6 +67,12 @@ button {
     border-radius: 6px;
     border: 1px solid #3A59D1;
     background-color: #3A59D1;
+}
+
+input:focus,
+input:active {
+    outline: none;
+    border-color: #3A59D1;
 }
 
 label {
