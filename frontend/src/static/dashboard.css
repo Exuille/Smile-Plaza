@@ -29,7 +29,7 @@
 }
   
 .table-wrapper thead {
-    background-color: #213448;
+    background-color: #3A59D1;
     color: #fff;
 }
   
@@ -75,7 +75,7 @@
 }
 
 .table-wrapper select:focus {
-    border-color: #213448;
+    border-color: #3A59D1;
     outline: none;
     background-color: #ffffff;
 }
@@ -134,8 +134,8 @@
     font-weight: bold;
     width: 88%;
     border-radius: 6px;
-    border: 1px solid #213448;
-    background-color: #213448;
+    border: 1px solid #3A59D1;
+    background-color: #3A59D1;
 }
 
 .dropdown-menu {
@@ -165,7 +165,7 @@
 }
   
 .dropdown-menu button:hover {
-    background-color: #213448;
+    background-color: #3A59D1;
     color: #ffffff;
 }
   
