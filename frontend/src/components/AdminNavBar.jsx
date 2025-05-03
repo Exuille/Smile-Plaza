@@ -24,7 +24,7 @@ const AdminNavBar = () => {
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <div className="nav-center">
           <NavLink 
-            to="/admin/" 
+            to="/admin" 
             end
             className={({ isActive }) => (isActive ? "nav-link active-link" : "nav-link")}
           >
