@@ -24,6 +24,7 @@
     color: #3A59D1;
     font-size: 2.5rem;
     font-weight: bold;
+    line-height: 1.2;
 }
 
 .left-panel .basic-text {
@@ -56,5 +57,10 @@
 
     .right-panel {
         display: none;
+    }
+    
+    .left-text-container {
+        width: 90%;
+        margin: 0 0 72px 0;
     }
 }
