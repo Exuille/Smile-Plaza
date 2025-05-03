@@ -77,6 +77,11 @@
     width: 100%;
 }
 
+.profile-input::placeholder {
+    color: #183b4e;
+    opacity: 1;
+}
+
 .profile-info-btns {
     display: none;
     gap: 20px;
