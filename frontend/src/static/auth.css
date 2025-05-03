@@ -9,7 +9,7 @@
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e0e0e0;
+    border: 1px solid #3A59D1;
     overflow: hidden;
 }
 
@@ -69,13 +69,19 @@ hr {
 .auth-btn {
     color: white;
     font-weight: bold;
+    margin-top: 16px;
     width: 88%;
-    border-radius: 6px;
+    border-radius: 16px;
+    border: 1px solid #27548A;
+    background-color: #27548A;
+}
+
+.auth-btn:hover {
     border: 1px solid #3A59D1;
     background-color: #3A59D1;
 }
 
-label {
+.auth-label {
     margin-left: 20px;
     font-size: 0.9rem;
     font-weight: 500;
@@ -83,7 +89,7 @@ label {
     align-self: flex-start;
 }
 
-label, .auth-btn, .signup-recovery-a {
+.auth-label, .signup-recovery-a {
     margin-top: 12px;
 }
 
@@ -111,5 +117,10 @@ label, .auth-btn, .signup-recovery-a {
 @media (max-width: 767px) {
     .auth-container {
       width: 90%;
+    }
+    
+    .left-text-container {
+        width: 90%;
+        margin: 0 0 72px 0;
     }
 }

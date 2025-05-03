@@ -10,17 +10,17 @@ class Signup extends Component {
         <form className="auth-form">
             <div className="names-container">
               <div>
-                <label htmlFor="firstName">First Name</label>
+                <label htmlFor="firstName" className="auth-label">First Name</label>
                 <input type="name" id="firstName" className="auth-input" required />
               </div>
               <div>
-                <label htmlFor="lastName">Last Name</label>
+                <label htmlFor="lastName" className="auth-label">Last Name</label>
                 <input type="name" id="lastName" className="auth-input" required />
               </div>
             </div>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email" className="auth-label">Email</label>
             <input type="email" id="email" className="auth-input" required />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className="auth-label">Password</label>
             <input type="password" id="password" className="auth-input" required />
           <button type="submit" className="auth-btn">Sign Up</button>
         </form>
