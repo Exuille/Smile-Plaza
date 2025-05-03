@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 12px;
 }
 
@@ -109,4 +110,15 @@ iframe {
     border: 1px solid #000000;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+@media (max-width: 767px) {
+    .tab {
+        width: 90%;
+    }
+
+    iframe {
+        margin-block: 1rem;
+        width: 90%;
+    }
 }
