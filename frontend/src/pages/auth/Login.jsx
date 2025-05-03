@@ -8,9 +8,9 @@ class Login extends Component {
         <h2>Login</h2>
         <hr />
         <form className="auth-form">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email" className="auth-label">Email</label>
             <input type="email" id="email" className="auth-input" required />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className="auth-label">Password</label>
             <input type="password" id="password" className="auth-input" required />
           <button type="submit" className="auth-btn">Login</button>
         </form>
