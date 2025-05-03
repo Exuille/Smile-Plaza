@@ -112,4 +112,9 @@ label, .auth-btn, .signup-recovery-a {
     .auth-container {
       width: 90%;
     }
+    
+    .left-text-container {
+        width: 90%;
+        margin: 0 0 72px 0;
+    }
 }
