@@ -111,6 +111,5 @@ label, .auth-btn, .signup-recovery-a {
 @media (max-width: 767px) {
     .auth-container {
       width: 90%;
-      height: auto;
     }
 }
