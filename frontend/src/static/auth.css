@@ -75,7 +75,7 @@ hr {
     background-color: #3A59D1;
 }
 
-label {
+.auth-label {
     margin-left: 20px;
     font-size: 0.9rem;
     font-weight: 500;
@@ -83,7 +83,7 @@ label {
     align-self: flex-start;
 }
 
-label, .auth-btn, .signup-recovery-a {
+.auth-label, .auth-btn, .signup-recovery-a {
     margin-top: 12px;
 }
 
