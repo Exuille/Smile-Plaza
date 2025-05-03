@@ -3,7 +3,6 @@ import '../../static/profile.css'
 import * as images from '../../assets/img/img.js'
 
 const Profile = () => {
-
   const infoBtns = useRef();
   const nameInp = useRef();
   const emailInp = useRef();
@@ -36,26 +35,22 @@ const Profile = () => {
       <div className="profile-top-container">
         <img className="profile-top-pic" src={images.logo} />
         <div className="profile-top-info">
-          <h2>Shrek</h2>
-          <div className="profile-top-btns">
-            <button onClick={editProfile} className="btn defaultBtn">Edit Profile</button>
-            <button className="btn defaultBtn">Reset Password</button>
-          </div>
+          <p className="name"><strong>Juan Dela Cruz</strong></p>
+          <p className="email">email@gmail.com</p>
         </div>
       </div>
       
       <div className="profile-info-container">
-        <h1><span>Account Information</span></h1>
         <div className="profile-info">
-          <h4>Name</h4>
+          <label htmlFor="" className="profile-label">Name</label>
           <input ref={nameInp} className="profile-input" value="Shrek" disabled />
         </div>
         <div className="profile-info">
-          <h4>Email</h4>
+          <label htmlFor="" className="profile-label">Email</label>
           <input ref={emailInp} className="profile-input" value="shrek@gmail.com" disabled />
         </div>
         <div className="profile-info">
-          <h4>Contact Number</h4>
+          <label htmlFor="" className="profile-label">Contact Number</label>
           <input ref={contactInp} className="profile-input" value="092132435476" disabled />
         </div>
         <div ref={infoBtns} className="profile-info-btns">
@@ -65,7 +60,11 @@ const Profile = () => {
       </div>
 
       <div className="profile-btns-container">
-        <button className="btn defaultBtn" onClick={logout}>Logout</button>
+          <div className="profile-top-btns">
+            <button className="btn defaultBtn" onClick={logout}>Logout</button>
+            <button onClick={editProfile} className="btn defaultBtn">Edit Profile</button>
+            <button className="btn defaultBtn">Reset Password</button>
+          </div>
         <button className="btn deleteBtn" onClick={deleteAcc}>Delete Profile</button>
       </div>
     </div>
