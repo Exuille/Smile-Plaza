@@ -3,7 +3,7 @@
     align-items: center;
     flex-direction: column;
     height: 70vh;
-    width: 70%;
+    width: 80%;
     margin: 3rem auto;
     background: #ffffff;
     border-radius: 12px;
@@ -20,7 +20,7 @@
     border-top-right-radius: 12px;
 }
 
-table {
+.table-wrapper table {
     width: 100%;
     min-width: 700px;
     border-collapse: collapse;
@@ -28,12 +28,12 @@ table {
     table-layout: fixed;
 }
   
-thead {
+.table-wrapper thead {
     background-color: #213448;
     color: #fff;
 }
   
-th, td {
+.table-wrapper th, .table-wrapper td {
     text-align: left;
     padding: 0.75rem;
     border-bottom: 1px solid #eee;
@@ -42,24 +42,48 @@ th, td {
     white-space: normal;
 }
   
-td {
+.table-wrapper td {
     color: #333;
     vertical-align: middle;
     min-width: 100px;
 }
 
-tbody tr:hover {
+.table-wrapper tbody tr:hover {
     background-color: #f1f1f1;
 }
   
-th:first-child,
-td:first-child {
+.table-wrapper th:first-child,
+.table-wrapper td:first-child {
     border-left: none;
 }
   
-th:last-child,
-td:last-child {
+.table-wrapper th:last-child,
+.table-wrapper td:last-child {
     border-right: none;
+}
+
+.table-wrapper select {
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 0.9rem;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.table-wrapper select:focus {
+    border-color: #213448;
+    outline: none;
+    background-color: #ffffff;
+}
+
+.table-wrapper option {
+    background-color: #fff;
+    color: #333;
+    padding: 6px;
 }
 
 .status-badge {
@@ -99,6 +123,55 @@ td:last-child {
 .status-line {
     margin-bottom: 4px;
 }
+
+.action-cell {
+    position: relative;
+}
+
+.action-btn {
+    padding: 6px 6px;
+    color: white;
+    font-weight: bold;
+    width: 88%;
+    border-radius: 6px;
+    border: 1px solid #213448;
+    background-color: #213448;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 35px;
+    right: 0;
+    background: #fdfdfd;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
+}
+  
+.dropdown-menu button {
+    padding: 6px 12px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    color: #333;
+}
+  
+.dropdown-menu button:hover {
+    background-color: #213448;
+    color: #ffffff;
+}
+  
+.dropdown-menu button:first-child {
+    border-top-left-radius: 8px
+}  
 
 @media (max-width: 767px) {
     .dashboard-container {

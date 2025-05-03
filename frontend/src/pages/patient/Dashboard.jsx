@@ -1,15 +1,15 @@
-import React from 'react';
-import '../css/patient/Dashboard.css';
+import React, { useState } from 'react';
+import '../../static/dashboard.css';
 
 const Dashboard = () => {
-  const appointments = [
+  const [appointments, setAppointments] = useState([
     {
       name: 'John Doe',
       date: '2025-05-01',
       time: '10:00 AM',
       service: 'Dental Cleaning',
       status: 'Completed',
-      feedback: 'Nice.'
+      feedback: 'Not available. Make a new appointment.'
     },
     {
       name: 'Jane Smith',
@@ -17,7 +17,7 @@ const Dashboard = () => {
       time: '2:00 PM',
       service: 'Eye Checkup',
       status: 'Pending',
-      feedback: 'Waiting.'
+      feedback: "You've been approved."
     },
     {
       name: 'Robert Brown',
@@ -25,9 +25,22 @@ const Dashboard = () => {
       time: '9:30 AM',
       service: 'Physical Therapy',
       status: 'Cancelled',
-      feedback: 'Hindi ka nya gusto.'
+      feedback: 'Mark as Completed.'
     }
-  ];
+  ]);
+
+  const [openMenuIndex, setOpenMenuIndex] = useState(null);
+
+  const handleAction = (action, index) => {
+    console.log(`Action "${action}" clicked on row ${index}`);
+    setOpenMenuIndex(null);
+  };
+
+  const handleFeedbackChange = (index, newValue) => {
+    const updatedAppointments = [...appointments];
+    updatedAppointments[index].feedback = newValue;
+    setAppointments(updatedAppointments);
+  };
 
   return (
     <div className="dashboard-container">
@@ -56,9 +69,36 @@ const Dashboard = () => {
                     {appointment.status}
                   </span>
                 </td>
-                <td>{appointment.feedback}</td>
                 <td>
-                  <button>Cancel</button>
+                  <select
+                    value={appointment.feedback}
+                    onChange={(e) => handleFeedbackChange(index, e.target.value)}
+                  >
+                    <option value="Not available. Make a new appointment.">Not available. Make a new appointment.</option>
+                    <option value="You've been approved.">You've been approved.</option>
+                    <option value="Mark as Completed.">Mark as Completed.</option>
+                  </select>
+                </td>
+                <td className="action-cell">
+                  <button
+                    className="action-btn"
+                    onClick={() => setOpenMenuIndex(openMenuIndex === index ? null : index)}
+                  >
+                    ...
+                  </button>
+                  {openMenuIndex === index && (
+                    <div
+                      className="dropdown-menu"
+                      style={{
+                        top: index === appointments.length - 1 ? 'auto' : '35px',
+                        bottom: index === appointments.length - 1 ? '35px' : 'auto',
+                      }}
+                    >
+                      <button onClick={() => handleAction('Mark as Reserved', index)}>Mark as Reserved</button>
+                      <button onClick={() => handleAction('Mark as Completed', index)}>Mark as Completed</button>
+                      <button onClick={() => handleAction('Delete Entry', index)}>Delete Entry</button>
+                    </div>
+                  )}
                 </td>
               </tr>
             ))}

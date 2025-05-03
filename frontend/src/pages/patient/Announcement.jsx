@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/patient/Announcement.css';
+import '../../static/announcement.css';
 
 const Announcement = () => {
   const [activeTab, setActiveTab] = useState('clinic'); // default tab

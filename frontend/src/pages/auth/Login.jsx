@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/auth/Auth.css';
+import '../../static/auth.css';
 
 class Login extends Component {
   render() {
@@ -7,12 +7,12 @@ class Login extends Component {
       <div className="auth-container">
         <h2>Login</h2>
         <hr />
-        <form>
+        <form className="auth-form">
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" required />
+            <input type="email" id="email" className="auth-input" required />
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" required />
-          <button type="submit">Login</button>
+            <input type="password" id="password" className="auth-input" required />
+          <button type="submit" className="auth-btn">Login</button>
         </form>
         <div className="signup-recovery-a">
           <a href="/signup" className="link"><strong>Create an account.</strong></a>
