@@ -41,6 +41,7 @@ const Dashboard = () => {
               <th>SERVICE</th>
               <th>STATUS</th>
               <th>FEEDBACK</th>
+              <th>ACTION</th>
             </tr>
           </thead>
           <tbody>
@@ -56,6 +57,9 @@ const Dashboard = () => {
                   </span>
                 </td>
                 <td>{appointment.feedback}</td>
+                <td>
+                  <button>Cancel</button>
+                </td>
               </tr>
             ))}
           </tbody>
