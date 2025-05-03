@@ -17,7 +17,7 @@
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-    border: 1px solid #e0e0e0;
+    border: 1px solid #3A59D1;
     overflow: hidden;
 }
 
@@ -42,7 +42,6 @@
     color: #3D90D7;
     transform: scale(1.05);
 }
-
 
 hr {
     margin-inline: 12px;
