@@ -14,39 +14,34 @@ const AdminNavBar = () => {
       </div>
       <div className="nav-center">
         <NavLink 
-          to="/" 
-          className={({ isActive }) => (isActive ? "nav-link active-link" : "nav-link")}
-        >
-          Home
-        </NavLink>
-        <NavLink 
-          to="/dashboard" 
+          to="/admin/" 
+          end
           className={({ isActive }) => (isActive ? "nav-link active-link" : "nav-link")}
         >
           Dashboard
         </NavLink>
         <NavLink 
-          to="/announcement" 
+          to="/admin/announcement" 
           className={({ isActive }) => (isActive ? "nav-link active-link" : "nav-link")}
         >
           Announcements & Clinic Hours
         </NavLink>
         <NavLink 
-          to="/appointment" 
+          to="/admin/userlog" 
           className={({ isActive }) => (isActive ? "nav-link active-link" : "nav-link")}
         >
-          Appointments
+          User Log
         </NavLink>
       </div>
       <div className="nav-end">
         <NavLink 
-          to="/" 
+          to="/login" 
           className="login-btn"
         >
           Login
         </NavLink>
         <NavLink 
-          to="/" 
+          to="/signup" 
           className="signup-btn"
         >
           Sign Up
