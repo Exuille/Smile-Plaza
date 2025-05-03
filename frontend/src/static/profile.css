@@ -1,0 +1,114 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+	height: 80vh;
+    margin: 0 auto 2rem;
+    padding: 40px;
+    overflow: hidden;
+    align-items: stretch;
+    justify-content: space-between;
+    background: #ffffff;
+    border-radius: 15px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+
+/* top */
+.profile-top-container {
+    display: flex;
+    gap: 30px;
+}
+
+.profile-top-pic {
+    height: 150px;
+    border-radius: 50%;
+}
+
+.profile-top-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 42px;
+    color: #183b4e;
+}
+
+.profile-top-btns {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* mid */
+.profile-info-container {
+    border: solid 1px black;
+    display: flex;
+    flex-direction: column;
+    padding: 0 40px 40px;
+    gap: 20px;
+    border-radius: 10px;
+    color: #27548b;
+}
+
+.profile-info-container h1 {
+    width: 100%;
+    line-height: 0.1em;
+    margin: 0px 0 20px;
+}
+
+.profile-info-container h1 span { 
+    background:#fff; 
+    padding:0 10px; 
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 18px;
+}
+
+.profile-input {
+    color: #183b4e;
+    border: 1px solid black;
+    padding: 8px;
+    font-size: 23px;
+    width: 100%;
+}
+
+.profile-info-btns {
+    display: none;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+
+/* bottom */
+.profile-btns-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.saveBtn {
+    background-color: green;
+}
+
+.deleteBtn {
+    background-color: red;
+}
+
+.defaultBtn {
+    background-color: #27548b;
+}
+
+
+/* general */
+.btn {
+    padding: 8px 23px;
+    font-size: 18px;
+    border-radius: 13px;
+    cursor: pointer;
+    color: #f4f3df;
+}
+
