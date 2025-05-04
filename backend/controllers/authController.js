@@ -78,7 +78,7 @@ export const register = catchAsync(async (req, res) => {
 });
 
 
-const login = catchAsync(async (req, res) => {
+export const login = catchAsync(async (req, res) => {
     const { email, password, captchaToken } = req.body;
 
     if (!email || !password || !captchaToken) {

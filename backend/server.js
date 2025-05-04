@@ -25,7 +25,7 @@ app.use("/auth", authRoutes)
 app.use("/appointment", appointmentRoutes)
 app.use("/announcement", announcementRoutes)
 app.use("/holiday", holidayRoutes)
-app.use("/api/email", emailRoutes);
+app.use("/email", emailRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
