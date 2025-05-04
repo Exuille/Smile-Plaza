@@ -208,3 +208,66 @@ export const getAppointmentMetrics = catchAsync(async (req, res) => {
     },
   })
 })
+
+export const getAvailableTimes = catchAsync(async (req, res) => {
+  const { selectedDate } = req.body
+
+  if (!selectedDate) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Please provide a date",
+    })
+  }
+
+  const selectedDateObj = new Date(selectedDate)
+  const startOfDay = new Date(selectedDateObj)
+  startOfDay.setHours(0, 0, 0, 0)
+
+  const endOfDay = new Date(selectedDateObj)
+  endOfDay.setHours(23, 59, 59, 999)
+
+  const appointments = await Appointment.find({
+    dateTime: {
+      $gte: startOfDay,
+      $lte: endOfDay,
+    },
+    status: { $ne: 'cancelled' },
+  })
+
+  const occupiedTimes = appointments.map((appt) => {
+    const apptDate = new Date(appt.dateTime)
+    return apptDate.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    })
+  })
+
+  const allTimeSlots = []
+  const baseTime = new Date(selectedDateObj)
+  baseTime.setHours(8, 0, 0, 0)
+
+  while (baseTime.getHours() < 17 || (baseTime.getHours() === 17 && baseTime.getMinutes() === 0)) {
+    const hour = baseTime.getHours()
+    if (hour === 12) {
+      baseTime.setHours(13, 0)
+      continue
+    }
+
+    const slot = baseTime.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    })
+
+    allTimeSlots.push(slot)
+    baseTime.setMinutes(baseTime.getMinutes() + 30)
+  }
+
+  const availableTimeSlots = allTimeSlots.filter(time => !occupiedTimes.includes(time))
+
+  res.status(200).json({
+    status: "success",
+    availableTimes: availableTimeSlots,
+  })
+})

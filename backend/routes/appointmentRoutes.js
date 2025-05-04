@@ -6,7 +6,8 @@ import {
     getAppointmentById, 
     getAppointments,
     updateAppointment,
-    getAppointmentMetrics} from '../controllers/appointmentController.js';
+    getAppointmentMetrics,
+    getAvailableTimes} from '../controllers/appointmentController.js';
 import {protect} from '../controllers/authController.js';
 
 const router = express.Router();
@@ -18,6 +19,7 @@ router.route("/:id").get(protect, getAppointmentById); // fetch one
 router.route("/").get(protect, getAppointments); // for admin 
 router.route("/:id").put(protect, updateAppointment); //edit for admin
 router.get('/metrics', protect, getAppointmentMetrics)
+router.get('/availableTime', protect, getAvailableTimes)
 
 
 export default router;
