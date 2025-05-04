@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js"
 import appointmentRoutes from "./routes/appointmentRoutes.js"
 import announcementRoutes from "./routes/announcementRoutes.js"
 import holidayRoutes from "./routes/holidayRoutes.js"
+import emailRoutes from "./routes/emailServiceRoutes.js";
 
 dotenv.config()
 
@@ -24,6 +25,7 @@ app.use("/auth", authRoutes)
 app.use("/appointment", appointmentRoutes)
 app.use("/announcement", announcementRoutes)
 app.use("/holiday", holidayRoutes)
+app.use("/email", emailRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

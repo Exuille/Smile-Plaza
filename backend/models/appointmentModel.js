@@ -11,6 +11,11 @@ const AppointmentSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    service: {
+        type: String,
+        enum: ['Dental Consultation', 'Orthodontics','Oral Prophylaxis','Tooth Restoration' ,'Tooth Extraction','Odontectomy','Dentures'],
+        default: 'Dental Consultation'
+    },
     status: {
       type: String,
       enum: ["pending", "accepted","completed", "cancelled"],
