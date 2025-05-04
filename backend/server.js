@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js"
 import appointmentRoutes from "./routes/appointmentRoutes.js"
 import announcementRoutes from "./routes/announcementRoutes.js"
 import holidayRoutes from "./routes/holidayRoutes.js"
+import emailRoutes from "./routes/emailRoutes.js";
 
 dotenv.config()
 
