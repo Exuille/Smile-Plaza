@@ -3,7 +3,7 @@ import Holiday from "../models/holidayModel.js"
 import catchAsync from "../utils/catchAsync.js"
 
 export const createAppointment = catchAsync(async (req, res) => {
-  const { dateTime } = req.body
+  const { dateTime, service } = req.body
   const patient = req.user?.id
 
   if (!patient) {
@@ -17,6 +17,13 @@ export const createAppointment = catchAsync(async (req, res) => {
     return res.status(400).json({
       status: "fail",
       message: "Please enter a date first",
+    })
+  }
+
+  if (!service) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Please select a service",
     })
   }
 
@@ -42,7 +49,6 @@ export const createAppointment = catchAsync(async (req, res) => {
     },
   })
 
-  // Check if any of the holidays cover the requested time
   for (const holiday of holidays) {
     if (holiday.isFullDay) {
       return res.status(400).json({
@@ -50,9 +56,11 @@ export const createAppointment = catchAsync(async (req, res) => {
         message: `Cannot book an appointment on a holiday: ${holiday.title}`,
       })
     } else {
-      // For partial day holidays, check if the time falls within the range
       const appointmentTime = appointmentDate.getTime()
-      if (appointmentTime >= holiday.startTime.getTime() && appointmentTime <= holiday.endTime.getTime()) {
+      if (
+        appointmentTime >= holiday.startTime.getTime() &&
+        appointmentTime <= holiday.endTime.getTime()
+      ) {
         return res.status(400).json({
           status: "fail",
           message: `Cannot book an appointment during holiday hours: ${holiday.title}`,
@@ -61,7 +69,11 @@ export const createAppointment = catchAsync(async (req, res) => {
     }
   }
 
-  const existingAppointment = await Appointment.findOne({ dateTime: appointmentDate, status: "pending" })
+  const existingAppointment = await Appointment.findOne({
+    dateTime: appointmentDate,
+    status: "pending",
+  })
+
   if (existingAppointment) {
     return res.status(409).json({
       status: "fail",
@@ -69,7 +81,12 @@ export const createAppointment = catchAsync(async (req, res) => {
     })
   }
 
-  const newAppointment = await Appointment.create({ patient, dateTime: appointmentDate, status: "pending" })
+  const newAppointment = await Appointment.create({
+    patient,
+    dateTime: appointmentDate,
+    service,
+    status: "pending",
+  })
 
   res.status(201).json({
     status: "success",
