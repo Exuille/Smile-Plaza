@@ -138,3 +138,20 @@
     font-weight: 550;
     border-radius: 6px;
 }
+
+
+@media (max-width: 768px) {
+    .profile-wrapper {
+        width: 90%;
+        padding: 30px 15px;
+    }
+
+    .profile-top-info {
+        overflow-x: scroll;
+    }
+
+    .profile-btns-container, .profile-top-btns {
+        gap: 6px;
+        flex-direction: column;
+    }
+}

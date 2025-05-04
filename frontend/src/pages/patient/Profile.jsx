@@ -78,11 +78,11 @@ const Profile = () => {
         </div>
 
         <div className="profile-btns-container">
-            <div className="profile-top-btns">
-              <button className="btn defaultBtn" onClick={logout}>Logout</button>
-              <button onClick={editProfile} className="btn defaultBtn">Edit Profile</button>
-              <button className="btn defaultBtn">Reset Password</button>
-            </div>
+          <div className="profile-top-btns">
+            <button className="btn defaultBtn" onClick={logout}>Logout</button>
+            <button onClick={editProfile} className="btn defaultBtn">Edit Profile</button>
+            <button className="btn defaultBtn">Reset Password</button>
+          </div>
           <button className="btn deleteBtn" onClick={deleteAcc}>Delete Profile</button>
         </div>
       </div>
