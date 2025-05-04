@@ -21,11 +21,6 @@ const userSchema = new mongoose.Schema({
         enum: ['admin', 'patient'], 
         default: 'patient' 
     },
-    service: {
-        type: String,
-        enum: ['Dental Consultation', 'Orthodontics','Oral Prophylaxis','Tooth Restoration' ,'Tooth Extraction','Odontectomy','Dentures'],
-        default: 'Dental Consultation'
-    },
     contactInfo: { 
         type: String 
     },
