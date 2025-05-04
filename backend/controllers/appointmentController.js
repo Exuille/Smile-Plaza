@@ -3,7 +3,7 @@ import Holiday from "../models/holidayModel.js"
 import catchAsync from "../utils/catchAsync.js"
 
 export const createAppointment = catchAsync(async (req, res) => {
-  const { dateTime, service } = req.body
+  const { selectedDate, selectedTimeSlot, service } = req.body
   const patient = req.user?.id
 
   if (!patient) {
@@ -13,10 +13,10 @@ export const createAppointment = catchAsync(async (req, res) => {
     })
   }
 
-  if (!dateTime) {
+  if (!selectedDate || !selectedTimeSlot) {
     return res.status(400).json({
       status: "fail",
-      message: "Please enter a date first",
+      message: "Please select both date and time",
     })
   }
 
@@ -27,7 +27,9 @@ export const createAppointment = catchAsync(async (req, res) => {
     })
   }
 
-  const appointmentDate = new Date(dateTime)
+  // Combine selected date and time into one Date object
+  const appointmentDate = new Date(`${selectedDate}T${convertTo24HourTime(selectedTimeSlot)}:00`)
+
   if (appointmentDate < new Date()) {
     return res.status(400).json({
       status: "fail",
@@ -35,7 +37,7 @@ export const createAppointment = catchAsync(async (req, res) => {
     })
   }
 
-  // Check if the requested time is during a holiday
+  // Check for holiday
   const startOfDay = new Date(appointmentDate)
   startOfDay.setHours(0, 0, 0, 0)
 
@@ -96,7 +98,17 @@ export const createAppointment = catchAsync(async (req, res) => {
   })
 })
 
-// Keep the rest of the appointmentController.js code unchanged
+function convertTo24HourTime(time12h) {
+  const [time, modifier] = time12h.split(' ')
+  let [hours, minutes] = time.split(':')
+
+  hours = parseInt(hours, 10)
+  if (modifier === 'PM' && hours !== 12) hours += 12
+  if (modifier === 'AM' && hours === 12) hours = 0
+
+  return `${String(hours).padStart(2, '0')}:${minutes}`
+}
+
 export const cancelAppointment = catchAsync(async (req, res) => {
   const appointment = await Appointment.findById(req.params.id)
 
