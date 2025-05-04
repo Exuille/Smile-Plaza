@@ -106,16 +106,18 @@ const Announcement = () => {
       {popupOpen ? 
         <div className="popup">
           <div className="popup-content">
-            {appointmentId ? 
-              <h2>Announcement ID: {appointmentId}</h2>
-              : 
-              <h2>New Announcement</h2>
-            }
-            <div>
-              <label>Announcement: </label>
-              <input value={title} id="title" ref={titleInpRef} onChange={changeValue} />
+            <div className="popup-content-heading">
+              {appointmentId ? 
+                <h1>Announcement ID: {appointmentId}</h1>
+                : 
+                <h1>New Announcement</h1>
+              }
             </div>
-            <div>
+            <div className="inp-container">
+              <label>Title: </label>
+              <input value={title ? title : ""} id="title" ref={titleInpRef} onChange={changeValue} />
+            </div>
+            <div className="inp-container">
               <label>Tag: </label>
               <select onChange={selectTag} value={selectedTag}>
                 <option onChange={selectTag} value="promo">Promo</option>
@@ -123,13 +125,13 @@ const Announcement = () => {
                 <option onChange={selectTag} value="others">Others</option>
               </select>
             </div>
-            <div>
+            <div className="inp-container">
               <label>Date: </label>
-              <input type="date" value={date} id="date" ref={dateInpRef} onChange={changeValue} />
+              <input type="date" value={date ? date : ""} id="date" ref={dateInpRef} onChange={changeValue} />
             </div>
-            <div>
+            <div className="inp-container">
               <label>Content: </label>
-              <input value={content} id="content" ref={contentInpRef} onChange={changeValue} />
+              <input value={content ? content : ""} id="content" ref={contentInpRef} onChange={changeValue} />
             </div>
             <div className="popup-btns">
               <button className="red-btn" onClick={cancel}>Cancel</button>
@@ -148,10 +150,10 @@ const Announcement = () => {
               return (
                 <div key={appointmentId} className="announcement-content-container">
                   <div className="announcement-title-container">
-                    <h2 className="announcement-title">{appointments[appointmentId]["title"]} | {appointments[appointmentId]["tag"]}</h2>
+                    <h2>{appointments[appointmentId]["title"]} | {appointments[appointmentId]["tag"]}</h2>
                     <div className="update-btn-container">
-                      <button id="edit" onClick={(e) => edit(e, appointmentId)} className="green-btn">Edit</button>
-                      <button className="red-btn">Delete</button>
+                      <button id="edit" onClick={(e) => edit(e, appointmentId)} className="green-btn"><i class='bx bx-edit-alt'></i></button>
+                      <button className="red-btn"><i class='bx bx-trash' ></i></button>
                     </div>
                   </div>
                   <div className="announcement-content">
