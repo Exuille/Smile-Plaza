@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+/* import nodemailer from "nodemailer";
 import { google } from "googleapis";
 import dotenv from "dotenv";
 
@@ -71,3 +71,4 @@ To complete the authentication process, please use the One-Time Password (OTP) p
     return false;
   }
 }
+ */
