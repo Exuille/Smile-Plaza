@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import axios from 'axios';
 import catchAsync from '../utils/catchAsync.js';
 import User from '../models/authModel.js';
 
@@ -76,38 +77,55 @@ export const register = catchAsync(async (req, res) => {
     createSendToken(newUser, 201, res);
 });
 
-export const login = catchAsync(async (req, res) => {
-    const { email, password } = req.body;
 
-    if (!email || !password) {
+const login = catchAsync(async (req, res) => {
+    const { email, password, captchaToken } = req.body;
+
+    if (!email || !password || !captchaToken) {
         return res.status(400).json({
             status: "fail",
-            message: "Please provide email and password"
+            message: "Please provide email, password, and captcha token."
         });
     }
 
-    let user = await User.findOne({email});
-/*     if (!user) {
-        user = await User.findOne({ username });
-    } */
+    //Verify CAPTCHA
+    const verifyCaptcha = await axios.post(
+        `https://www.google.com/recaptcha/api/siteverify`,
+        null,
+        {
+            params: {
+                secret: process.env.RECAPTCHA_SECRET_KEY,
+                response: captchaToken,
+            },
+        }
+    );
+
+    if (!verifyCaptcha.data.success) {
+        return res.status(400).json({
+            status: "fail",
+            message: "CAPTCHA verification failed."
+        });
+    }
+
+    const user = await User.findOne({ email }).select('+password'); 
     if (!user) {
         return res.status(404).json({
             status: "fail",
-            message: "User cannot be found!"
+            message: "User not found!"
         });
     }
 
-    const isPasswordCorrect = await user.correctPassword(password, user.password);
-
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
         return res.status(401).json({
             status: "fail",
             message: "Incorrect password!"
         });
-    } else {
-        createSendToken(user, 200, res, "24h");
     }
+
+    createSendToken(user, 200, res, "24h");
 });
+
 
 export const logout = catchAsync(async (req, res) => {
     res.cookie("jwt", "loggedout", {
