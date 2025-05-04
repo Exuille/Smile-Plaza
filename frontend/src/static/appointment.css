@@ -6,17 +6,17 @@
 
 .appointment-container {
 	display: flex;
-    flex-direction: column;
-    width: 70%;
-	height: 80vh;
-    margin: 0 auto 2rem;
-    padding: 40px;
-    overflow: hidden;
-    background: #ffffff;
-    border-radius: 15px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    gap: 20px;
+  flex-direction: column;
+  width: 70%;
+  height: 80vh;
+  margin: 0 auto 2rem;
+  padding: 40px;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 15px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  gap: 20px;
 }
 
 
@@ -30,8 +30,8 @@
 .appointment-calendar-container, .appointment-available {
 	display: flex;
 	padding: 20px;
-  	border-radius: 8px;
-  	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 	width: 50%;
 }
 
@@ -71,7 +71,7 @@
 }
 
 .fc .fc-daygrid-day-frame {
-  min-height: 80px; /* Makes each day cell taller */
+  min-height: 80px;
 }
 
 .fc .fc-toolbar-title {
@@ -96,19 +96,16 @@
   color: #333;
 }
 
-.fc .fc-daygrid-day-number {
-  font-weight: bold;
-  color: #333;
-/*  background-color: ;*/
-}
-
-
 
 .appointment-available {
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
 	padding: 20px;
+}
+
+.appointment-available p {
+  font-size: 1.5rem;
 }
 
 .available-time {
@@ -145,4 +142,68 @@
 
 .appointment-footer select:focus {
   border-color: #007bff;
+}
+
+
+@media (max-width: 767px) {
+    .appointment-container {
+      width: 90%;
+      height: auto;
+      gap: 10px;
+    }
+
+    .appointment-container h1 {
+      font-size: 1.5rem;
+    }
+
+    .appointment-container-main {
+      flex-direction: column;
+      margin-top: 20px;
+      gap: 30px;
+      height: auto;
+      width: 100%;
+    }
+
+    .appointment-calendar-container {
+      flex-direction: column;
+      width: 100%;
+      height: 500px;
+    }
+
+    .fc {
+      height: 100%;
+      font-size: 0.8rem;
+    }
+
+    .fc .fc-daygrid-day-frame {
+      min-height: 20px;
+    }
+
+    .fc .fc-toolbar-title {
+      font-size: 1rem;
+    }
+
+    .fc .fc-button {
+      padding: 3px 6px;
+    }
+
+    .appointment-available {
+      flex-direction: column;
+      width: 100%;
+      height: auto;
+      gap: 20px;
+    }
+
+    .appointment-available p {
+      font-size: 1rem;
+    }
+
+    .available-time button , .appointment-footer button{
+      padding: 4px 9px;
+      border-radius: 8px;
+      font-size: 13px;
+      background-color: #27548b;
+      color: #f4f3df;
+      cursor: pointer;
+    }
 }

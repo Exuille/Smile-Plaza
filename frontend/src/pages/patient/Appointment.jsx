@@ -8,6 +8,7 @@ import interactionPlugin from "@fullcalendar/interaction"
 
 const Appointment = () => {
   const today = new Date();
+  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
   const formattedDate = today.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -74,23 +75,28 @@ const Appointment = () => {
   }
 
   const handleDateClick = (arg) => {
-    document.querySelectorAll('.fc-daygrid-day').forEach(el => {
-      el.style.backgroundColor = ''
-      el.style.border = '';
-    });
+    today.setHours(0, 0, 0, 0);
+    if (new Date(arg.dateStr) >= today) {
+      document.querySelectorAll('.fc-daygrid-day').forEach(el => {
+        el.style.backgroundColor = ''
+        el.style.border = '';
+      });
 
-    const clickedCell = document.querySelector(`[data-date="${arg.dateStr}"]`);
-    if (clickedCell) {
-      clickedCell.style.backgroundColor = '#d1ecf1';
-      clickedCell.style.border = '2px solid #0c5460';
+      const clickedCell = document.querySelector(`[data-date="${arg.dateStr}"]`);
+      if (clickedCell) {
+        clickedCell.style.backgroundColor = '#d1ecf1';
+        clickedCell.style.border = '2px solid #0c5460';
+      }
+
+      const formattedDate = new Date(arg.dateStr).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      setSelectedDate(formattedDate);
+    } else {
+      alert("Cant book earlier than today")
     }
-
-    const formattedDate = new Date(arg.dateStr).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-    setSelectedDate(formattedDate);
   };
 
   const handleSelectChange = (e) => {
@@ -115,13 +121,13 @@ const Appointment = () => {
             dateClick={handleDateClick}
             initialView="dayGridMonth"
             validRange={{
-              start: new Date(),
+              start: firstDayOfMonth,
             }}
           />
         </div>
 
         <div className="appointment-available">
-          <h3>Available Time Slots for: {selectedDate}</h3>
+          <p>Available Time Slots for: <strong style={{whiteSpace: "nowrap"}}>{selectedDate}</strong></p>
           <div className="available-time">
             <button onClick={selectTimeSlot}>7:00-8:00</button>
             <button onClick={selectTimeSlot}>8:00-8:00</button>
@@ -132,7 +138,7 @@ const Appointment = () => {
             <button onClick={selectTimeSlot}>1:00-8:00</button>
           </div>
           <div className="appointment-footer">
-            <p>Selected Time Slot: <strong>{selectedTimeSlot}</strong></p>
+            <p>Selected Time Slot: <strong style={{whiteSpace: "nowrap"}}>{selectedTimeSlot}</strong></p>
             <select value={selectedService} onChange={handleSelectChange}>
               <option value="Dental Consultation">Dental Consultation</option>
               <option value="Dental Consultation1">Dental Consultation1</option>
