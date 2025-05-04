@@ -144,3 +144,50 @@ export const updateAppointment = catchAsync(async (req, res) => {
 
   res.status(200).json({ status: "success", data: { appointment: updated } })
 })
+
+export const getAppointmentMetrics = catchAsync(async (req, res) => {
+  const match = {}
+
+  if (req.query.status) {
+    match.status = req.query.status
+  }
+
+  if (req.user.role !== "admin") {
+    match.patient = req.user.id
+  }
+
+  const appointments = await Appointment.find(match)
+
+  const counts = await Appointment.aggregate([
+    {
+      $match: req.user.role === "admin"
+        ? {}
+        : { patient: req.user._id },
+    },
+    {
+      $group: {
+        _id: "$status",
+        count: { $sum: 1 },
+      },
+    },
+  ])
+
+  const statusCounts = {
+    pending: 0,
+    completed: 0,
+    cancelled: 0,
+  }
+
+  counts.forEach((item) => {
+    statusCounts[item._id] = item.count
+  })
+
+  res.status(200).json({
+    status: "success",
+    results: appointments.length,
+    data: {
+      appointments,
+      counts: statusCounts,
+    },
+  })
+})
