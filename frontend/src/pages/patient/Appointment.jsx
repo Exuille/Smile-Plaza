@@ -19,6 +19,18 @@ const Appointment = () => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("7:00-8:00");
   const [selectedService, setSelectedService] = useState("Dental Consultation");
 
+  const timeSlots = [
+    "9:00 AM - 10:00 AM",
+    "10:00 AM - 11:00 AM",
+    "11:00 AM - 12:00 PM",
+    "12:00 PM - 1:00 PM",
+    "1:00 PM - 2:00 PM",
+    "2:00 PM - 3:00 PM",
+    "3:00 PM - 4:00 PM",
+    "4:00 PM - 5:00 PM",
+  ]
+
+  // sample
   const available = [
     "2025-05-07",
     "2025-05-13",
@@ -129,13 +141,15 @@ const Appointment = () => {
         <div className="appointment-available">
           <p>Available Time Slots for: <strong style={{whiteSpace: "nowrap"}}>{selectedDate}</strong></p>
           <div className="available-time">
-            <button onClick={selectTimeSlot}>7:00-8:00</button>
-            <button onClick={selectTimeSlot}>8:00-8:00</button>
-            <button onClick={selectTimeSlot}>9:00-8:00</button>
-            <button onClick={selectTimeSlot}>10:00-8:00</button>
-            <button onClick={selectTimeSlot}>11:00-8:00</button>
-            <button onClick={selectTimeSlot}>12:00-8:00</button>
-            <button onClick={selectTimeSlot}>1:00-8:00</button>
+            {timeSlots ? 
+              timeSlots.map((time, index) => {
+                return (
+                  <button key={index}>{time}</button>
+                )
+              })
+              :
+              null
+            }
           </div>
           <div className="appointment-footer">
             <p>Selected Time Slot: <strong style={{whiteSpace: "nowrap"}}>{selectedTimeSlot}</strong></p>
