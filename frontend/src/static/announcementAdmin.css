@@ -1,0 +1,195 @@
+button {
+	padding: 8px 18px;
+	font-size: 1.3rem;
+	border-radius: 8px;
+	color: white;
+	cursor: pointer;
+}
+
+.announcement-container-admin {
+	display: flex;
+    align-items: center;
+    justify-content: stretch;
+    flex-direction: column;
+    min-height: 80vh;
+    width: 80%;
+    margin: 0 auto 3rem;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    overflow-y: scroll;
+	gap: 10px;
+	color: #183b4e;
+}
+
+.popup {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-grow: 1;
+}
+
+.popup-content {
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 30px;
+}
+
+.popup-content-heading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+	margin-bottom: 20px;
+}
+
+.inp-container {
+	display: flex;
+	align-items: center;
+	font-size: 1.2rem;
+	gap: 10px;
+	width: 100%;
+}
+
+.popup input, .popup select {
+	padding: 13px;
+	font-size: 1.2rem;
+	flex-grow: 1;
+}
+
+.popup-btns {
+	display: flex;
+	justify-content: space-between;
+}  
+
+.popup-btns button {
+	font-size: 1rem;
+}
+
+
+.announcement-content-main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 30px;
+	width: 100%;
+}
+
+.announcement-btn-container {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.announcement-btn-container button {
+	background-color: green;
+}
+
+.announcement-content-container {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.announcement-title-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #3A59D1;
+}
+
+.announcement-title-container h2 {
+	font-size: 1.5rem;
+}
+
+.update-btn-container {
+	display: flex;
+	gap: 18px;
+}
+
+.green-btn {
+	background-color: green;
+}
+
+.red-btn {
+	background-color: red;
+}
+
+.announcement-content {
+	padding-left: 30px;
+}
+
+
+
+@media (max-width: 767px) {
+	.announcement-container-admin {
+	    min-height: 50%;
+	    width: 90%;
+	    overflow: hidden;
+	}
+
+	button {
+		padding: 5px 13px;
+		font-size: 0.8rem;
+	}
+
+	.announcement-title-container {
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+
+	.announcement-btn-container {
+		justify-content: center;
+	}
+
+	.update-btn-container {
+		gap: 5px;
+	}
+
+	.update-btn-container button {
+		font-size: 0.8rem;
+		padding: 3px 8px;
+	}
+
+	.announcement-content {
+		padding-left: 0;
+	}
+
+	.popup-content {
+		padding: 10px 0 10px 0;
+		gap: 10px;
+	}
+
+	.popup-content-heading {
+		font-size: 0.8rem;
+	}
+
+	.inp-container {
+		display: flex;
+		align-items: center;
+		font-size: 0.8rem;
+		gap: 8px;
+	}
+
+	.popup input, .popup select {
+		padding: 8px 3px;
+		font-size: 0.8rem;
+	}
+
+	.popup-btns {
+		display: flex;
+		justify-content: space-between;
+	}  
+
+	.popup-btns button {
+		font-size: 0.8rem;
+	}
+}

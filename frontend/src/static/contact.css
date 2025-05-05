@@ -1,0 +1,117 @@
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    width: 100%;
+}
+
+.contact-left-panel, .contact-right-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+}
+
+.contact-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 75vh;
+    width: 80%;
+    margin: 3rem 72px 3rem 3rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #3A59D1;
+    overflow: hidden;
+}
+
+.contact-left-text-container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-left: 48px;
+    margin-bottom: 24px;
+}
+
+.contact-left-panel .heading {
+    color: #3A59D1;
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.contact-form .heading {
+    color: #3A59D1;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.contact-left-panel .basic-text {
+    color: #27548A;
+    font-size: 1rem;
+}
+
+.contact-input, .contact-btn {
+    height: 36px;
+}
+
+.contact-input, .contact-textarea {
+    width: 90%;
+    border-radius: 6px;
+    border: 3px solid #3A59D1;
+    box-shadow: 0px 2px 0px 1px rgba(58,89,209,1);
+    margin-bottom: 12px;
+    padding: 12px;
+}
+
+.contact-textarea {
+    resize: none;
+}
+
+.contact-btn {
+    margin-bottom: 12px;
+    color: white;
+    font-weight: bold;
+    width: 88%;
+    border-radius: 6px;
+    border: 1px solid #3A59D1;
+    background-color: #3A59D1;
+}
+
+.contact-input:focus,
+.contact-input:active,
+.contact-textarea:focus,
+.contact-textarea:active {
+    outline: none;
+    border-color: #3A59D1;
+}
+
+@media (max-width: 767px) {
+    .contact-container {
+        height: auto;
+        flex-wrap: wrap;
+    }
+    
+    .contact-left-panel, .contact-right-panel {
+        width: 100%;
+    }
+
+    .contact-left-panel {
+        margin-top: 36px;
+    }
+
+    .contact-form {
+        width: 90%;
+        margin: 3rem auto;
+    }
+    
+    .contact-left-text-container {
+        width: 90%;
+        margin: 0;
+    }
+}

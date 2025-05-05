@@ -1,0 +1,124 @@
+.announcement-container {
+    min-height: 85vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: 70vh;
+    width: 50%;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    border: 1px solid #3A59D1;
+    overflow: hidden;
+}
+
+.tab-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 12px;
+}
+
+.tab button {
+    font-size: 0.8rem;
+    font-weight: 550;
+    color: #213448;
+    border: none;
+    background-color: white;
+}
+
+.tab button.active {
+    font-weight: bold;
+    color: #3D90D7;
+    transform: scale(1.05);
+}
+
+hr {
+    margin-inline: 12px;
+}
+
+.tab h2 {
+    color: #27548A;
+}
+
+.clinic-hours, .announcement {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 12px;
+    height: 80%;
+    margin: auto 12px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.clinic-hours::-webkit-scrollbar, .announcement::-webkit-scrollbar {
+    display: none;
+}
+
+.clinic-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.clinic-table th {
+    padding: 12px 6px 4px 6px;
+    color: #547792;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.clinic-table td {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    text-align: left;
+    color: #547792;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.announcement-content {
+    margin-top: 12px;
+    align-self: flex-start;
+    text-align: justify;
+    padding-inline: 24px;
+}
+
+.announcement-content h5, .announcement-content p {
+    color: #547792;
+}
+
+.announcement-content p {
+    font-size: 0.8rem;
+}
+
+iframe {
+    height: 70vh;
+    width: 30%;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+@media (max-width: 767px) {
+    .tab {
+        width: 90%;
+    }
+
+    iframe {
+        margin-block: 1rem;
+        width: 90%;
+    }
+}
