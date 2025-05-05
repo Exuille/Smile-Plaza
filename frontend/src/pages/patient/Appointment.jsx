@@ -20,14 +20,25 @@ const Appointment = () => {
   const [selectedService, setSelectedService] = useState("Dental Consultation");
 
   const timeSlots = [
-    "9:00 AM - 10:00 AM",
-    "10:00 AM - 11:00 AM",
-    "11:00 AM - 12:00 PM",
-    "12:00 PM - 1:00 PM",
-    "1:00 PM - 2:00 PM",
-    "2:00 PM - 3:00 PM",
-    "3:00 PM - 4:00 PM",
-    "4:00 PM - 5:00 PM",
+    "8:00 AM",
+    "8:30 AM",
+    "9:00 AM",
+    "9:30 AM",
+    "10:00 AM",
+    "10:30 AM",
+    "11:00 AM",
+    "11:30 AM",
+    "12:00 PM",
+    "12:30 PM",
+    "1:00 PM",
+    "1:30 PM",
+    "2:00 PM",
+    "2:30 PM",
+    "3:00 PM",
+    "3:30 PM",
+    "4:00 PM",
+    "4:30 PM",
+    "5:00 PM",
   ]
 
   // sample
@@ -123,9 +134,11 @@ const Appointment = () => {
   return (
     <div className="appointment-container">
       <h1>Book Appointments</h1>
-      <p><span className="legend-box blue"></span> - Available</p>
-      <p><span className="legend-box yellow"></span> - Few slots left</p>
-      <p><span className="legend-box gray"></span> - Slot allocation exhausted/Closed</p>
+      <div className="legend-container">
+        <p><span className="legend-box blue"></span>Available</p>
+        <p><span className="legend-box yellow"></span>Few slots left</p>
+        <p><span className="legend-box gray"></span>Slot allocation exhausted/Closed</p>
+      </div>
       <div className="appointment-container-main">
         <div className="appointment-calendar-container">
           <FullCalendar

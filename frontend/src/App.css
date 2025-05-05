@@ -10,6 +10,8 @@
 :root {
 	--black: #0D0D0D;
 	--white: #FBFBFB;
-	--light-blue: #3FA2F6;
-	--dark-blue: #0F67B1;
+	--light: #F3F3E0;
+	--light-blue: #94B4C1;
+	--mid-blue: #547792;
+	--dark-blue: #213448;
 }
