@@ -1,9 +1,9 @@
 import nodemailer from 'nodemailer';
 
 export const sendContactMessage = async (req, res) => {
-    const { name, email, phone, subject, message } = req.body;
+    const { name, email, contact, subject, content } = req.body;
   
-    if (!name || !email || !phone || !subject || !message) {
+    if (!name || !email || !contact || !subject || !content) {
       return res.status(400).json({ message: "All fields are required." });
     }
   
@@ -22,13 +22,13 @@ export const sendContactMessage = async (req, res) => {
         subject: `Contact Form Submission: ${subject}`,
         html: `
           <div">
-            <p>${message.replace(/\n/g, "<br/>")}</p>
+            <p>${contact.replace(/\n/g, "<br/>")}</p>
             
             <br/><br/>
             <p>Sincerely,</p>
             <p>${name}</p>
             <p><a href="mailto:${email}">${email}</a></p>
-            <p>${phone}</p>
+            <p>${contact}</p>
       
           </div>
         `,
