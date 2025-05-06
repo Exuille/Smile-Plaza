@@ -23,7 +23,8 @@ const Login = () => {
           email, password, captchaToken
         })
         alert("logged in!")
-        console.log(res.status, res.message);
+        console.log(res.data);
+        localStorage.setItem("token", res.data.token);
       } catch(err) {
         if (err.response) {
           feedbackRef.current.textContent = err.response.data.message;

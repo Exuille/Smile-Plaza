@@ -41,6 +41,8 @@ const createSendToken = (user, statusCode, res, expiryTime) => {
 export const register = catchAsync(async (req, res) => {
     const { name, email, password, role } = req.body;
 
+    console.log(name, email, password, role)
+
     if (!name || !email || !password || !role) {
         return res.status(400).json({
             status: "fail",
@@ -94,7 +96,7 @@ export const login = catchAsync(async (req, res) => {
         null,
         {
             params: {
-                secret: process.env.RECAPTCHA_SECRET_KEY,
+                secret: process.env.SITE_SECRET,
                 response: captchaToken,
             },
         }
