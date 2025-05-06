@@ -107,6 +107,7 @@ export const getAnnouncementById = catchAsync(async (req, res) => {
 
 export const updateAnnouncement = catchAsync(async (req, res) => {
   // Check if user is admin
+  console.log(req)
   if (req.user.role !== "admin") {
     return res.status(403).json({
       status: "fail",
@@ -114,7 +115,7 @@ export const updateAnnouncement = catchAsync(async (req, res) => {
     })
   }
 
-  const { title, content, dateTime, priority } = req.body
+  const { title, content, date, tag, priority } = req.body
 
   // Validate priority if provided
   if (priority && !["normal", "important", "urgent"].includes(priority)) {
@@ -135,8 +136,9 @@ export const updateAnnouncement = catchAsync(async (req, res) => {
 
   if (title) announcement.title = title
   if (content) announcement.content = content
-  if (dateTime) announcement.dateTime = new Date(dateTime)
+  if (date) announcement.dateTime = new Date(date)
   if (priority) announcement.priority = priority
+  if (tag) announcement.tag = tag
 
   await announcement.save()
 

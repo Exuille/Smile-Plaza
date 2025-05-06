@@ -42,7 +42,7 @@ button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	margin-bottom: 20px;
 }
 
@@ -97,16 +97,23 @@ button {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+.announcement-content span {
+	font-size: 1.2rem;
+}
+
 .announcement-title-container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #3A59D1;
 }
 
 .announcement-title-container h2 {
 	font-size: 1.5rem;
+}
+
+.announcement-content-container h3 {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #3A59D1;
 }
 
 .update-btn-container {
@@ -126,6 +133,39 @@ button {
 	padding-left: 30px;
 }
 
+
+.filter-container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	gap: 30px;
+}
+
+.filter-container, .filter-container select {
+	font-size: 1.2rem;
+}
+
+.tags-container {
+	display: flex;
+	margin-top: 10px;
+	color: white;
+	font-size: 0.8rem;
+	gap: 10px;
+}
+
+.filter-priority, .filter-tag {
+	border-radius: 13px;
+	padding: 8px 13px;
+}
+
+.filter-priority {
+	background-color: blue;
+}
+
+.filter-tag {
+	background-color: green;
+}
 
 
 @media (max-width: 767px) {

@@ -51,16 +51,16 @@ const Announcement = ({data}) => {
     setFilteredPriority(e.target.value)
   }
 
-  console.log(announcements)
-
   const edit = (idx) => {
-    console.log(idx)
     if (idx) {
+      const date = new Date(announcements[idx]["dateTime"]);
+      const dateValue = date.toISOString().split('T')[0];
+
       setAnnouncementId(announcements[idx]["announcementID"])
       setTitle(announcements[idx]["title"])
       setSelectedTag(announcements[idx]["tag"])
       setSelectedPriority(announcements[idx]["priority"])
-      setDate(announcements[idx]["dateTime"])
+      setDate(dateValue)
       setContent(announcements[idx]["content"])
     } else {
       setAnnouncementId(null)
@@ -116,32 +116,42 @@ const Announcement = ({data}) => {
         alert("Can't book past date")
         return;
       }
+
+      try {
+        const res = await axios.put(`http://localhost:3001/announcement/${announcementId}`, {
+          "title": titleInpRef.current.value, 
+          "content": contentInpRef.current.value, 
+          "date": dateInpRef.current.value, 
+          "priority": selectedPriority, 
+          "tag": selectedTag
+        }, {headers: {
+          Authorization: `Bearer ${token}`
+        }})
+
+        console.log(res.data)
+      } catch(err) {
+        console.log(err)
+      }
+
     } else {
       // add new announcement
-      console.log(
-        selectedPriority,
-        selectedTag,
-        title,
-        content,
-        date,
-      );
       if (new Date(date) < new Date()) {
         alert("Can't book past date")
         return;
       }
-    }
 
-    try {
-      const res = await axios.post("http://localhost:3001/announcement/create", {
-        title, content, date, "priority": selectedPriority, "tag": selectedTag
-      }, {headers: {
-        Authorization: `Bearer ${token}`
-      }})
+      try {
+        const res = await axios.post("http://localhost:3001/announcement/create", {
+          title, content, date, "priority": selectedPriority, "tag": selectedTag
+        }, {headers: {
+          Authorization: `Bearer ${token}`
+        }})
 
-      console.log(res)
-      alert("saved");
-    } catch(err) {
-      console.log(err)
+        console.log(res)
+        alert("saved");
+      } catch(err) {
+        console.log(err)
+      }
     }
 
     setSelectedTag("promo");
@@ -214,7 +224,10 @@ const Announcement = ({data}) => {
         <div className="announcement-content-main">  
           <h1>Announcements</h1>
           <div className="announcement-btn-container">
-            <div className="filter-container">
+            <button id="add" onClick={() => edit()}>Add New Announcement</button>
+          </div>
+          <div className="filter-container">
+            <div>
               <label>Tag: </label>
               <select onChange={filterTag} value={filteredTag}>
                 <option onChange={filterTag} value="">All</option>
@@ -223,7 +236,7 @@ const Announcement = ({data}) => {
                 <option onChange={filterTag} value="others">Others</option>
               </select>
             </div>
-            <div className="filter-container">
+            <div>
               <label>Priority: </label>
               <select onChange={filterPriority} value={filteredPriority}>
                 <option onChange={filterPriority} value="">All</option>
@@ -232,7 +245,6 @@ const Announcement = ({data}) => {
                 <option onChange={filterPriority} value="urgent">Urgent</option>
               </select>
             </div>
-            <button id="add" onClick={() => edit()}>Add New Announcement</button>
           </div>
           {announcements ? 
             Object.keys(announcements).map((idx) => {
@@ -245,22 +257,22 @@ const Announcement = ({data}) => {
                       <button onClick={() => deleteAppointment(idx)} className="red-btn"><i className='bx bx-trash' ></i></button>
                     </div>
                   </div>
+                  <h3>
+                  {
+                    new Date(announcements[idx]['dateTime']).toLocaleString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                      timeZone: 'UTC'
+                    })
+                  }
+                  </h3>
                   <div className="tags-container">
-                    <h3>{announcements[idx]["priority"]}</h3>
-                    <h3>{announcements[idx]["tag"]}</h3>
+                    <h3 className="filter-priority">{announcements[idx]["priority"]}</h3>
+                    <h3 className="filter-tag">{announcements[idx]["tag"]}</h3>
                   </div>
                   <div className="announcement-content">
-                    <h3>
-                    {
-                      new Date(announcements[idx]['dateTime']).toLocaleString('en-US', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        timeZone: 'UTC'
-                      })
-                    }
-                    </h3>
-                    <p>{announcements[idx]['content']}</p>
+                    <p><span>{announcements[idx]['content']}</span></p>
                   </div>
                 </div>
               )
