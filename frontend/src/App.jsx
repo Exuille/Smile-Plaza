@@ -27,6 +27,8 @@ import AdminLayout from './layouts/AdminLayout';
 import Protected from './layouts/Protected';
 
 function App() {
+  const token = localStorage.getItem("token");
+
   return (
     <Routes>
       {/* Public and Patient Routes */}
@@ -47,7 +49,7 @@ function App() {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<AdminDashboard />} />
         <Route path="profile" element={<AdminProfile />} />
-        <Route path="announcement" element={<AdminAnnouncement />} />
+        <Route path="announcement" element={<AdminAnnouncement data={{token}}/>} />
         <Route path="appointment" element={<AdminAppointment />} />
         <Route path="userlog" element={<AdminUserLog />} />
       </Route>

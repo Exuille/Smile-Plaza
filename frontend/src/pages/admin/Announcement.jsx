@@ -1,49 +1,71 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import "../../static/announcementAdmin.css"
+import axios from "axios";
 
-const Announcement = () => {
+const Announcement = ({data}) => {
+  const token = data.token;
+
   const [popupOpen, setPopupOpen] = useState(false);
   const [popupAdd, setPopupAdd] = useState(true);
   const [selectedTag, setSelectedTag] = useState("promo");
+  const [selectedPriority, setSelectedPriority] = useState("normal");
 
-  const [appointmentId, setAppointmentId] = useState(null);
+  const [filteredTag, setFilteredTag] = useState("");
+  const [filteredPriority, setFilteredPriority] = useState("");
+
+  const [announcementId, setAnnouncementId] = useState(null);
   const [title, setTitle] = useState(null);
   const [date, setDate] = useState(null);
   const [content, setContent] = useState(null);
+
+  const [announcements, setAnnouncements] = useState(null);
 
   const titleInpRef = useRef();
   const dateInpRef = useRef();
   const contentInpRef = useRef();
 
-  const appointments = {
-    "1" : {
-      "title": "title1",
-      "tag": "promo",
-      "date": "2025-05-31",
-      "content": "can anybody find me somebody to love"
-    }, "2" : {
-      "title": "title2",
-      "tag": "holiday",
-      "date": "2025-05-12",
-      "content": "can anybody find me somebody to love"
-    }, "3" : {
-      "title": "title3",
-      "tag": "holiday",
-      "date": "2025-05-19",
-      "content": "can anybody find me somebody to love"
+  useEffect(() => {
+    const getAllAnnouncements = async () => {
+      try {
+        console.log(filteredPriority, filteredTag)
+        const res = await axios.get("http://localhost:3001/announcement", {
+          headers: {Authorization: `Bearer ${token}`},
+          params: {priority: filteredPriority, tag: filteredTag}
+        });
+        if (res.data.status == "success") {
+          setAnnouncements(res.data.data.announcements)
+        }
+      } catch (err) {
+        console.log(err)
+      }
     }
+
+    getAllAnnouncements();
+  }, [announcementId, filteredTag, filteredPriority])
+
+  const filterTag = (e) => {
+    setFilteredTag(e.target.value)
   }
 
-  const edit = (e, appointmentId) => {
-    if (appointmentId) {
-      setAppointmentId(appointmentId)
-      setTitle(appointments[appointmentId]["title"])
-      setSelectedTag(appointments[appointmentId]["tag"])
-      setDate(appointments[appointmentId]["date"])
-      setContent(appointments[appointmentId]["content"])
+  const filterPriority = (e) => {
+    setFilteredPriority(e.target.value)
+  }
+
+  console.log(announcements)
+
+  const edit = (idx) => {
+    console.log(idx)
+    if (idx) {
+      setAnnouncementId(announcements[idx]["announcementID"])
+      setTitle(announcements[idx]["title"])
+      setSelectedTag(announcements[idx]["tag"])
+      setSelectedPriority(announcements[idx]["priority"])
+      setDate(announcements[idx]["dateTime"])
+      setContent(announcements[idx]["content"])
     } else {
-      setAppointmentId(null)
+      setAnnouncementId(null)
       setTitle(null)
+      setSelectedPriority("normal")
       setSelectedTag("promo");
       setDate(null)
       setContent(null)
@@ -51,16 +73,42 @@ const Announcement = () => {
     setPopupOpen(true)
   }
 
+  const deleteAppointment = async (idx) => {
+    const id = announcements[idx]["announcementID"]
+
+    try {
+      const res = await axios.delete(`http://localhost:3001/announcement/${id}`, {
+        headers: {Authorization: `Bearer ${token}`},
+        params: {id}
+      })
+
+      // TODO add popup confirmation btn
+      console.log(res.data)
+      setAnnouncements(prev => {
+        const newData = {...prev};
+        delete newData[idx];
+        return newData;
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const selectTag = (e) => {
     setSelectedTag(e.target.value)
   }
 
-  const save = () => {
-    if (appointmentId) {
+  const selectPriority = (e) => {
+    setSelectedPriority(e.target.value)
+  }
+
+  const save = async () => {
+    if (announcementId) {
       // update announcement
       console.log(
         titleInpRef.current.value,
         selectedTag,
+        selectedPriority,
         dateInpRef.current.value, 
         contentInpRef.current.value, 
       );
@@ -71,6 +119,7 @@ const Announcement = () => {
     } else {
       // add new announcement
       console.log(
+        selectedPriority,
         selectedTag,
         title,
         content,
@@ -81,9 +130,23 @@ const Announcement = () => {
         return;
       }
     }
-    alert("saved");
+
+    try {
+      const res = await axios.post("http://localhost:3001/announcement/create", {
+        title, content, date, "priority": selectedPriority, "tag": selectedTag
+      }, {headers: {
+        Authorization: `Bearer ${token}`
+      }})
+
+      console.log(res)
+      alert("saved");
+    } catch(err) {
+      console.log(err)
+    }
+
     setSelectedTag("promo");
-    setAppointmentId(null);
+    setSelectedPriority("normal")
+    setAnnouncementId(null);
     setPopupOpen(false);
   }
 
@@ -107,8 +170,8 @@ const Announcement = () => {
         <div className="popup">
           <div className="popup-content">
             <div className="popup-content-heading">
-              {appointmentId ? 
-                <h1>Announcement ID: {appointmentId}</h1>
+              {announcementId ? 
+                <h1>Announcement ID: {announcementId}</h1>
                 : 
                 <h1>New Announcement</h1>
               }
@@ -123,6 +186,14 @@ const Announcement = () => {
                 <option onChange={selectTag} value="promo">Promo</option>
                 <option onChange={selectTag} value="holiday">Holiday</option>
                 <option onChange={selectTag} value="others">Others</option>
+              </select>
+            </div>
+            <div className="inp-container">
+              <label>Priority: </label>
+              <select onChange={selectPriority} value={selectedPriority}>
+                <option onChange={selectPriority} value="normal">Normal</option>
+                <option onChange={selectPriority} value="important">Important</option>
+                <option onChange={selectPriority} value="urgent">Urgent</option>
               </select>
             </div>
             <div className="inp-container">
@@ -143,22 +214,53 @@ const Announcement = () => {
         <div className="announcement-content-main">  
           <h1>Announcements</h1>
           <div className="announcement-btn-container">
-            <button id="add" onClick={edit}>Add New Announcement</button>
+            <div className="filter-container">
+              <label>Tag: </label>
+              <select onChange={filterTag} value={filteredTag}>
+                <option onChange={filterTag} value="">All</option>
+                <option onChange={filterTag} value="promo">Promo</option>
+                <option onChange={filterTag} value="holiday">Holiday</option>
+                <option onChange={filterTag} value="others">Others</option>
+              </select>
+            </div>
+            <div className="filter-container">
+              <label>Priority: </label>
+              <select onChange={filterPriority} value={filteredPriority}>
+                <option onChange={filterPriority} value="">All</option>
+                <option onChange={filterPriority} value="normal">Normal</option>
+                <option onChange={filterPriority} value="important">Important</option>
+                <option onChange={filterPriority} value="urgent">Urgent</option>
+              </select>
+            </div>
+            <button id="add" onClick={() => edit()}>Add New Announcement</button>
           </div>
-          {appointments ? 
-            Object.keys(appointments).map((appointmentId, idx) => {
+          {announcements ? 
+            Object.keys(announcements).map((idx) => {
               return (
-                <div key={appointmentId} className="announcement-content-container">
+                <div key={idx} className="announcement-content-container">
                   <div className="announcement-title-container">
-                    <h2>{appointments[appointmentId]["title"]} | {appointments[appointmentId]["tag"]}</h2>
+                    <h2>{announcements[idx]["title"]}</h2>
                     <div className="update-btn-container">
-                      <button id="edit" onClick={(e) => edit(e, appointmentId)} className="green-btn"><i class='bx bx-edit-alt'></i></button>
-                      <button className="red-btn"><i class='bx bx-trash' ></i></button>
+                      <button id="edit" onClick={() => edit(idx)} className="green-btn"><i className='bx bx-edit-alt'></i></button>
+                      <button onClick={() => deleteAppointment(idx)} className="red-btn"><i className='bx bx-trash' ></i></button>
                     </div>
                   </div>
+                  <div className="tags-container">
+                    <h3>{announcements[idx]["priority"]}</h3>
+                    <h3>{announcements[idx]["tag"]}</h3>
+                  </div>
                   <div className="announcement-content">
-                    <h3>{appointments[appointmentId]['date']}</h3>
-                    <p>{appointments[appointmentId]['content']}</p>
+                    <h3>
+                    {
+                      new Date(announcements[idx]['dateTime']).toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        timeZone: 'UTC'
+                      })
+                    }
+                    </h3>
+                    <p>{announcements[idx]['content']}</p>
                   </div>
                 </div>
               )

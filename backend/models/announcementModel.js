@@ -19,6 +19,11 @@ const AnnouncementSchema = new mongoose.Schema(
       required: true,
       default: Date.now,
     },
+    tag: {
+      type: String,
+      enum: ["holiday", "promo", "others"],
+      default: "normal",
+    },
     priority: {
       type: String,
       enum: ["normal", "important", "urgent"],

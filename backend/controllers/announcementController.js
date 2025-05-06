@@ -2,7 +2,7 @@ import Announcement from "../models/announcementModel.js"
 import catchAsync from "../utils/catchAsync.js"
 
 export const createAnnouncement = catchAsync(async (req, res) => {
-  const { title, content, dateTime, priority } = req.body
+  const { title, content, date, tag, priority } = req.body
 
   // Check if user is admin
   if (req.user.role !== "admin") {
@@ -27,13 +27,14 @@ export const createAnnouncement = catchAsync(async (req, res) => {
     })
   }
 
-  const announcementDate = dateTime ? new Date(dateTime) : new Date()
+  const announcementDate = date ? new Date(date) : new Date()
 
   const newAnnouncement = await Announcement.create({
     title,
     content,
     dateTime: announcementDate,
     priority: priority || "normal",
+    tag: tag || "holiday",
     createdBy: req.user.id,
   })
 
@@ -47,7 +48,9 @@ export const createAnnouncement = catchAsync(async (req, res) => {
 
 export const getAllAnnouncements = catchAsync(async (req, res) => {
   // Add filtering by priority
-  const { priority } = req.query
+  const { priority, tag } = req.query
+
+  console.log(tag, priority)
 
   const filter = {}
   if (priority) {
@@ -58,6 +61,16 @@ export const getAllAnnouncements = catchAsync(async (req, res) => {
       })
     }
     filter.priority = priority
+  }
+
+  if (tag) {
+    if (!["holiday", "promo", "others"].includes(tag)) {
+      return res.status(400).json({
+        status: "fail",
+        message: "Invalid tag filter. Must be one of: holiday, promo, others",
+      })
+    }
+    filter.tag = tag
   }
 
   const announcements = await Announcement.find(filter).sort({
@@ -145,7 +158,6 @@ export const deleteAnnouncement = catchAsync(async (req, res) => {
   }
 
   const announcement = await Announcement.findOneAndDelete({ announcementID: req.params.id })
-
   if (!announcement) {
     return res.status(404).json({
       status: "fail",
