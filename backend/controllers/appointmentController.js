@@ -128,13 +128,36 @@ export const cancelAppointment = catchAsync(async (req, res) => {
 
 export const getMyAppointments = catchAsync(async (req, res) => {
   const appointments = await Appointment.find({ patient: req.user.id })
+    .populate('patient', 'name') // Only fetch the name field
+    .select('dateTime service feedback_status patient status'); // Include status
 
-  if (!appointments) {
-    return res.status(404).json({ status: "fail", message: "No appointments found" })
+  if (!appointments || appointments.length === 0) {
+    return res.status(404).json({ status: "fail", message: "No appointments found" });
   }
 
-  res.status(200).json({ status: "success", results: appointments.length, data: { appointments } })
-})
+  // Format appointments to return desired fields
+  const formattedAppointments = appointments.map(app => {
+    const dateObj = new Date(app.dateTime);
+    const formattedDate = dateObj.toISOString().split('T')[0]; // yyyy-mm-dd
+    const formattedTime = dateObj.toTimeString().split(':').slice(0, 2).join(':'); // hh:mm
+
+    return {
+      name: app.patient.name,
+      date: formattedDate,
+      time: formattedTime,
+      service: app.service,
+      feedback_status: app.feedback_status || "none", // default if null/undefined
+      status: app.status, // Add status
+    };
+  });
+
+  res.status(200).json({
+    status: "success",
+    results: formattedAppointments.length,
+    data: { appointments: formattedAppointments }
+  });
+});
+
 
 export const getAppointments = catchAsync(async (req, res) => {
   let appointments
