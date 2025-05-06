@@ -2,11 +2,10 @@ import React from 'react';
 import NavBar from '../components/NavBar';
 import { Navigate, Outlet } from 'react-router-dom';
 
-const PatientLayout = () => {
-  const token = localStorage.getItem("token");
+const PatientLayout = ({data}) => {
+  const token = data.token;
 
-  return token ? (
-    <div
+  return <div
       style={{
         backgroundImage: "url('main-background.png')",
         backgroundRepeat: "no-repeat",
@@ -21,8 +20,6 @@ const PatientLayout = () => {
         <Outlet />
       </main>
     </div>
-    ) : 
-    <Navigate to="/login" />;
 };
 
 export default PatientLayout;

@@ -2,8 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import React from 'react';
 import NavBar from '../components/NavBar';
 
-const Protected = () => {
-  const token = localStorage.getItem("token");
+const Protected = ({data}) => {
 
   return token ? (
     <div

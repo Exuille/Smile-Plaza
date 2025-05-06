@@ -27,18 +27,23 @@ import AdminLayout from './layouts/AdminLayout';
 import Protected from './layouts/Protected';
 
 function App() {
+
+  const token = localStorage.getItem("token");
+
   return (
     <Routes>
       {/* Public and Patient Routes */}
-      <Route path="/" element={<PatientLayout />}>
+      <Route path="/" element={<PatientLayout data={{token}}/>}>
         <Route index element={<Home />} />
         <Route path="contact" element={<Contact />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="announcement" element={<PatientAnnouncement />} />
-        <Route path="dashboard" element={<PatientDashboard />} />
-        <Route path="profile" element={<PatientProfile />} />
-        <Route path="appointment" element={<PatientAppointment />} />
+        <Route path="" element={<Protected data={{token}}/>}>
+          <Route path="dashboard" element={<PatientDashboard />} />
+          <Route path="profile" element={<PatientProfile />} />
+          <Route path="appointment" element={<PatientAppointment />} />
+        </Route>
       </Route>
 
       {/* Admin Routes */}

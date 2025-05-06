@@ -5,6 +5,8 @@ import '../static/navbar.css';
 const NavBar = ({data}) => {
   const navigate = useNavigate();
   const token = data.token
+
+  console.log(token)
   
   const [menuOpen, setMenuOpen] = useState(false);
 
