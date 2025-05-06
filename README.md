@@ -1,5 +1,14 @@
-# Smile-Plaza
-Dental Appointment System
+<p align= "center">
+  <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/bbea19a8-18d0-431d-a4f8-ff353f210874"  width="15%" height="15%">
+</p>
+<br>
+<h1 align="center">
+  Smile Plaza Dental Center Appointment Management System<br>
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=poppins&weight=900&size=35&pause=1000&center=true&vCenter=true&random=false&width=435&lines=Family+Dentist+;General+Dentistry;Orthodontics" alt="Typing SVG" /></a><br>
+  <br>
+</a>
+
+![Alt text](https://raw.githubusercontent.com/Trilokia/Trilokia/379277808c61ef204768a61bbc5d25bc7798ccf1/bottom_header.svg)
 
 
 <h2 id="about-the-project">🏥 About The Project </h2>
