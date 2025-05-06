@@ -26,7 +26,7 @@ const Login = () => {
           email, password, captchaToken
         })
         localStorage.setItem("token", res.data.token);
-        navigate('/', { replace: true });
+        window.location.replace('/');
       } catch(err) {
         if (err.response) {
           feedbackRef.current.textContent = err.response.data.message;

@@ -5,8 +5,6 @@ import '../static/navbar.css';
 const NavBar = ({data}) => {
   const navigate = useNavigate();
   const token = data.token
-
-  console.log(token)
   
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -14,7 +12,7 @@ const NavBar = ({data}) => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    navigate('/', { replace: true });
+    window.location.replace('/');
   }
 
   return (
