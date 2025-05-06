@@ -110,43 +110,62 @@ function convertTo24HourTime(time12h) {
 }
 
 export const cancelAppointment = catchAsync(async (req, res) => {
-  const appointment = await Appointment.findById(req.params.id)
+  const appointment = await Appointment.findById(req.params.id);
 
   if (!appointment) {
-    return res.status(404).json({ status: "fail", message: "Appointment not found" })
+    return res.status(404).json({ status: "fail", message: "Appointment not found" });
   }
 
+  // Restrict cancellation to admin or owner of the appointment
   if (req.user.role !== "admin" && appointment.patient.toString() !== req.user.id) {
-    return res.status(403).json({ status: "fail", message: "Not authorized to cancel this appointment" })
+    return res.status(403).json({ status: "fail", message: "Not authorized to cancel this appointment" });
   }
 
-  appointment.status = "cancelled"
-  await appointment.save()
+  appointment.status = "cancelled";
+  await appointment.save();
 
-  res.status(200).json({ status: "success", data: { appointment } })
-})
+  // Prepare formatted response similar to getMyAppointments
+  const dateObj = new Date(appointment.dateTime);
+  const formattedDate = dateObj.toISOString().split('T')[0];
+  const formattedTime = dateObj.toTimeString().split(':').slice(0, 2).join(':');
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      appointment: {
+        id: appointment._id,
+        date: formattedDate,
+        time: formattedTime,
+        service: appointment.service,
+        feedback_status: appointment.feedback_status || "none",
+        status: appointment.status,
+      }
+    }
+  });
+});
+
 
 export const getMyAppointments = catchAsync(async (req, res) => {
   const appointments = await Appointment.find({ patient: req.user.id })
-    .populate('patient', 'name') // Only fetch the name field
-    .select('dateTime service feedback_status patient status'); // Include status
+    .populate('patient', 'name') 
+    .select('dateTime service feedback_status patient status _id'); 
 
   if (!appointments || appointments.length === 0) {
     return res.status(404).json({ status: "fail", message: "No appointments found" });
   }
 
-  // Format appointments to return desired fields
   const formattedAppointments = appointments.map(app => {
     const dateObj = new Date(app.dateTime);
-    const formattedDate = dateObj.toISOString().split('T')[0]; // yyyy-mm-dd
-    const formattedTime = dateObj.toTimeString().split(':').slice(0, 2).join(':'); // hh:mm
+    const formattedDate = dateObj.toISOString().split('T')[0]; 
+    const formattedTime = dateObj.toTimeString().split(':').slice(0, 2).join(':'); 
 
     return {
+      id: app._id, 
       name: app.patient.name,
       date: formattedDate,
       time: formattedTime,
       service: app.service,
-      feedback_status: app.feedback_status || "none", // default if null/undefined
+      feedback_status: app.feedback_status || "none", 
       status: app.status, // Add status
     };
   });
