@@ -26,11 +26,6 @@ hr {
     margin: 12px 0;
 }
 
-.recaptcha {
-    width: 100%;
-    border: 1px solid red;
-}
-
 .auth-form {
     display: flex;
     align-items: center;

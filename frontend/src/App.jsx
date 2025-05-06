@@ -24,6 +24,7 @@ import AdminUserLog from './pages/admin/UserLog';
 // Layouts
 import PatientLayout from './layouts/PatientLayout';
 import AdminLayout from './layouts/AdminLayout';
+import Protected from './layouts/Protected';
 
 function App() {
   return (
@@ -34,10 +35,10 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
+        <Route path="announcement" element={<PatientAnnouncement />} />
         <Route path="dashboard" element={<PatientDashboard />} />
         <Route path="profile" element={<PatientProfile />} />
         <Route path="appointment" element={<PatientAppointment />} />
-        <Route path="announcement" element={<PatientAnnouncement />} />
       </Route>
 
       {/* Admin Routes */}

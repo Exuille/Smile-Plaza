@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../static/navbar.css';
 
-const NavBar = () => {
+const NavBar = ({data}) => {
+  const navigate = useNavigate();
+  const token = data.token
+  
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate('/', { replace: true });
+  }
 
   return (
     <nav className="navbar">
@@ -26,12 +34,20 @@ const NavBar = () => {
           <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active-link" : "nav-link"}>
             Home
           </NavLink>
-          <NavLink to="/dashboard" className={({ isActive }) => isActive ? "nav-link active-link" : "nav-link"}>
-            Dashboard
-          </NavLink>
-          <NavLink to="/appointment" className={({ isActive }) => isActive ? "nav-link active-link" : "nav-link"}>
-            Appointments
-          </NavLink>
+          {
+            token ?
+              <NavLink to="/dashboard" className={({ isActive }) => isActive ? "nav-link active-link" : "nav-link"}>
+                Dashboard
+              </NavLink>
+            : null
+          }
+          {
+            token ?
+              <NavLink to="/appointment" className={({ isActive }) => isActive ? "nav-link active-link" : "nav-link"}>
+                Appointments
+              </NavLink>
+            : null
+          }
           <NavLink to="/announcement" className={({ isActive }) => isActive ? "nav-link active-link" : "nav-link"}>
             Announcements & Clinic Hours
           </NavLink>
@@ -40,10 +56,19 @@ const NavBar = () => {
           </NavLink>
         </div>
       </div>
-      
       <div className={`nav-end patient ${menuOpen ? 'mobile-visible' : ''}`}>
-        <NavLink to="/login" className="login-btn">Login</NavLink>
-        <NavLink to="/signup" className="signup-btn">Sign Up</NavLink>
+      {
+        token ?
+          <a style={{cursor: "pointer"}} onClick={logout} className="login-btn">Logout</a>
+        : 
+          <NavLink to="/login" className="login-btn">Login</NavLink>
+      }
+      {
+        token ?
+          null
+        : 
+          <NavLink to="/signup" className="signup-btn">Sign Up</NavLink>
+      }
       </div>
     </nav>
   );
