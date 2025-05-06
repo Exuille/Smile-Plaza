@@ -179,15 +179,41 @@ export const getMyAppointments = catchAsync(async (req, res) => {
 
 
 export const getAppointments = catchAsync(async (req, res) => {
-  let appointments
   if (req.user.role === "admin") {
-    appointments = await Appointment.find().populate("patient")
-  } else {
-    appointments = await Appointment.find({ patient: req.user.id })
-  }
+    const appointments = await Appointment.find()
+      .populate('patient', 'name') 
+      .select('dateTime service feedback_status patient status _id');
 
-  res.status(200).json({ status: "success", results: appointments.length, data: { appointments } })
-})
+    if (!appointments || appointments.length === 0) {
+      return res.status(404).json({ status: "fail", message: "No appointments found" });
+    }
+
+    const formattedAppointments = appointments.map(app => {
+      const dateObj = new Date(app.dateTime);
+      const formattedDate = dateObj.toISOString().split('T')[0];
+      const formattedTime = dateObj.toTimeString().split(':').slice(0, 2).join(':');
+
+      return {
+        id: app._id,
+        name: app.patient.name,
+        date: formattedDate,
+        time: formattedTime,
+        service: app.service,
+        feedback_status: app.feedback_status || "none",
+        status: app.status,
+      };
+    });
+
+    return res.status(200).json({
+      status: "success",
+      results: formattedAppointments.length,
+      data: { appointments: formattedAppointments }
+    });
+  } else {
+    return res.status(403).json({ status: "fail", message: "Access forbidden: Admins only" });
+  }
+});
+
 
 export const getAppointmentById = catchAsync(async (req, res) => {
   const appointment = await Appointment.findById(req.params.id).populate("patient")
