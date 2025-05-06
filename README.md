@@ -9,9 +9,7 @@ Dental Appointment System
       <img src="https://github.com/user-attachments/assets/b2186f0e-d954-4e01-a82f-228f959ca891" width="100%">
     </td>
     <td width="70%" align="justify" style="border: none;">
-      Okidok aligns with <strong>SDG 3: Good Health and Well-Being</strong> by making healthcare more accessible and efficient. 
-      It assists in early detection and treatment, especially for individuals with limited access to healthcare professionals, 
-      thus promoting overall health and well-being.
+      Smile Plaza aligns with <strong>SDG 3: Good Health and Well-Being</strong> by making healthcare more accessible and efficient.
     </td>
   </tr>
 </table>
