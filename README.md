@@ -29,6 +29,20 @@
   </tr>
 </table>
 
+<h2 id="preview">🫣 Preview </h2>
+
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="" width="180"></td>
+      <td><img src="" width="180"></td>
+      <td><img src="" width="180"></td>
+      <td><img src="" width="180"></td>
+      <td><img src="" width="180"></td>
+    </tr>
+  </table>
+</div>
+
 <h2 id="contributing">👩‍💻 Contributors</h2> 
 
 <table width="100%" style="border-collapse: collapse;"> 
