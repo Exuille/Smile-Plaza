@@ -7,6 +7,11 @@ const AdminNavBar = () => {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    window.location.replace('/');
+  }
+
   return (
     <nav className="navbar">
       <div className="nav-start">
@@ -46,18 +51,7 @@ const AdminNavBar = () => {
       </div>
 
       <div className={`nav-end admin ${menuOpen ? 'mobile-visible' : ''}`}>
-        <NavLink 
-          to="/login" 
-          className="login-btn"
-        >
-          Login
-        </NavLink>
-        <NavLink 
-          to="/signup" 
-          className="signup-btn"
-        >
-          Sign Up
-        </NavLink>
+        <a style={{cursor: "pointer"}} onClick={logout} className="login-btn">Logout</a>
       </div>
     </nav>
   );
