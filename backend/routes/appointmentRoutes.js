@@ -20,8 +20,8 @@ router.post('/create', protect, createAppointment);
 router.put('/cancel/:id', protect, cancelAppointment);
 
 // Admin routes
-router.get('/', protect, getAppointments);
-router.get('/:id', protect, getAppointmentById);
-router.put('/:id', protect, updateAppointment);
+router.get('/', /* protect, */ getAppointments);
+router.get('/:id',/*  protect, */ getAppointmentById);
+router.put('/:id',/*  protect, */ updateAppointment);
 
 export default router;

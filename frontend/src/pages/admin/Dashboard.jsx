@@ -1,45 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../static/dashboard.css';
 
 const Dashboard = () => {
-  const [appointments, setAppointments] = useState([
-    {
-      name: 'John Doe',
-      date: '2025-05-01',
-      time: '10:00 AM',
-      service: 'Dental Cleaning',
-      status: 'Completed',
-      feedback: 'Not available. Make a new appointment.'
-    },
-    {
-      name: 'Jane Smith',
-      date: '2025-05-02',
-      time: '2:00 PM',
-      service: 'Eye Checkup',
-      status: 'Pending',
-      feedback: "You've been approved."
-    },
-    {
-      name: 'Robert Brown',
-      date: '2025-05-03',
-      time: '9:30 AM',
-      service: 'Physical Therapy',
-      status: 'Cancelled',
-      feedback: 'Mark as Completed.'
-    }
-  ]);
-
+  const [appointments, setAppointments] = useState([]);
   const [openMenuIndex, setOpenMenuIndex] = useState(null);
 
-  const handleAction = (action, index) => {
-    console.log(`Action "${action}" clicked on row ${index}`);
-    setOpenMenuIndex(null);
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/appointment/', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch appointments');
+        }
+
+        const data = await response.json();
+        setAppointments(data);
+      } catch (error) {
+        console.error('Error fetching appointments:', error);
+      }
+    };
+
+    fetchAppointments();
+  }, []);
+
+  const handleAction = async (action, index) => {
+    const selectedAppointment = appointments[index];
+
+    try {
+      if (action === 'Delete Entry') {
+        const response = await fetch(`http://localhost:3000/appointment/${selectedAppointment._id}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to delete appointment');
+        }
+
+        setAppointments(appointments.filter((_, i) => i !== index));
+      } else {
+        const response = await fetch(`http://localhost:3000/appointment/${selectedAppointment._id}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ status: action === 'Mark as Completed' ? 'Completed' : 'Reserved' }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to update appointment status');
+        }
+
+        const updated = [...appointments];
+        updated[index].status = action === 'Mark as Completed' ? 'Completed' : 'Reserved';
+        setAppointments(updated);
+      }
+
+      setOpenMenuIndex(null);
+    } catch (error) {
+      console.error(`Failed to perform action ${action}:`, error);
+    }
   };
 
-  const handleFeedbackChange = (index, newValue) => {
+  const handleFeedbackChange = async (index, newValue) => {
     const updatedAppointments = [...appointments];
-    updatedAppointments[index].feedback = newValue;
-    setAppointments(updatedAppointments);
+    const appointmentToUpdate = updatedAppointments[index];
+    appointmentToUpdate.feedback = newValue;
+
+    try {
+      const response = await fetch(`http://localhost:3000/appointment/${appointmentToUpdate._id}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ feedback: newValue }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update feedback');
+      }
+
+      setAppointments(updatedAppointments);
+    } catch (error) {
+      console.error('Failed to update feedback:', error);
+    }
   };
 
   return (
@@ -59,10 +113,10 @@ const Dashboard = () => {
           </thead>
           <tbody>
             {appointments.map((appointment, index) => (
-              <tr key={index}>
+              <tr key={appointment._id}>
                 <td>{appointment.name}</td>
                 <td>{appointment.date}</td>
-                <td>{appointment.time}</td>
+                <td>{appointment.time}</td>2
                 <td>{appointment.service}</td>
                 <td>
                   <span className={`status-badge status-${appointment.status.toLowerCase()}`}>
@@ -71,7 +125,7 @@ const Dashboard = () => {
                 </td>
                 <td>
                   <select
-                    value={appointment.feedback}
+                    value={appointment.feedback || ''}
                     onChange={(e) => handleFeedbackChange(index, e.target.value)}
                   >
                     <option value="Not available. Make a new appointment.">Not available. Make a new appointment.</option>
