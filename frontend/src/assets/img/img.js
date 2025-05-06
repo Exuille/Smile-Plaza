@@ -1,9 +1,9 @@
 export { default as calendar } from "./calendar.jpg";
-export { default as dental_consultation } from "./treatments/dental_consultation.jpg";
-export { default as orthodontics } from "./treatments/orthodontics.jpg";
-export { default as oral_prophylaxis } from "./treatments/oral_prophylaxis.jpeg";
-export { default as tooth_restoration } from "./treatments/tooth_restoration.jpeg";
-export { default as tooth_extraction } from "./treatments/tooth_extraction.jpg";
-export { default as odontectonomy } from "./treatments/odontectonomy.jpg";
-export { default as dentures } from "./treatments/dentures.jpg";
+export { default as dental_consultation } from "./treatments/dental_consultation.png";
+export { default as orthodontics } from "./treatments/orthodontics.png";
+export { default as oral_prophylaxis } from "./treatments/oral_prophylaxis.png";
+export { default as tooth_restoration } from "./treatments/tooth_restoration.png";
+export { default as tooth_extraction } from "./treatments/tooth_extraction.png";
+export { default as odontectomy } from "./treatments/odontectomy.png";
+export { default as dentures } from "./treatments/dentures.png";
 export { default as logo } from "./logo.jpg";

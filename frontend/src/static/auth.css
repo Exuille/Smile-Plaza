@@ -26,6 +26,11 @@ hr {
     margin: 12px 0;
 }
 
+.recaptcha {
+    width: 100%;
+    border: 1px solid red;
+}
+
 .auth-form {
     display: flex;
     align-items: center;
@@ -99,9 +104,15 @@ hr {
     white-space: nowrap;
 }
 
+.feedback-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
 .feedback {
     font-size: 0.8rem;
-    margin-bottom: 24px;
+    color: red;
 }
 
 .link, label {
