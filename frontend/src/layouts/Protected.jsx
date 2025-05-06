@@ -2,8 +2,8 @@ import { Navigate, Outlet } from "react-router-dom";
 import React from 'react';
 import NavBar from '../components/NavBar';
 
-const Protected = ({data}) => {
-
+const Protected = () => {
+  const token = localStorage.getItem("token");
   return token ? (
     <div
       style={{
@@ -15,7 +15,7 @@ const Protected = ({data}) => {
         width: "100%"
       }}
     >
-      <NavBar />
+      <NavBar data={{token}}/>
       <main>
         <Outlet />
       </main>

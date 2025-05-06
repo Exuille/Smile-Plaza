@@ -2,8 +2,8 @@ import React from 'react';
 import NavBar from '../components/NavBar';
 import { Navigate, Outlet } from 'react-router-dom';
 
-const PatientLayout = ({data}) => {
-  const token = data.token;
+const PatientLayout = () => {
+  const token = localStorage.getItem("token");
 
   return <div
       style={{
