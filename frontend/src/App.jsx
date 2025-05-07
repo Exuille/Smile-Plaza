@@ -24,34 +24,41 @@ import AdminUserLog from './pages/admin/UserLog';
 // Layouts
 import PatientLayout from './layouts/PatientLayout';
 import AdminLayout from './layouts/AdminLayout';
-import Protected from './layouts/Protected';
+import RoleProtected from './layouts/RoleProtected';
 
 function App() {
   const token = localStorage.getItem("token");
 
   return (
     <Routes>
-      {/* Public and Patient Routes */}
+      {/* Public */}
       <Route path="/" element={<PatientLayout />}>
         <Route index element={<Home />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
+        <Route path="login" element={<Login data={{token}}/>} />
+        <Route path="signup" element={<Signup data={{token}}/>} />
         <Route path="announcement" element={<PatientAnnouncement />} />
       </Route>
-      <Route path="/" element={<Protected />}>
-        <Route path="dashboard" element={<PatientDashboard />} />
-        <Route path="profile" element={<PatientProfile />} />
-        <Route path="appointment" element={<PatientAppointment />} />
+
+      {/* Patient Routes */}
+      <Route element={<RoleProtected allowedRole="patient" data={{token}} />}>
+        <Route path="/" element={<PatientLayout />}>
+          <Route path="dashboard" element={<PatientDashboard />} />
+          <Route path="profile" element={<PatientProfile />} />
+          <Route path="appointment" element={<PatientAppointment />} />
+        {/*<Route path="/" element={<Protected data={{token}} />}>*/}
+        </Route>
       </Route>
 
       {/* Admin Routes */}
-      <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<AdminDashboard />} />
-        <Route path="profile" element={<AdminProfile />} />
-        <Route path="announcement" element={<AdminAnnouncement data={{token}}/>} />
-        <Route path="appointment" element={<AdminAppointment />} />
-        <Route path="userlog" element={<AdminUserLog />} />
+      <Route element={<RoleProtected allowedRole="admin" data={{token}} />}>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="profile" element={<AdminProfile />} />
+          <Route path="announcement" element={<AdminAnnouncement data={{token}}/>} />
+          <Route path="appointment" element={<AdminAppointment />} />
+          <Route path="userlog" element={<AdminUserLog />} />
+        </Route>
       </Route>
     </Routes>
   );

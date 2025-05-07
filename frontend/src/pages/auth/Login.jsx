@@ -1,11 +1,17 @@
 import ReCAPTCHA from 'react-google-recaptcha'
-import  { useNavigate } from 'react-router-dom'
+import { jwtDecode } from "jwt-decode";
 import React, { useRef } from 'react';
 import '../../static/auth.css';
 import axios from "axios";
 
-const Login = () => {
-  const navigate = useNavigate();
+const Login = ({data}) => {
+  const token = data.token;
+  if (token) {
+    const decoded = jwtDecode(token);
+    console.log(decoded.role)
+    if (decoded.role == 'patient') window.location.replace('/');
+    if (decoded.role == 'admin') window.location.replace('/admin');
+  }
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -26,6 +32,10 @@ const Login = () => {
           email, password, captchaToken
         })
         localStorage.setItem("token", res.data.token);
+        const decoded1 = jwtDecode(res.data.token);
+        console.log(decoded1)
+        if (decoded1.role == 'patient') window.location.replace('/');
+        if (decoded1.role == 'admin') window.location.replace('/admin');
         window.location.replace('/');
       } catch(err) {
         if (err.response) {
