@@ -8,7 +8,7 @@ const RoleProtected = ({ allowedRole, data}) => {
 
 	try {
 		const decoded = jwtDecode(token);
-		console.log(decoded)
+		console.log(decoded.role, allowedRole)
 		if (decoded.role === allowedRole) {
 			return <Outlet />;
 		} else if (decoded.role == "patient") {
