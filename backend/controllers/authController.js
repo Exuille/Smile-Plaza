@@ -8,14 +8,14 @@ const hashPassword = async (pass) => {
     return await bcrypt.hash(pass, 10);
 };
 
-const signToken = (id, expiryTime) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
+const signToken = (id, expiryTime, role) => {
+    return jwt.sign({ id, role }, process.env.JWT_SECRET, {
         expiresIn: expiryTime || process.env.JWT_EXPIRES_IN,
     });
 };
 
-const createSendToken = (user, statusCode, res, expiryTime) => {
-    const token = signToken(user._id, expiryTime);
+const createSendToken = (user, statusCode, res, expiryTime, role) => {
+    const token = signToken(user._id, expiryTime, role);
     
     const cookieOptions = {
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
@@ -76,7 +76,7 @@ export const register = catchAsync(async (req, res) => {
     const hashedPassword = await hashPassword(password);
     const newUser = await User.create({ name, email, password: hashedPassword, role });
 
-    createSendToken(newUser, 201, res);
+    createSendToken(newUser, 201, res, role);
 });
 
 
@@ -125,7 +125,7 @@ export const login = catchAsync(async (req, res) => {
         });
     }
 
-    createSendToken(user, 200, res, "24h");
+    createSendToken(user, 200, res, "24h", user.role);
 });
 
 

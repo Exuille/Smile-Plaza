@@ -8,7 +8,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await fetch('http://localhost:3000/appointment/', {
+        const response = await fetch('http://localhost:3001/appointment/', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -20,7 +20,8 @@ const Dashboard = () => {
         }
 
         const data = await response.json();
-        setAppointments(data);
+        console.log(data.data.appointments, "aaaaaaaa")
+        setAppointments(data.data.appointments);
       } catch (error) {
         console.error('Error fetching appointments:', error);
       }
@@ -95,6 +96,8 @@ const Dashboard = () => {
       console.error('Failed to update feedback:', error);
     }
   };
+
+  console.log(appointments)
 
   return (
     <div className="dashboard-container">

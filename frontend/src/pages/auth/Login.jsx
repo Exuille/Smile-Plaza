@@ -36,7 +36,6 @@ const Login = ({data}) => {
         console.log(decoded1)
         if (decoded1.role == 'patient') window.location.replace('/');
         if (decoded1.role == 'admin') window.location.replace('/admin');
-        window.location.replace('/');
       } catch(err) {
         if (err.response) {
           feedbackRef.current.textContent = err.response.data.message;
