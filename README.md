@@ -29,6 +29,261 @@
   </tr>
 </table>
 
+<h2 id="features">🔑 Key Features </h2>
+<h3>🏠 Home Section</h3>
+
+<table style="border: none; border-collapse: collapse; width: 100%; table-layout: fixed;">
+  <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :one: Home
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Dental Clinic Name: Prominently displayed on the homepage.</li>
+    </td>
+  </tr>
+  <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :two: About
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Information about the dental clinic.</li>
+      <li>Mission</li>
+      <li>Values</li>
+    </td>
+  </tr>
+        <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :three: Treatments
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>List of services such as: Dental Consultation</li>
+      <li>Orthodontics</li>
+      <li>Oral Prophylaxis</li>
+      <li>Tooth Restoration</li>
+      <li>Tooth Extraction</li>
+      <li>Odontectomy</li>
+      <li>Dentures</li>
+    </td>
+  </tr>
+    <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :four: Clinic Hours
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Displayed clinic days and hours</li>
+      <li>Maps showing the direction of the clinic.</li>
+    </td>
+  </tr>
+    <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :five: Contact Us
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Phone number</li>
+      <li>Email address</li>
+      <li>Physical Location</li>
+      <li>Send emails for inquiries.</li>
+      <li>Social media links/li>
+    </td>
+  </tr>
+                <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :six: Appointment
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Only available after creating an account.</li>
+      <li>Schedule appointments.</li>
+      <li>Manage existing appointments.</li>
+    </td>
+  </tr>
+    <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :seven: Login
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Remembering accounts</li>
+      <li>Recaptcha verification</li>
+      <li>Password recovery option</li>
+    </td>
+  </tr>
+    <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :eight: Register
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Input personal information.</li>
+      <li>Set up account with an email and password.</li>
+    </td>
+  </tr>
+</table>
+
+<h3>🛡️ Admin</h3>
+
+<table style="border: none; border-collapse: collapse; width: 100%; table-layout: fixed;">
+  <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :one: Dashboard
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Total number of patients</li>
+        <li>Pending appointments</li>
+        <li>Unfinished appointments</li>
+        <li>Accepted appointments</li>
+        <li>Canceled appointments</li>
+        <li>Rejected appointments</li>
+    </td>
+  </tr>
+  <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :two: Schedule
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Allows the admin to view appointments on a calendar.</li>
+      <li>Manages appointment of customers.</li>
+      <li>Sends email after accepting or rejecting the appointment to the user.</li>
+      <li>It can also manage clinic working days.</li>
+      <li>Automatically rejects and cancels existing appointments in that day after adding holiday.</li>
+    </td>
+  </tr>
+        <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :three: Patient Log
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Patient ID</li>
+      <li>Patient's personal information</li>
+      <li>Number of appointments made by the patient</li>
+    </td>
+  </tr>
+    <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :four: Post
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Create announcements or posts for patients or staff.</li>
+      <li>Create announcements or posts automatically after adding holiday.</li>
+    </td>
+  </tr>
+    <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :five: Announcement
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>View created posts/announcements</li>
+      <li>Update or delete existing announcements</li>
+      <li>Pagination feature</li>
+    </td>
+  </tr>
+                <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :six: Account
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Access to: Admin's account information and ability to update account details.</li>
+    </td>
+  </tr>
+    <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :seven: Logout
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Provides a secure way to log out of the admin account.</li>
+    </td>
+  </tr>
+</table>
+
+<h3>🛌 Patient</h3>
+
+<table style="border: none; border-collapse: collapse; width: 100%; table-layout: fixed;">
+  <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :one: Announcement
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Access announcements made by the admin.</li>
+        <li>Check dental clinic hours or updates.</li>
+    </td>
+  </tr>
+  <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :two: My Appointment
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Book appointments conveniently.</li>
+      <li>Select preferred date and time.</li>
+      <li>Choose a needed service.</li>
+      <li>Added holiday dates, past dates, and walk-in dates cannot be accessed by the user.</li>
+      <li>Receive email confirmation after appointment.</li>
+    </td>
+  </tr>
+        <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :three: History
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Details of past appointments.</li>
+    </td>
+  </tr>
+    <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :four: Account
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Update account</li>
+      <li>Manage account details</li>
+    </td>
+  </tr>
+    <tr style="border: none;">
+    <td width="305px" style="border: none; vertical-align: top; padding-right: 20px;">
+      <ul style="margin-left: -25px;">
+        &nbsp;&nbsp;&nbsp; :five: Logout
+    </td>
+    <td width="705px" align="justify" style="border: none;">
+      <ul style="margin-left: -40px;">
+      <li>Provides a secure way to log out of the admin account.</li>
+    </td>
+  </tr>
+</table>
+
+
 <h2 id="preview">🫣 Preview </h2>
 
 <div align="center">
