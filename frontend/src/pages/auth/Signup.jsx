@@ -112,7 +112,7 @@ const Signup = () => {
     }
 
     if (password != confirmPassword) {
-      addValue("passwordEqual", "Passwords not equal.")
+      addValue("passwordEqual", "Passwords do not match.")
     } else {
       removeValue("passwordEqual")
     }
