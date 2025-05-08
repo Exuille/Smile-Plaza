@@ -12,25 +12,6 @@
 
 ![Alt text](https://raw.githubusercontent.com/Trilokia/Trilokia/379277808c61ef204768a61bbc5d25bc7798ccf1/bottom_header.svg)
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary><strong>Table of Contents</strong></summary>
-  <ol style="padding-left: 20px;">
-    <li>
-      <a href="about-the-project">About The Project</a>
-      <ul>
-        <li><a href="sdg">Sustainable Development Goal</a></li>
-      </ul>
-    </li>
-    <li><a href="features">Key Features</a></li>
-    <li><a href="framework">Programming Language and Frameworks Used</a></li>
-    <li><a href="preview">Preview</a></li>
-    <li><a href="contributing">Contributors</a></li>
-    <li><a href="links">Important Links</a></li>
-    <li><a href="acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
 
 <h2 id="about-the-project">🏥 About The Project </h2>
 <p align="justify">
