@@ -1,14 +1,35 @@
-<p align= "center">
-  <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/bbea19a8-18d0-431d-a4f8-ff353f210874"  width="15%" height="15%">
+<p align="center">
+  <img src="https://github.com/Seankyron/dental_clinic/assets/123806801/bbea19a8-18d0-431d-a4f8-ff353f210874" width="15%" height="15%">
 </p>
 <br>
 <h1 align="center">
   Smile Plaza Dental Center Appointment Management System<br>
-  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=poppins&weight=900&size=35&pause=1000&center=true&vCenter=true&random=false&width=435&lines=Family+Dentist+;General+Dentistry;Orthodontics" alt="Typing SVG" /></a><br>
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.demolab.com?font=poppins&weight=900&size=35&pause=1000&center=true&vCenter=true&random=false&width=435&lines=Family+Dentist+;General+Dentistry;Orthodontics" alt="Typing SVG" />
+  </a><br>
   <br>
-</a>
+</h1>
 
 ![Alt text](https://raw.githubusercontent.com/Trilokia/Trilokia/379277808c61ef204768a61bbc5d25bc7798ccf1/bottom_header.svg)
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary><strong>Table of Contents</strong></summary>
+  <ol style="padding-left: 20px;">
+    <li>
+      <a href="about-the-project">About The Project</a>
+      <ul>
+        <li><a href="sdg">Sustainable Development Goal</a></li>
+      </ul>
+    </li>
+    <li><a href="features">Key Features</a></li>
+    <li><a href="framework">Programming Language and Frameworks Used</a></li>
+    <li><a href="preview">Preview</a></li>
+    <li><a href="contributing">Contributors</a></li>
+    <li><a href="links">Important Links</a></li>
+    <li><a href="acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
 
 <h2 id="about-the-project">🏥 About The Project </h2>
@@ -289,14 +310,29 @@
 <div align="center">
   <table>
     <tr>
-      <td><img src="" width="180"></td>
-      <td><img src="" width="180"></td>
-      <td><img src="" width="180"></td>
-      <td><img src="" width="180"></td>
-      <td><img src="" width="180"></td>
+      <td><img src="https://github.com/user-attachments/assets/4bc54325-be62-4aea-9325-f6cb909131f4" width="350"></td>
+      <td><img src="https://github.com/user-attachments/assets/a00887ba-1bc9-49b0-8adc-ccbef73114f7" width="350"></td>
+      <td><img src="https://github.com/user-attachments/assets/6ccd9498-613d-40d6-9af4-8cb46212d9fc" width="350"></td>
+    </tr>
+    <tr>
+      <td><img src="https://github.com/user-attachments/assets/bff7684e-54c1-4f7d-864e-ba9fb523f8b6" width="350"></td>
+      <td><img src="https://github.com/user-attachments/assets/9f75e48d-e095-4f2e-aedd-387e73eb4c5a" width="350"></td>
+      <td><img src="https://github.com/user-attachments/assets/481d3fc9-1fa6-4bb8-8ca5-9eff62a50dde" width="350"></td>
+    </tr>
+    <tr>
+      <td><img src="https://github.com/user-attachments/assets/ea2e7a4a-9100-4727-9a08-62aa36c740eb" width="350"></td>
+      <td><img src="https://github.com/user-attachments/assets/dcd35bc4-1463-403c-9e22-30ce6c66edc4" width="350"></td>
+      <td><img src="https://github.com/user-attachments/assets/af29d95c-3db3-4336-8b94-d10712ce8069" width="350"></td>
+    </tr>
+    <tr>
+      <td><img src="https://github.com/user-attachments/assets/d18b242f-001f-4c13-82c6-a8339ee30b39" width="350"></td>
+      <td><img src="https://github.com/user-attachments/assets/bb97cdaa-63ec-49ee-8753-181e600d6a87" width="350"></td>
+      <td><img src="https://github.com/user-attachments/assets/56238aa1-d4d7-4957-ba2d-7971d615ab93" width="350"></td>
     </tr>
   </table>
 </div>
+
+
 
 <h2 id="contributing">👩‍💻 Contributors</h2> 
 
@@ -305,7 +341,7 @@
     <td align="center" width="20%" style="padding: 10px;"> 
         <img src="" width="250px;" alt="Sean Kyron's GitHub Profile"/>
         <br>
-        <b>Briones, Sean Kyron Z.</b>
+        <b>Briones,</b><br><b>Sean Kyron Z.</b>
         <br>
         <a href="https://github.com/Seankyron">
           <img src="https://img.shields.io/badge/GitHub-Seankyron-181717?style=for-the-badge&logo=github&logoColor=white" alt="Sean Kyron's GitHub Profile Badge"/>
@@ -314,7 +350,7 @@
     <td align="center" width="20%" style="padding: 10px;"> 
         <img src="https://github.com/user-attachments/assets/92ff0bce-e186-4a9e-bf26-767d30fb68d5" width="250px;" alt="Glenn's GitHub Profile"/>
         <br>
-        <b>Guinoban, Glenn M.</b>
+        <b>Guinoban,</b><br><b>Glenn M.</b>
         <br>
         <a href="https://github.com/glngnbn">
           <img src="https://img.shields.io/badge/GitHub-glngnbn-181717?style=for-the-badge&logo=github&logoColor=white" alt="Glenn's GitHub Profile Badge"/>
@@ -322,28 +358,28 @@
     </td> 
     <td align="center" width="20%" style="padding: 10px;"> 
         <a href="https://github.com/ratatatatcode" style="text-decoration: none; color: inherit;">
-          <img src="" width="250px;" alt="James Michael's GitHub Profile"/>
+          <img src="https://github.com/user-attachments/assets/0a05d363-a3f4-4122-aa87-12626e4eeae9" width="250px;" alt="James Michael's GitHub Profile"/>
         </a>
         <br>
-        <b>Magnaye, James Michael D.</b>
+        <b>Magnaye,</b><br><b>James Michael D.</b>
         <br>
         <a href="https://github.com/ratatatatcode">
           <img src="https://img.shields.io/badge/GitHub-ratatatatcode-181717?style=for-the-badge&logo=github&logoColor=white" alt="James Michael's GitHub Profile Badge"/>
         </a>
     </td> 
     <td align="center" width="20%" style="padding: 10px;"> 
-        <img src="" width="240px;" alt="Hersey Anne's GitHub Profile"/>
+        <img src="https://github.com/user-attachments/assets/d667d932-a5c6-4e49-ab4a-791e50dab823" width="240px;" alt="Hersey Anne's GitHub Profile"/>
         <br>
-        <b>Odasco, Hersey Anne V.</b>
+        <b>Odasco,</b><br><b>Hersey Anne V.</b>
         <br>
         <a href="https://github.com/herseyy">
           <img src="https://img.shields.io/badge/GitHub-herseyy-181717?style=for-the-badge&logo=github&logoColor=white" alt="Hersey Anne's GitHub Profile Badge"/>
         </a>
     </td> 
     <td align="center" width="20%" style="padding: 10px;">
-        <img src="" width="240px;" alt="Alexander Guille's GitHub Profile"/>
+        <img src="https://github.com/user-attachments/assets/5ec8dd28-ca20-41e9-adf1-bbf410538cd7" width="240px;" alt="Alexander Guille's GitHub Profile"/>
         <br>
-        <b>Penuliar, Alexander Guille A.</b>
+        <b>Penuliar,</b><br><b>Alexander Guille A.</b>
         <br>
         <a href="https://github.com/Exuille">
           <img src="https://img.shields.io/badge/GitHub-Exuille-181717?style=for-the-badge&logo=github&logoColor=white" alt="Alexander Guille's GitHub Profile Badge"/>
