@@ -334,7 +334,13 @@ Or use the **"Open in GitHub Desktop"** button on the repository page.
 cd frontend
 ```
 
-2. Install the required dependencies:
+2. Create a `.env` file in the `frontend` folder and add the following content:
+
+```
+VITE_REACT_APP_SITE_KEY=YOUR_SITE_KEY_HERE
+```
+
+3. Install the required dependencies:
 
 ```
 npm install
@@ -346,7 +352,7 @@ Or:
 npm i
 ```
 
-3. Start the development server:
+4. Start the development server:
 
 ```
 npm run dev
@@ -379,10 +385,11 @@ npm i
 4. Create a `.env` file inside the `backend` folder with the following content:
 
 ```
-URI=INPUT+YOUR+MONGODB+SERVER+HERE
-PORT=3000
-JWT_SECRET=INPUT_YOUR_JWT_SECRET_HERE
+URI=YOUR_MONGODB_SERVER_HERE
+PORT=3001
+JWT_SECRET=YOUR_JWT_SECRET_HERE
 JWT_EXPIRES_IN=1h
+SITE_SECRET=YOUR_SITE_SECRET_HERE
 ```
 
 > ⚠️ **Do not change the PORT.** The server uses port 3000 by default.
