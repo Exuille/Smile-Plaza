@@ -319,7 +319,7 @@ Make sure you have the following installed:
 Clone the project using this URL:
 
 ```
-https://github.com/VinnRe/RegExpresso.git
+https://github.com/Exuille/Smile-Plaza.git
 ```
 
 Or use the **"Open in GitHub Desktop"** button on the repository page.
