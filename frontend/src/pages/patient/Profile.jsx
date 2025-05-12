@@ -34,9 +34,10 @@ const Profile = () => {
         const data = await res.json();
         console.log('Fetched user:', data);
 
-        setName(data.name || '');
-        setEmail(data.email || '');
-        setContact(data.contact || '');
+        // Set user data to state
+        setName(data.data.name || '');
+        setEmail(data.data.email || '');
+        setContact(data.data.contact || '');
       } catch (err) {
         console.error(err);
         alert('Unable to fetch user info');
@@ -98,15 +99,38 @@ const Profile = () => {
         <div className="profile-info-container">
           <div className="profile-info">
             <label className="profile-label">Name</label>
-            <input ref={nameInp} className="profile-input" id="name" onChange={changeValue} value={name} disabled />
+            <input 
+              ref={nameInp} 
+              className="profile-input" 
+              id="name" 
+              onChange={changeValue} 
+              value={name} 
+              disabled 
+            />
           </div>
           <div className="profile-info">
             <label className="profile-label">Email</label>
-            <input ref={emailInp} className="profile-input" type="email" id="email" onChange={changeValue} value={email} disabled />
+            <input 
+              ref={emailInp} 
+              className="profile-input" 
+              type="email" 
+              id="email" 
+              onChange={changeValue} 
+              value={email} 
+              disabled 
+            />
           </div>
           <div className="profile-info">
             <label className="profile-label">Contact Number</label>
-            <input ref={contactInp} className="profile-input" type="text" id="contact" onChange={changeValue} value={contact} disabled />
+            <input 
+              ref={contactInp} 
+              className="profile-input" 
+              type="text" 
+              id="contact" 
+              onChange={changeValue} 
+              value={contact} 
+              disabled 
+            />
           </div>
           <div ref={infoBtns} className="profile-info-btns">
             <button className="btn deleteBtn" onClick={cancel}>Cancel</button>
