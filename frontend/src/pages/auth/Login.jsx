@@ -50,7 +50,7 @@ const Login = ({data}) => {
   }
 
   return (
-    <div className="auth-container">
+    <div className="login-container auth-container">
       <h2>Login</h2>
       <hr />
       <form className="auth-form">
@@ -60,12 +60,11 @@ const Login = ({data}) => {
           <input ref={passwordRef} type="password" id="password" className="auth-input" required />
         <button onClick={login} type="submit" className="auth-btn">Login</button>
         <div className="recapcha-container">
-          <ReCAPTCHA size="compact" ref={recaptcha} sitekey={import.meta.env.VITE_REACT_APP_SITE_KEY} />
+          <ReCAPTCHA ref={recaptcha} sitekey={import.meta.env.VITE_REACT_APP_SITE_KEY} />
         </div>
       </form>
       <div className="signup-recovery-a">
         <a href="/signup" className="link"><strong>Create an account.</strong></a>
-        <a href="/recovery" className="link"> Forgot Password?</a>
       </div>
       <p className="feedback" ref={feedbackRef}></p>
     </div>

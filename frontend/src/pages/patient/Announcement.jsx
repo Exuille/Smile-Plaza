@@ -73,14 +73,17 @@ const Announcement = () => {
           <h2>Announcement</h2>
           <div className="announcement-content">
             <h5>Title: Hello World(?)</h5>
+            <p className="date">January 01, 2025</p>
             <p>content: Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, corporis asperiores! Quos facilis deserunt eos velit neque atque sed pariatur quia, ullam expedita deleniti? Quae voluptatem deleniti voluptate eligendi modi.</p>
           </div>
           <div className="announcement-content">
             <h5>Title: Hello World(?)</h5>
+            <p className="date">January 01, 2025</p>
             <p>content: Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, corporis asperiores! Quos facilis deserunt eos velit neque atque sed pariatur quia, ullam expedita deleniti? Quae voluptatem deleniti voluptate eligendi modi.</p>
           </div>
           <div className="announcement-content">
             <h5>Title: Hello World(?)</h5>
+            <p className="date">January 01, 2025</p>
             <p>content: Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, corporis asperiores! Quos facilis deserunt eos velit neque atque sed pariatur quia, ullam expedita deleniti? Quae voluptatem deleniti voluptate eligendi modi.</p>
           </div>
         </div>

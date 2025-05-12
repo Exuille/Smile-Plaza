@@ -15,11 +15,8 @@
     "@fullcalendar/interaction": "^6.1.17",
     "@fullcalendar/react": "^6.1.17",
     "axios": "^1.9.0",
-<<<<<<< HEAD
     "frontend": "file:",
-=======
     "jwt-decode": "^4.0.0",
->>>>>>> a0f7dddc99009fc98ee675ecc0a69f438786d88c
     "package.json": "^2.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

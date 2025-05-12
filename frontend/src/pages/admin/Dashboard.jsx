@@ -123,18 +123,8 @@ const Dashboard = () => {
                 <td>{appointment.service}</td>
                 <td>
                   <span className={`status-badge status-${appointment.status.toLowerCase()}`}>
-                    {appointment.status}
+                    {appointment.status.toUpperCase()}
                   </span>
-                </td>
-                <td>
-                  <select
-                    value={appointment.feedback || ''}
-                    onChange={(e) => handleFeedbackChange(index, e.target.value)}
-                  >
-                    <option value="Not available. Make a new appointment.">Not available. Make a new appointment.</option>
-                    <option value="You've been approved.">You've been approved.</option>
-                    <option value="Mark as Completed.">Mark as Completed.</option>
-                  </select>
                 </td>
                 <td className="action-cell">
                   <button

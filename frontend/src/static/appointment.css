@@ -19,6 +19,9 @@
   gap: 20px;
 }
 
+.appointment-container h1 {
+  color: #27548A;
+}
 
 .appointment-container-main {
 	display: flex;
@@ -80,7 +83,7 @@
 }
 
 .fc .fc-toolbar-title {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #3A59D1;
 }
 
@@ -88,6 +91,7 @@
   background-color: #3A59D1;
   color: white;
   border: none;
+  font-size: 0.8rem;
   padding: 6px 12px;
   border-radius: 4px;
 }
@@ -101,40 +105,43 @@
   color: #000;
 }
 
-
 .appointment-available {
+  display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
 	padding: 20px;
 }
 
 .appointment-available p {
-  font-size: 1.5rem;
+  font-size: 1rem;
+  margin-bottom: 6px;
 }
 
 .available-time {
 	display: flex;
 	flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 	gap: 5px;
+  margin-bottom: 6px;
 }
 
-.available-time button , .appointment-footer button{
-	padding: 8px 18px;
+.available-time button , .appointment-footer button {
+  width: 90px;
 	border-radius: 8px;
-	font-size: 18px;
+	font-size: 0.8rem;
+  border: none;
 	background-color: #27548b;
 	color: #f4f3df;
 	cursor: pointer;
 }
-
 
 .appointment-footer {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
 }
-
 
 .appointment-footer select {
   padding: 10px;

@@ -93,6 +93,7 @@
     font-size: 0.8rem;
     text-align: center;
     display: inline-block;
+    padding-block: 4px;
 }
   
 .status-available {
@@ -131,6 +132,7 @@
 .action-btn {
     padding: 6px 6px;
     color: white;
+    font-size: 0.8rem;
     font-weight: bold;
     width: 88%;
     border-radius: 6px;

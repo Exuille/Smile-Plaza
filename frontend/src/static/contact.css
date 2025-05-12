@@ -76,11 +76,15 @@
 .contact-btn {
     margin-bottom: 12px;
     color: white;
+    font-size: 1rem;
     font-weight: bold;
     width: 88%;
     border-radius: 6px;
     border: 1px solid #3A59D1;
     background-color: #3A59D1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .contact-input:focus,

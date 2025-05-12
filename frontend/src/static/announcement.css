@@ -97,7 +97,12 @@ hr {
 }
 
 .announcement-content h5, .announcement-content p {
-    color: #547792;
+    color: #1b3041;
+}
+
+.announcement-content .date {
+    font-size: 0.7rem;
+    margin-bottom: 4px;
 }
 
 .announcement-content p {

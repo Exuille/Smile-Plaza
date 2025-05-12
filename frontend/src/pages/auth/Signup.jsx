@@ -133,7 +133,7 @@ const Signup = () => {
   }
 
   return (
-    <div className="auth-container">
+    <div className="signup-container auth-container">
       <h2>Sign Up</h2>
       <hr />
       <form className="auth-form">
