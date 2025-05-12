@@ -11,7 +11,7 @@ const Announcement = () => {
     const fetchAnnouncements = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:3001/announcement/', {
+        const res = await fetch('http://localhost:3001/announcement', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -20,7 +20,7 @@ const Announcement = () => {
         if (!res.ok) throw new Error('Failed to fetch');
 
         const data = await res.json();
-        setAnnouncements(data);
+        setAnnouncements(data.data.announcements);
       } catch (err) {
         console.error('Error fetching announcements:', err.message);
       }
@@ -94,9 +94,24 @@ const Announcement = () => {
         )}
 
         {activeTab === 'announcement' && (
-        <div className="announcement">
-          <h2>Announcement</h2>
-        </div>
+          <div className="announcement">
+            <h2>Announcement</h2>
+            {announcements.length > 0 ? (
+              announcements.map((item, index) => (
+                <div className="announcement-content" key={index}>
+                  <h5>Title: {item.title}</h5>
+                  <p className="date">{new Date(item.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}</p>
+                  <p>Content: {item.content}</p>
+                </div>
+              ))
+            ) : (
+              <p>No announcements available.</p>
+            )}
+          </div>
         )}
       </div>
       <iframe
