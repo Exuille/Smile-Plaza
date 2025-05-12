@@ -1,8 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../static/announcement.css';
 
 const Announcement = () => {
   const [activeTab, setActiveTab] = useState('clinic'); // default tab
+  const [announcements, setAnnouncements] = useState([]);
+
+  useEffect(() => {
+    if (activeTab !== 'announcement') return;
+
+    const fetchAnnouncements = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const res = await fetch('http://localhost:3001/announcement', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        });
+
+        if (!res.ok) throw new Error('Failed to fetch');
+
+        const data = await res.json();
+        setAnnouncements(data.data.announcements);
+      } catch (err) {
+        console.error('Error fetching announcements:', err.message);
+      }
+    };
+
+    fetchAnnouncements();
+  }, [activeTab]);
 
   return (
     <div className="announcement-container">
@@ -69,21 +94,24 @@ const Announcement = () => {
         )}
 
         {activeTab === 'announcement' && (
-        <div className="announcement">
-          <h2>Announcement</h2>
-          <div className="announcement-content">
-            <h5>Title: Hello World(?)</h5>
-            <p>content: Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, corporis asperiores! Quos facilis deserunt eos velit neque atque sed pariatur quia, ullam expedita deleniti? Quae voluptatem deleniti voluptate eligendi modi.</p>
+          <div className="announcement">
+            <h2>Announcement</h2>
+            {announcements.length > 0 ? (
+              announcements.map((item, index) => (
+                <div className="announcement-content" key={index}>
+                  <h5>Title: {item.title}</h5>
+                  <p className="date">{new Date(item.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}</p>
+                  <p>Content: {item.content}</p>
+                </div>
+              ))
+            ) : (
+              <p>No announcements available.</p>
+            )}
           </div>
-          <div className="announcement-content">
-            <h5>Title: Hello World(?)</h5>
-            <p>content: Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, corporis asperiores! Quos facilis deserunt eos velit neque atque sed pariatur quia, ullam expedita deleniti? Quae voluptatem deleniti voluptate eligendi modi.</p>
-          </div>
-          <div className="announcement-content">
-            <h5>Title: Hello World(?)</h5>
-            <p>content: Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, corporis asperiores! Quos facilis deserunt eos velit neque atque sed pariatur quia, ullam expedita deleniti? Quae voluptatem deleniti voluptate eligendi modi.</p>
-          </div>
-        </div>
         )}
       </div>
       <iframe

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../static/appointment.css';
 
 import FullCalendar from '@fullcalendar/react';
@@ -6,6 +7,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
 const Appointment = () => {
+  const navigate = useNavigate();
   const today = new Date();
   const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
@@ -14,12 +16,30 @@ const Appointment = () => {
   const [selectedService, setSelectedService] = useState('Dental Consultation');
   const [availableTimes, setAvailableTimes] = useState([]);
 
-  const timeSlots = [
-    "8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM", "10:00 AM",
-    "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM",
-    "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM",
-    "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM",
-  ];
+
+  const fetchAvailableTimes = async (dateStr) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:3001/appointment/availableTime?date=${dateStr}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Fetched data:', data);
+
+        setAvailableTimes(data.availableTimes || []);
+      } else {
+        console.error('Failed to fetch available times');
+        setAvailableTimes([]);
+      }
+    } catch (error) {
+      console.error('Error fetching available times:', error);
+      setAvailableTimes([]);
+    }
+  };
 
   const handleDateClick = (arg) => {
     const clickedDate = new Date(arg.dateStr);
@@ -38,6 +58,7 @@ const Appointment = () => {
       }
 
       setSelectedDate(clickedDate);
+      fetchAvailableTimes(arg.dateStr);
     } else {
       alert('Cannot book earlier than today');
     }
@@ -66,8 +87,8 @@ const Appointment = () => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          selectedDate: selectedDate.toISOString().split('T')[0], // ✔ "2025-05-07"
-          selectedTimeSlot: selectedTimeSlot,                     // ✔ "10:30 AM"
+          selectedDate: selectedDate.toISOString().split('T')[0],
+          selectedTimeSlot: selectedTimeSlot,                     
           service: selectedService,
         }),
       });
@@ -76,6 +97,7 @@ const Appointment = () => {
         const data = await response.json();
         console.log('Appointment created:', data);
         alert('Appointment booked successfully!');
+        navigate('/dashboard');
       } else {
         const errorData = await response.json();
         console.error('Failed to create appointment:', errorData);
@@ -108,42 +130,48 @@ const Appointment = () => {
         </div>
 
         <div className="appointment-available">
-          <p>
-            Available Time Slots for:{" "}
-            <strong style={{ whiteSpace: "nowrap" }}>
-              {selectedDate
-                ? selectedDate.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })
-                : 'None'}
-            </strong>
-          </p>
-          <div className="available-time">
-            {availableTimes.length > 0
-              ? availableTimes.map((time, index) => (
-                  <button key={index} onClick={() => setSelectedTimeSlot(time)}>
+          <div className="appointment-top">
+            <p className="available-slot">
+              Available Time Slots for:{" "}
+              <strong style={{ whiteSpace: "nowrap" }}>
+                {selectedDate
+                  ? selectedDate.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })
+                  : 'None'}
+              </strong>
+            </p>
+            <div className="available-time">
+              {availableTimes.length > 0 ? (
+                availableTimes.map((time, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedTimeSlot(time)}
+                    className={selectedTimeSlot === time ? 'selected-time' : ''}
+                  >
                     {time}
                   </button>
                 ))
-              : timeSlots.map((time, index) => (
-                  <button key={index} onClick={() => setSelectedTimeSlot(time)}>
-                    {time}
-                  </button>
-                ))}
-          </div>
-          <div className="appointment-footer">
-            <p>
+              ) : (
+                <p>No available time slots.</p>
+              )}
+            </div>
+            <p className="selected-slot">
               Selected Time Slot:{" "}
               <strong style={{ whiteSpace: "nowrap" }}>{selectedTimeSlot || 'None'}</strong>
             </p>
+          </div>
+          <div className="appointment-footer">
             <select value={selectedService} onChange={handleSelectChange}>
               <option value="Dental Consultation">Dental Consultation</option>
-              <option value="Dental Consultation1">Dental Consultation1</option>
-              <option value="Dental Consultation2">Dental Consultation2</option>
-              <option value="Dental Consultation3">Dental Consultation3</option>
-              <option value="Dental Consultation4">Dental Consultation4</option>
+              <option value="Orthodontics">Orthodontics</option>
+              <option value="Oral Prophylaxis">Oral Prophylaxis</option>
+              <option value="Tooth Restoration">Tooth Restoration</option>
+              <option value="Tooth Extraction">Tooth Extraction</option>
+              <option value="Odontectomy">Odontectomy</option>
+              <option value="Dentures">Dentures</option>
             </select>
             <button onClick={submit}>Submit</button>
           </div>

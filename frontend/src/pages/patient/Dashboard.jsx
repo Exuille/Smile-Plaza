@@ -79,11 +79,11 @@ const Dashboard = () => {
           <thead>
             <tr>
               <th>NAME</th>
+              <th>EMAIL</th>
               <th>DATE</th>
               <th>TIME</th>
               <th>SERVICE</th>
               <th>STATUS</th>
-              <th>FEEDBACK</th>
               <th>ACTION</th>
             </tr>
           </thead>
@@ -96,17 +96,17 @@ const Dashboard = () => {
               appointments.map((appointment, index) => (
                 <tr key={appointment.id || index}>
                   <td>{appointment.name}</td>
+                  <td>{appointment.email}</td>
                   <td>{appointment.date}</td>
                   <td>{appointment.time}</td>
                   <td>{appointment.service}</td>
                   <td>
                     <span className={`status-badge status-${appointment.status?.toLowerCase()}`}>
-                      {appointment.status || 'Unknown'}
+                      {appointment.status.toUpperCase() || 'Unknown'}
                     </span>
                   </td>
-                  <td>{appointment.feedback || 'N/A'}</td>
                   <td>
-                    {appointment.status === 'pending' && (
+                    {appointment.status.toLowerCase() === 'pending' && (
                       <button
                         className="action-btn"
                         onClick={() => cancelAppointment(appointment.id)} 

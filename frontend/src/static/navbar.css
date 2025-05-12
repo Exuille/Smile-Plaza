@@ -87,6 +87,16 @@
   cursor: pointer;
 }
 
+.nav-end-signin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-picture {
+  height: 40px;
+}
+
 @media (max-width: 768px) {
   .hamburger {
     display: block;

@@ -59,7 +59,10 @@ const NavBar = ({data}) => {
       <div className={`nav-end patient ${menuOpen ? 'mobile-visible' : ''}`}>
       {
         token ?
-          <a style={{cursor: "pointer"}} onClick={logout} className="login-btn">Logout</a>
+          <div className="nav-end-signin">
+            <a style={{cursor: "pointer"}} onClick={logout} className="login-btn">Logout</a>
+            <a href="/profile"><img src="default-profile.png" className="profile-picture" alt="Profile Picture" /></a>
+          </div>
         : 
           <NavLink to="/login" className="login-btn">Login</NavLink>
       }

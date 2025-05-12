@@ -1,11 +1,26 @@
-.auth-container {
+.login-container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 70vh;
+    height: 75vh;
     width: 30%;
-    margin: 3rem auto;
+    margin: 1rem auto 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #3A59D1;
+    overflow: hidden;
+}
+
+.signup-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 78vh;
+    width: 30%;
+    margin: 1rem auto 0 auto;
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -68,12 +83,16 @@ hr {
 
 .auth-btn {
     color: white;
+    font-size: 1rem;
     font-weight: bold;
     margin-top: 16px;
     width: 88%;
     border-radius: 16px;
     border: 1px solid #27548A;
     background-color: #27548A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .auth-btn:hover {
@@ -120,6 +139,19 @@ hr {
     color: #27548A;
 }
 
+.recapcha-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 16px 16px 0 16px;
+}
+
+.recapcha-container iframe {
+    width: 100%;
+    border: none;
+}
+
 @media (max-width: 767px) {
     .auth-container {
       width: 90%;
@@ -129,4 +161,4 @@ hr {
         width: 90%;
         margin: 0 0 72px 0;
     }
-}
+}   

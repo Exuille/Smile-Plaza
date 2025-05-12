@@ -22,7 +22,7 @@ const Contact = () => {
     e.preventDefault();
     setFeedback('Sending...');
     try {
-      const res = await fetch('http://localhost:3000/email/contact', {
+      const res = await fetch('http://localhost:3001/email/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

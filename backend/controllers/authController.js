@@ -148,13 +148,14 @@ export const fetchUser = catchAsync(async (req, res) => {
             message: "User not found"
         });
     }
-    
+    console.log(user)
     res.status(200).json({ 
         status: "success",
         data: {
             id: user._id,
             name: user.name,
-            email: user.email 
+            email: user.email,
+            contact: user.contactInfo || null
         }
     });
 });

@@ -52,6 +52,7 @@ const AdminNavBar = () => {
 
       <div className={`nav-end admin ${menuOpen ? 'mobile-visible' : ''}`}>
         <a style={{cursor: "pointer"}} onClick={logout} className="login-btn">Logout</a>
+        <a href="/admin/profile"><img src="default-profile.png" className="profile-picture" alt="Profile Picture" /></a>
       </div>
     </nav>
   );

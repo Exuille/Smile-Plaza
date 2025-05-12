@@ -290,16 +290,11 @@ export const getAppointmentMetrics = catchAsync(async (req, res) => {
 })
 
 export const getAvailableTimes = catchAsync(async (req, res) => {
-  const { selectedDate } = req.body
-
-  if (!selectedDate) {
-    return res.status(400).json({
-      status: "fail",
-      message: "Please provide a date",
-    })
+  const { date } = req.query;
+  if (!date) {
+    return res.status(400).json({ message: "Please provide a date" });
   }
-
-  const selectedDateObj = new Date(selectedDate)
+  const selectedDateObj = new Date(date);
   const startOfDay = new Date(selectedDateObj)
   startOfDay.setHours(0, 0, 0, 0)
 
