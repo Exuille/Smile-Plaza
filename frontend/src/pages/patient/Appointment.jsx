@@ -14,12 +14,30 @@ const Appointment = () => {
   const [selectedService, setSelectedService] = useState('Dental Consultation');
   const [availableTimes, setAvailableTimes] = useState([]);
 
-  const timeSlots = [
-    "8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM", "10:00 AM",
-    "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM",
-    "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM",
-    "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM",
-  ];
+
+  const fetchAvailableTimes = async (dateStr) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:3001/appointment/availableTime?date=${dateStr}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Fetched data:', data);
+
+        setAvailableTimes(data.availableTimes || []);
+      } else {
+        console.error('Failed to fetch available times');
+        setAvailableTimes([]);
+      }
+    } catch (error) {
+      console.error('Error fetching available times:', error);
+      setAvailableTimes([]);
+    }
+  };
 
   const handleDateClick = (arg) => {
     const clickedDate = new Date(arg.dateStr);
@@ -38,6 +56,7 @@ const Appointment = () => {
       }
 
       setSelectedDate(clickedDate);
+      fetchAvailableTimes(arg.dateStr);
     } else {
       alert('Cannot book earlier than today');
     }
@@ -121,17 +140,19 @@ const Appointment = () => {
             </strong>
           </p>
           <div className="available-time">
-            {availableTimes.length > 0
-              ? availableTimes.map((time, index) => (
-                  <button key={index} onClick={() => setSelectedTimeSlot(time)}>
-                    {time}
-                  </button>
-                ))
-              : timeSlots.map((time, index) => (
-                  <button key={index} onClick={() => setSelectedTimeSlot(time)}>
-                    {time}
-                  </button>
-                ))}
+            {availableTimes.length > 0 ? (
+              availableTimes.map((time, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedTimeSlot(time)}
+                  className={selectedTimeSlot === time ? 'selected-time' : ''}
+                >
+                  {time}
+                </button>
+              ))
+            ) : (
+              <p>No available time slots.</p>
+            )}
           </div>
           <div className="appointment-footer">
             <p>
