@@ -320,7 +320,7 @@
 <table width="100%" style="border-collapse: collapse;"> 
   <tr> 
     <td align="center" width="20%" style="padding: 10px;"> 
-        <img src="" width="250px;" alt="Sean Kyron's GitHub Profile"/>
+        <img src="https://github.com/user-attachments/assets/241f3987-1f62-4b6f-a466-5280da6acbce" width="250px;" alt="Sean Kyron's GitHub Profile"/>
         <br>
         <b>Briones,</b><br><b>Sean Kyron Z.</b>
         <br>
