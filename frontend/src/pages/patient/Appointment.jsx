@@ -130,44 +130,48 @@ const Appointment = () => {
         </div>
 
         <div className="appointment-available">
-          <p>
-            Available Time Slots for:{" "}
-            <strong style={{ whiteSpace: "nowrap" }}>
-              {selectedDate
-                ? selectedDate.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })
-                : 'None'}
-            </strong>
-          </p>
-          <div className="available-time">
-            {availableTimes.length > 0 ? (
-              availableTimes.map((time, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedTimeSlot(time)}
-                  className={selectedTimeSlot === time ? 'selected-time' : ''}
-                >
-                  {time}
-                </button>
-              ))
-            ) : (
-              <p>No available time slots.</p>
-            )}
-          </div>
-          <div className="appointment-footer">
-            <p>
+          <div className="appointment-top">
+            <p className="available-slot">
+              Available Time Slots for:{" "}
+              <strong style={{ whiteSpace: "nowrap" }}>
+                {selectedDate
+                  ? selectedDate.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })
+                  : 'None'}
+              </strong>
+            </p>
+            <div className="available-time">
+              {availableTimes.length > 0 ? (
+                availableTimes.map((time, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedTimeSlot(time)}
+                    className={selectedTimeSlot === time ? 'selected-time' : ''}
+                  >
+                    {time}
+                  </button>
+                ))
+              ) : (
+                <p>No available time slots.</p>
+              )}
+            </div>
+            <p className="selected-slot">
               Selected Time Slot:{" "}
               <strong style={{ whiteSpace: "nowrap" }}>{selectedTimeSlot || 'None'}</strong>
             </p>
+          </div>
+          <div className="appointment-footer">
             <select value={selectedService} onChange={handleSelectChange}>
               <option value="Dental Consultation">Dental Consultation</option>
-              <option value="Dental Consultation1">Dental Consultation1</option>
-              <option value="Dental Consultation2">Dental Consultation2</option>
-              <option value="Dental Consultation3">Dental Consultation3</option>
-              <option value="Dental Consultation4">Dental Consultation4</option>
+              <option value="Orthodontics">Orthodontics</option>
+              <option value="Oral Prophylaxis">Oral Prophylaxis</option>
+              <option value="Tooth Restoration">Tooth Restoration</option>
+              <option value="Tooth Extraction">Tooth Extraction</option>
+              <option value="Odontectomy">Odontectomy</option>
+              <option value="Dentures">Dentures</option>
             </select>
             <button onClick={submit}>Submit</button>
           </div>
