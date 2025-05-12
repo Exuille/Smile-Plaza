@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../static/appointment.css';
 
 import FullCalendar from '@fullcalendar/react';
@@ -6,6 +7,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
 const Appointment = () => {
+  const navigate = useNavigate();
   const today = new Date();
   const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
@@ -85,8 +87,8 @@ const Appointment = () => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          selectedDate: selectedDate.toISOString().split('T')[0], // ✔ "2025-05-07"
-          selectedTimeSlot: selectedTimeSlot,                     // ✔ "10:30 AM"
+          selectedDate: selectedDate.toISOString().split('T')[0],
+          selectedTimeSlot: selectedTimeSlot,                     
           service: selectedService,
         }),
       });
@@ -95,6 +97,7 @@ const Appointment = () => {
         const data = await response.json();
         console.log('Appointment created:', data);
         alert('Appointment booked successfully!');
+        navigate('/dashboard');
       } else {
         const errorData = await response.json();
         console.error('Failed to create appointment:', errorData);
