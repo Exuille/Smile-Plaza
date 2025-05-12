@@ -285,6 +285,116 @@
   </tr>
 </table>
 
+## 🏗️ System Architecture
+
+### 🖼️ Frontend  
+- **Frontend Framework**: [![React][React-logo]][React-url]  
+  - Provides a user-friendly interface  
+  - Communicates with the backend via RESTful APIs  
+
+### ⚙️ Backend  
+- **Backend Runtime & Framework**: [![Node.js][Node-logo]][Node-url] [![Express.js][Express-logo]][Express-url]  
+  - Handles authentication, appointments, announcements, and more  
+  - Integrates Google reCAPTCHA and email services  
+
+### 🗄️ Database  
+- **Database & ODM**: [![MongoDB][Mongo-logo]][Mongo-url] [![Mongoose][Mongoose-logo]][Mongoose-url]  
+  - Stores users, appointments, announcements, and holidays
+
+## 🚀 How to Setup
+
+### 📝 Prerequisites
+
+Make sure you have the following installed:
+
+- Visual Studio Code (VSCode)
+- Node.js v22.11.0 or higher
+- npm v10.9.0 or higher
+- MongoDB (local or cloud)
+
+---
+
+### 🔄 Clone the Repository
+
+Clone the project using this URL:
+
+```
+https://github.com/VinnRe/RegExpresso.git
+```
+
+Or use the **"Open in GitHub Desktop"** button on the repository page.
+
+---
+
+## 🌐 Frontend Setup
+
+1. Open a terminal and navigate to the frontend folder:
+
+```
+cd frontend
+```
+
+2. Install the required dependencies:
+
+```
+npm install
+```
+
+Or:
+
+```
+npm i
+```
+
+3. Start the development server:
+
+```
+npm run dev
+```
+
+---
+
+## 🛠 Backend Setup
+
+1. Open a new terminal or press `CTRL + SHIFT + \`` in VSCode.
+
+2. Navigate to the backend folder:
+
+```
+cd backend
+```
+
+3. Install the backend dependencies:
+
+```
+npm install
+```
+
+Or:
+
+```
+npm i
+```
+
+4. Create a `.env` file inside the `backend` folder with the following content:
+
+```
+URI=INPUT+YOUR+MONGODB+SERVER+HERE
+PORT=3000
+JWT_SECRET=INPUT_YOUR_JWT_SECRET_HERE
+JWT_EXPIRES_IN=1h
+```
+
+> ⚠️ **Do not change the PORT.** The server uses port 3000 by default.
+
+5. Start the backend server:
+
+```
+npm start
+```
+
+---
+ 
 
 <h2 id="preview">👁️ Preview </h2>
 
@@ -377,6 +487,21 @@ Each member played a vital role, offering unique talents and perspectives that s
 We are also grateful to the Smile Plaza Dental Center for providing the inspiration and context for this system, which gave our work real purpose and direction. Your openness and support allowed us to better understand the needs of a real-world application.
 
 This journey has been a valuable learning experience, and we are proud of what we’ve accomplished together.</p>
+
+[React-logo]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+
+[Node-logo]: https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
+[Node-url]: https://nodejs.org/
+
+[Express-logo]: https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white
+[Express-url]: https://expressjs.com/
+
+[Mongo-logo]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
+[Mongo-url]: https://www.mongodb.com/
+
+[Mongoose-logo]: https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white
+[Mongoose-url]: https://mongoosejs.com/
 
 
 
