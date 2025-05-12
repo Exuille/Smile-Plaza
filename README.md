@@ -392,7 +392,7 @@ JWT_EXPIRES_IN=1h
 SITE_SECRET=YOUR_SITE_SECRET_HERE
 ```
 
-> ⚠️ **Do not change the PORT.** The server uses port 3000 by default.
+> ⚠️ **Do not change the PORT.** The server uses port 3001 by default.
 
 5. Start the backend server:
 
