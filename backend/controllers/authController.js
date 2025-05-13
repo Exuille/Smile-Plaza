@@ -39,14 +39,12 @@ const createSendToken = (user, statusCode, res, expiryTime, role) => {
 };
 
 export const register = catchAsync(async (req, res) => {
-    const { name, email, password, role } = req.body;
-
-    console.log(name, email, password, role)
+    const { name, email, password, role, contactInfo } = req.body;
 
     if (!name || !email || !password || !role) {
         return res.status(400).json({
             status: "fail",
-            message: "Please provide name, email and password"
+            message: "Please provide name, email, password, and role"
         });
     }
 
@@ -74,7 +72,7 @@ export const register = catchAsync(async (req, res) => {
     }
 
     const hashedPassword = await hashPassword(password);
-    const newUser = await User.create({ name, email, password: hashedPassword, role });
+    const newUser = await User.create({ name, email, password: hashedPassword, role, contactInfo });
 
     createSendToken(newUser, 201, res, role);
 });
@@ -248,4 +246,119 @@ export const protect = catchAsync(async (req, res, next) => {
             message: "Authentication error"
         });
     }
+});
+
+export const editAccount = catchAsync(async (req, res) => {
+    console.log("editAccount controller reached with params:", req.params);
+    console.log("Request body:", req.body);
+    console.log("Current user from middleware:", req.user?.id);
+
+    const userId = req.params.id;
+    const updateData = req.body; 
+
+    if (Object.keys(updateData).length === 0) {
+        return res.status(400).json({
+            status: "fail",
+            message: "Please provide at least one field to update"
+        });
+    }
+
+    if (req.user.id !== userId) {
+        return res.status(403).json({
+            status: "fail",
+            message: "You are not authorized to edit this user's profile"
+        });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+        return res.status(404).json({
+            status: "fail",
+            message: "User not found"
+        });
+    }
+
+    console.log("Found user:", {
+        id: user._id,
+        current_email: user.email,
+        requested_email: updateData.email
+    });
+
+    if (updateData.email !== undefined) {
+        console.log(`Email comparison: ${updateData.email} === ${user.email}: ${updateData.email === user.email}`);
+        
+        if (updateData.email !== user.email) {
+            const existingEmail = await User.findOne({ 
+                email: updateData.email, 
+                _id: { $ne: userId } 
+            });
+            
+            console.log("Existing email check result:", existingEmail ? "Found duplicate" : "No duplicate");
+            
+            if (existingEmail) {
+                return res.status(409).json({
+                    status: "fail",
+                    message: "Another user already has this email"
+                });
+            }
+        } else {
+            console.log("Email unchanged - skipping validation");
+        }
+    }
+
+    if (updateData.name !== undefined) {
+        console.log(`Name comparison: ${updateData.name} === ${user.name}: ${updateData.name === user.name}`);
+        
+        if (updateData.name !== user.name) {
+            console.log("Name is changing, checking for duplicates...");
+            const existingName = await User.findOne({ 
+                name: updateData.name, 
+                _id: { $ne: userId } 
+            });
+            
+            if (existingName) {
+                return res.status(409).json({
+                    status: "fail",
+                    message: "Another user already has this name"
+                });
+            }
+        } else {
+            console.log("Name unchanged - skipping validation");
+        }
+    }
+
+    // HANDLE PASSWORD UPDATE (if provided)
+    if (updateData.password !== undefined) {
+        if (updateData.password.length < 8) {
+            return res.status(400).json({
+                status: "fail",
+                message: "Password must be at least 8 characters long"
+            });
+        }
+
+        updateData.password = await hashPassword(updateData.password);
+    }
+
+    const updates = {};
+    if (updateData.email !== undefined) updates.email = updateData.email;
+    if (updateData.name !== undefined) updates.name = updateData.name;
+    if (updateData.contactInfo !== undefined) updates.contactInfo = updateData.contactInfo;
+    if (updateData.password !== undefined) updates.password = updateData.password;
+
+    console.log("Updates to apply:", Object.keys(updates));
+
+    Object.assign(user, updates);
+    await user.save();
+    console.log("User saved successfully");
+
+    const updatedUser = user.toObject();
+    delete updatedUser.password;
+
+    console.log("Sending response with updated user");
+    res.status(200).json({
+        status: "success",
+        data: {
+            user: updatedUser
+        }
+    });
 });

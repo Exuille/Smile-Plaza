@@ -1,5 +1,5 @@
 import express from 'express';
-import {register, login, protect, logout, fetchUser,fetchAllUsers, updatePass} from '../controllers/authController.js';
+import {register, login, protect, logout, fetchUser,fetchAllUsers, updatePass, editAccount} from '../controllers/authController.js';
 
 const router = express.Router()
 
@@ -9,6 +9,7 @@ router.route("/logout").post(protect, logout);
 router.route("/fetch").get(protect, fetchUser);
 router.route("/:id").get(protect, fetchUser).put(protect, updatePass);
 router.route("/users").get(protect, fetchAllUsers);
+router.put("/account/:id", protect, editAccount);
 
 
 export default router;
