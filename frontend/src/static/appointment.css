@@ -1,0 +1,254 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.appointment-container {
+	display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 80vh;
+  margin: 0 auto 2rem;
+  padding: 40px;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 15px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  gap: 20px;
+}
+
+.appointment-container h1 {
+  color: #27548A;
+}
+
+.appointment-container-main {
+	display: flex;
+	justify-content: stretch;
+	gap: 30px;
+	height: 100%;
+}
+
+.appointment-calendar-container {
+	display: flex;
+	padding: 20px;
+  height: 80%;
+	width: 50%;
+  border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-available {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  height: 80%;
+  width: 50%;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: scroll;
+}
+
+.appointment-top {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.appointment-top .selected-slot {
+  margin-top: 12px;
+}
+
+.appointment-top .available-slot {
+  margin-bottom: 12px;
+}
+
+.appointment-calendar {
+	width: 100%;
+}
+
+.legend-container {
+  display: flex;
+  gap: 30px;
+}
+
+.legend-box {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.blue {
+  background-color: #007bff;
+}
+
+.yellow {
+  background-color: #ffc107;
+}
+
+.gray {
+  background-color: #6c757d;
+}
+
+/* calendar */
+.fc {
+  height: 100%;
+  width: 100% !important;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+}
+
+.fc .fc-daygrid-day-frame {
+  height: 60px;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.2rem;
+  color: #3A59D1;
+}
+
+.fc .fc-button {
+  background-color: #3A59D1;
+  color: white;
+  border: none;
+  font-size: 0.8rem;
+  padding: 6px 16px;
+  border-radius: 4px;
+}
+
+.fc .fc-button:hover {
+  background-color: #3A59D1;
+}
+
+.fc .fc-daygrid-day-number {
+  font-weight: bold;
+  color: #000;
+}
+
+.appointment-available p {
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.available-time {
+	display: flex;
+	flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+	gap: 5px;
+  margin-bottom: 6px;
+}
+
+.available-time button, .appointment-footer button {
+  width: 100px;
+	border-radius: 8px;
+	font-size: 0.8rem;
+  border: none;
+	color: #f4f3df;
+	cursor: pointer;
+}
+
+.available-time button {
+	background-color: #27548b;
+}
+
+.appointment-footer {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+  margin: 12px;
+}
+
+.appointment-footer button {
+  font-weight: 550;
+	background-color: #0e2746;
+  align-self: flex-end;
+}
+
+.appointment-footer select {
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.appointment-footer select:focus {
+  border-color: #007bff;
+}
+
+@media (max-width: 767px) {
+    .appointment-container {
+      width: 90%;
+      height: auto;
+      gap: 10px;
+    }
+
+    .appointment-container h1 {
+      font-size: 1.5rem;
+    }
+
+    .appointment-container-main {
+      flex-direction: column;
+      margin-top: 20px;
+      gap: 30px;
+      height: auto;
+      width: 100%;
+    }
+
+    .appointment-calendar-container {
+      flex-direction: column;
+      width: 100%;
+      height: 500px;
+    }
+
+    .legend-container {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .fc {
+      height: 100%;
+      font-size: 0.8rem;
+    }
+
+    .fc .fc-daygrid-day-frame {
+      min-height: 20px;
+    }
+
+    .fc .fc-toolbar-title {
+      font-size: 1rem;
+    }
+
+    .fc .fc-button {
+      padding: 3px 6px;
+    }
+
+    .appointment-available {
+      flex-direction: column;
+      width: 100%;
+      height: auto;
+      gap: 20px;
+    }
+
+    .appointment-available p {
+      font-size: 1rem;
+    }
+
+    .available-time button , .appointment-footer button{
+      padding: 4px 9px;
+      border-radius: 8px;
+      font-size: 13px;
+      background-color: #27548b;
+      color: #f4f3df;
+      cursor: pointer;
+    }
+}

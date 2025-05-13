@@ -1,0 +1,172 @@
+.logo {
+  height: 50px;
+  width: auto;
+  margin-left: 24px;
+}
+
+.navbar {
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 0 1rem;
+}
+
+.nav-start {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-container h2, .text-container h3 {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.text-container h2 {
+  color: #3D90D7;
+}
+
+.text-container h3 {
+  color: #547792;
+}
+
+.nav-center {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 0.8rem;
+  font-weight: 550;
+  color: #3A59D1;
+  text-decoration: none;
+}
+
+.active-link {
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.nav-end {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.login-btn, .signup-btn {
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 6px 12px;
+}
+
+.login-btn {
+  color: #3A59D1;
+}
+
+.signup-btn {
+  color: white;
+  background-color: #3A59D1;
+  border-radius: 4px;
+}
+
+.hamburger {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.nav-end-signin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-picture {
+  height: 40px;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 16px;
+    top: 24px;
+  }
+
+  .logo {
+    margin-left: 6px;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 15vh;
+    left: 0;
+    background-color: white;
+    z-index: 10;
+    padding: 1rem 0;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-center {
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 12px;
+  }
+
+  .nav-end.patient {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: calc(15vh + 170px);
+    left: 0;
+    background-color: white;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 10;
+  }
+      
+  .nav-end.admin {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: calc(15vh + 110px);
+    left: 0;
+    background-color: white;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 10;
+  }
+    
+  .nav-end.patient.mobile-visible, .nav-end.admin.mobile-visible {
+    display: flex;
+  }
+    
+  .login-btn,
+  .signup-btn {
+    width: 80%;
+    text-align: center;
+  }
+}

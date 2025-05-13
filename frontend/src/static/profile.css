@@ -1,0 +1,157 @@
+.profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+    width: 100%;
+}
+
+.profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: auto;
+    margin: 0 auto 2rem;
+    padding: 40px;
+    overflow: hidden;
+    align-items: stretch;
+    background: white;
+    border-radius: 15px;
+    border: 1px solid #3A59D1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* top */
+.profile-top-container {
+    display: flex;
+    gap: 24px;
+}
+
+.profile-top-pic {
+    height: 75px;
+    border: 2px solid #27548b;
+    border-radius: 50%;
+}
+
+.profile-top-info {
+    display: flex;
+    flex-direction: column;
+    color: #183b4e;
+}
+
+.profile-top-info .name{
+    font-size: 1.5rem;
+    margin: 0;
+    color: #3A59D1;
+}
+
+.profile-top-info .email{
+    font-size: 1rem;
+    margin: 0;
+}
+
+.profile-top-btns {
+    display: flex;
+    gap: 6px;
+}
+
+/* mid */
+.profile-info-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    padding: 12px 36px;
+    border: solid 1px #3A59D1;
+    border-radius: 12px;
+    background-color: #fcfcfc;
+    color: #27548b;
+    overflow-y: scroll;
+}
+
+.profile-info-container h2 {
+    width: max-content;
+    line-height: 0.1em;
+    transform: translateY(-16px);
+    padding: 6px;
+    background-color: white;
+}
+
+.profile-info-container h1 span { 
+    background:#fff; 
+    padding: 0 10px; 
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-label {
+    font-size: 0.9rem;
+    font-weight: 550;
+    margin-bottom: 4px;
+}
+
+.profile-input {
+    color: black;
+    margin-bottom: 12px;
+    padding: 8px;
+    border: 1px solid #3A59D1;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.profile-info-btns {
+    display: none;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+/* bottom */
+.profile-btns-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+
+.saveBtn {
+    border: 1px solid green;
+    background-color: green;
+}
+
+.deleteBtn {
+    border: 1px solid red;
+    background-color: red;
+}
+
+.defaultBtn {
+    border: 1px solid #3A59D1;
+    background-color: #3A59D1;
+}
+
+/* general */
+.btn {
+    padding: 8px 23px;
+    border-radius: 13px;
+    cursor: pointer;
+    color: white;
+    font-weight: 550;
+    border-radius: 6px;
+}
+
+
+@media (max-width: 768px) {
+    .profile-wrapper {
+        width: 90%;
+        padding: 30px 15px;
+    }
+
+    .profile-top-info {
+        overflow-x: scroll;
+    }
+
+    .profile-btns-container, .profile-top-btns {
+        gap: 6px;
+        flex-direction: column;
+    }
+}

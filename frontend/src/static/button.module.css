@@ -1,0 +1,31 @@
+button {
+	border: 2px solid var(--white);
+	color: var(--white);
+	background-color: var(--dark-blue);
+	border-radius: 150px;
+	width: 100%;
+	height: 100%;
+/*	width: 230px;*/
+/*	padding: 18px 0;*/
+	text-align: center;
+}
+
+button:hover {
+	cursor: pointer;
+	color: var(--dark-blue);
+	border: 2px solid var(--dark-blue);
+	background-color: var(--white);
+}
+
+
+button.hollowBtn {
+	color: var(--dark-blue);
+	border: 2px solid var(--dark-blue);
+	background-color: var(--white);
+}
+
+button.hollowBtn:hover {
+	border: 2px solid var(--white);
+	color: var(--white);
+	background-color: var(--dark-blue);
+}
