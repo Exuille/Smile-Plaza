@@ -87,7 +87,7 @@ const Profile = () => {
       body: JSON.stringify({
         name,
         email,
-        contactInfo: contact, // ✅ use contactInfo instead of contact
+        contactInfo: contact,
       }),
     });
 
