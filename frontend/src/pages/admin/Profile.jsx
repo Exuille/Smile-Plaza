@@ -179,7 +179,7 @@ const Profile = () => {
           <div className="profile-top-btns">
             <button className="btn defaultBtn" onClick={logout}>Logout</button>
             <button onClick={editProfile} className="btn defaultBtn">Edit Profile</button>
-            <button className="btn defaultBtn">Reset Password</button>
+            {/* <button className="btn defaultBtn">Reset Password</button> */}
           </div>
           {/* <button className="btn deleteBtn" onClick={deleteAcc}>Delete Profile</button> */}
         </div>
