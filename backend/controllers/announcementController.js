@@ -2,7 +2,7 @@ import Announcement from "../models/announcementModel.js"
 import catchAsync from "../utils/catchAsync.js"
 
 export const createAnnouncement = catchAsync(async (req, res) => {
-  const { title, content, date, tag, priority } = req.body
+  const { title, content, date, tag, priority, selectedTime } = req.body
 
   // Check if user is admin
   if (req.user.role !== "admin") {
@@ -33,6 +33,7 @@ export const createAnnouncement = catchAsync(async (req, res) => {
     title,
     content,
     dateTime: announcementDate,
+    timeRange: selectedTime,
     priority: priority || "normal",
     tag: tag || "promo",
     createdBy: req.user.id,
@@ -115,7 +116,7 @@ export const updateAnnouncement = catchAsync(async (req, res) => {
     })
   }
 
-  const { title, content, date, tag, priority } = req.body
+  const { title, content, date, tag, priority, timeRange } = req.body
 
   console.log(date, "aaaa")
 
@@ -139,6 +140,7 @@ export const updateAnnouncement = catchAsync(async (req, res) => {
   if (title) announcement.title = title
   if (content) announcement.content = content
   if (date) announcement.dateTime = new Date(date)
+  if (timeRange) announcement.timeRange = timeRange
   if (priority) announcement.priority = priority
   if (tag) announcement.tag = tag
 

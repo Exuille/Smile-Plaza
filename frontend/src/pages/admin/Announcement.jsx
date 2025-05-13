@@ -86,6 +86,7 @@ const Announcement = ({data}) => {
       setSelectedPriority("normal")
       setSelectedTag("promo");
       setSelectedTime("fullDay");
+      setId(null);
       setDate(null)
       setContent(null)
     }
@@ -174,6 +175,7 @@ const Announcement = ({data}) => {
             "title": titleInpRef.current.value, 
             "content": contentInpRef.current.value, 
             "date": dateInpRef.current.value, 
+            "timeRange": selectedTime,
             "priority": selectedPriority, 
             "tag": selectedTag
           }, {headers: {
@@ -218,7 +220,7 @@ const Announcement = ({data}) => {
           }})
         } else {
           res = await axios.post("http://localhost:3001/announcement/create", {
-            title, content, date, "priority": selectedPriority, "tag": selectedTag
+            title, content, date, "priority": selectedPriority, "tag": selectedTag, selectedTime
           }, {headers: {
             Authorization: `Bearer ${token}`
           }})
@@ -226,7 +228,6 @@ const Announcement = ({data}) => {
 
         console.log(res)
         alert("saved");
-        location.reload()
       } catch(err) {
         console.log(err)
       }
@@ -236,6 +237,7 @@ const Announcement = ({data}) => {
     setSelectedPriority("normal")
     setAnnouncementId(null);
     setPopupOpen(false);
+    setId(null);
   }
 
   const cancel = () => {
