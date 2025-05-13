@@ -24,34 +24,42 @@ const Login = ({data}) => {
     const password = passwordRef.current.value;
     const captchaToken = recaptcha.current.getValue();
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      feedbackRef.current.textContent = "Please enter a valid email address.";
+      return;
+    }
+
     if (!captchaToken) {
       alert('Please verify the reCAPTCHA!');
-    } else {
-      try {
-        const res = await axios.post("http://localhost:3001/auth/login", {
-          email, password, captchaToken
-        });
-        localStorage.setItem("token", res.data.token);
-        const decoded1 = jwtDecode(res.data.token);
-        if (decoded1.role === 'patient') window.location.replace('/');
-        if (decoded1.role === 'admin') window.location.replace('/admin');
-      } catch (err) {
-        if (err.response) {
-          feedbackRef.current.textContent = err.response.data.message;
-        } else if (err.request) {
-          feedbackRef.current.textContent = "No response from server.";
-        } else {
-          feedbackRef.current.textContent = "Something went wrong.";
-        }
+      return;
+    }
 
-        setTimeout(() => {
-          emailRef.current.value = "";
-          passwordRef.current.value = "";
-          recaptcha.current.reset();
-          feedbackRef.current.textContent = "";
-          emailRef.current.focus();
-        }, 3000);
+    try {
+      const res = await axios.post("http://localhost:3001/auth/login", {
+        email, password, captchaToken
+      });
+      localStorage.setItem("token", res.data.token);
+      const decoded1 = jwtDecode(res.data.token);
+      if (decoded1.role === 'patient') window.location.replace('/');
+      if (decoded1.role === 'admin') window.location.replace('/admin');
+    } catch (err) {
+      if (err.response) {
+        feedbackRef.current.textContent = err.response.data.message;
+      } else if (err.request) {
+        feedbackRef.current.textContent = "No response from server.";
+      } else {
+        feedbackRef.current.textContent = "Something went wrong.";
       }
+
+      setTimeout(() => {
+        emailRef.current.value = "";
+        passwordRef.current.value = "";
+        recaptcha.current.reset();
+        feedbackRef.current.textContent = "";
+        emailRef.current.focus();
+      }, 3000);
     }
   };
 
