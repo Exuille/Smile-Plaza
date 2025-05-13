@@ -23,7 +23,6 @@ const Announcement = ({data}) => {
   const [title, setTitle] = useState(null);
   const [date, setDate] = useState(null);
   const [content, setContent] = useState(null);
-  const [timeRange, setTimeRange] = useState(null);
 
   const [announcements, setAnnouncements] = useState(null);
 
@@ -34,7 +33,6 @@ const Announcement = ({data}) => {
   useEffect(() => {
     const getAllAnnouncements = async () => {
       try {
-        console.log(filteredPriority, filteredTag)
         const res = await axios.get("http://localhost:3001/announcement", {
           headers: {Authorization: `Bearer ${token}`},
           params: {priority: filteredPriority, tag: filteredTag}
@@ -67,6 +65,8 @@ const Announcement = ({data}) => {
 
   const edit = (idx) => {
     if (idx) {
+      // update announcement
+      console.log(announcements[idx])
       const date = new Date(announcements[idx]["dateTime"]);
       const dateValue = date.toISOString().split('T')[0];
 
@@ -77,6 +77,7 @@ const Announcement = ({data}) => {
       setDate(dateValue)
       setContent(announcements[idx]["content"])
     } else {
+      // create new announcement
       setAnnouncementId(null)
       setTitle(null)
       setSelectedPriority("normal")
@@ -135,20 +136,31 @@ const Announcement = ({data}) => {
         return;
       }
 
-      try {
-        const res = await axios.put(`http://localhost:3001/announcement/${announcementId}`, {
-          "title": titleInpRef.current.value, 
-          "content": contentInpRef.current.value, 
-          "date": dateInpRef.current.value, 
-          "priority": selectedPriority, 
-          "tag": selectedTag
-        }, {headers: {
-          Authorization: `Bearer ${token}`
-        }})
+      if (selectedTag == "holiday") {
+        console.log('call holiday route')
+        try {
+          const res = await axios.put(`http://localhost:3001/holiday/${announcementId}`, {
 
-        console.log(res.data)
-      } catch(err) {
-        console.log(err)
+          })
+        } catch(err) {
+          console.log(err)
+        }
+      } else {
+        try {
+          const res = await axios.put(`http://localhost:3001/announcement/${announcementId}`, {
+            "title": titleInpRef.current.value, 
+            "content": contentInpRef.current.value, 
+            "date": dateInpRef.current.value, 
+            "priority": selectedPriority, 
+            "tag": selectedTag
+          }, {headers: {
+            Authorization: `Bearer ${token}`
+          }})
+
+          console.log(res.data)
+        } catch(err) {
+          console.log(err)
+        }
       }
 
     } else {
@@ -161,20 +173,20 @@ const Announcement = ({data}) => {
       try {
         console.log(selectedTag)
         let res;
-        if (selectedTag == "holiday") {
-          let startTime, endTime, isFullDay;
-          if (selectedTime == "fullDay") {
-            isFullDay = true
-          } else {
-            isFullDay = false
-            if (selectedTime == "halfDayAM") {
-              startTime = halfDayAMstartTime
-              endTime = halfDayAMendTime
-            } else if (selectedTime == "halfDayPM") {
-              startTime = halfDayPMstartTime
-              endTime = halfDayPMendTime
-            }
+        let startTime, endTime, isFullDay;
+        if (selectedTime == "fullDay") {
+          isFullDay = true
+        } else {
+          isFullDay = false
+          if (selectedTime == "halfDayAM") {
+            startTime = halfDayAMstartTime
+            endTime = halfDayAMendTime
+          } else if (selectedTime == "halfDayPM") {
+            startTime = halfDayPMstartTime
+            endTime = halfDayPMendTime
           }
+        }
+        if (selectedTag == "holiday") {
           console.log(title, content, date, selectedTime, startTime, endTime);
           res = await axios.post("http://localhost:3001/holiday/create", {
             title, "description": content, date, isFullDay, startTime, endTime
@@ -233,14 +245,20 @@ const Announcement = ({data}) => {
               <label>Title: </label>
               <input value={title ? title : ""} id="title" ref={titleInpRef} onChange={changeValue} />
             </div>
-            <div className="inp-container">
-              <label>Tag: </label>
-              <select onChange={selectTag} value={selectedTag}>
-                <option onChange={selectTag} value="promo">Promo</option>
-                <option onChange={selectTag} value="holiday">Holiday</option>
-                <option onChange={selectTag} value="others">Others</option>
-              </select>
-            </div>
+            {announcementId ? 
+              <div className="inp-container">
+                <h3>Tag: {selectedTag}</h3>
+              </div>
+            : 
+              <div className="inp-container">
+                <label>Tag: </label>
+                <select onChange={selectTag} value={selectedTag}>
+                  <option onChange={selectTag} value="promo">Promo</option>
+                  <option onChange={selectTag} value="holiday">Holiday</option>
+                  <option onChange={selectTag} value="others">Others</option>
+                </select>
+              </div>
+            }
             <div className="inp-container">
               <label>Time: </label>
               <select onChange={selectTime} value={selectedTime}>
@@ -322,14 +340,14 @@ const Announcement = ({data}) => {
                       day: 'numeric',
                       timeZone: 'UTC'
                     }) 
-                  } | {announcements[idx]['halfDayAM'] !== undefined ? (
-                      announcements[idx]['halfDayAM'] == true ? (
+                  } | {announcements[idx]['timeRange'] == "fullDay" ? (
+                      `${to12HourFormat(halfDayAMstartTime)} - ${to12HourFormat(halfDayPMendTime)}`
+                    ) : (
+                      announcements[idx]['timeRange'] == "halfDayAM" ? (
                         `${to12HourFormat(halfDayAMstartTime)} - ${to12HourFormat(halfDayAMendTime)}`
                       ) : (
                         `${to12HourFormat(halfDayPMstartTime)} - ${to12HourFormat(halfDayPMendTime)}`
                       )
-                    ) : (
-                      `${to12HourFormat(halfDayAMstartTime)} - ${to12HourFormat(halfDayPMendTime)}`
                     )
                   }
                   </h3>

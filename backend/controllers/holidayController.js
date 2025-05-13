@@ -29,26 +29,24 @@ const createOrUpdateHolidayAnnouncement = async (holiday, userId) => {
       return existingAnnouncement
     }
   }
+  let timeRange;
+  if (holiday.isFullDay == true) {
+    timeRange = "fullDay"
+  } else {
+    const time = holiday.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    console.log(time)
+    timeRange = time == halfDayAMstartTime ? "halfDayAM" : "halfDayPM"
+  }
 
   const newHolidayData = {
     title: `Holiday: ${holiday.title}`,
     content,
     dateTime: holiday.date,
-    isFullDay: holiday.isFullDay,
+    timeRange,
     priority: priority,
     tag: "holiday",
     createdBy: userId,
   }
-
-  if (!holiday.isFullDay) {
-    const extractedTime = holiday.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-    console.log(extractedTime)
-    if (!(holiday.isFullDay)) {
-      newHolidayData.halfDayAM = extractedTime == halfDayAMstartTime
-    }
-  }
-
-  console.log(newHolidayData)
 
   // Otherwise, create a new announcement
   const newAnnouncement = await Announcement.create(newHolidayData);
