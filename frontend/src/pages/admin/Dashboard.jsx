@@ -111,7 +111,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <div className="table-wrapper">
-        <table>
+        <table className="table-header">
           <thead>
             <tr>
               <th>NAME</th>
@@ -119,48 +119,49 @@ const Dashboard = () => {
               <th>TIME</th>
               <th>SERVICE</th>
               <th>STATUS</th>
-              <th>FEEDBACK</th>
               <th>ACTION</th>
             </tr>
           </thead>
-          <tbody>
-            {appointments.map((appointment, index) => (
-              <tr key={appointment.id}>
-                <td>{appointment.name}</td>
-                <td>{appointment.date}</td>
-                <td>{appointment.time}</td>
-                <td>{appointment.service}</td>
-                <td>
-                  <span className={`status-badge status-${appointment.status.toLowerCase()}`}>
-                    {appointment.status.toUpperCase()}
-                  </span>
-                </td>
-                <td>{appointment.feedback_status !== 'none' ? appointment.feedback_status : '—'}</td>
-                <td className="action-cell">
-                  <button
-                    className="action-btn"
-                    onClick={() => setOpenMenuIndex(openMenuIndex === index ? null : index)}
-                  >
-                    ...
-                  </button>
-                  {openMenuIndex === index && (
-                    <div
-                      className="dropdown-menu"
-                      style={{
-                        top: index === appointments.length - 1 ? 'auto' : '35px',
-                        bottom: index === appointments.length - 1 ? '35px' : 'auto',
-                      }}
-                    >
-                      <button onClick={() => handleAction('Mark as Reserved', index)}>Mark as Reserved</button>
-                      <button onClick={() => handleAction('Mark as Completed', index)}>Mark as Completed</button>
-                      {/* <button onClick={() => handleAction('Delete Entry', index)}>Delete Entry</button> */}
-                    </div>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
         </table>
+        <div className="table-body-wrapper">
+          <table className="table-body">
+            <tbody>
+              {appointments.map((appointment, index) => (
+                <tr key={appointment.id}>
+                  <td>{appointment.name}</td>
+                  <td>{appointment.date}</td>
+                  <td>{appointment.time}</td>
+                  <td>{appointment.service}</td>
+                  <td>
+                    <span className={`status-badge status-${appointment.status.toLowerCase()}`}>
+                      {appointment.status.toUpperCase()}
+                    </span>
+                  </td>
+                  <td className="action-cell">
+                    <button
+                      className="action-btn"
+                      onClick={() => setOpenMenuIndex(openMenuIndex === index ? null : index)}
+                    >
+                      ...
+                    </button>
+                    {openMenuIndex === index && (
+                      <div
+                        className="dropdown-menu"
+                        style={{
+                          top: index === appointments.length - 1 ? 'auto' : '35px',
+                          bottom: index === appointments.length - 1 ? '35px' : 'auto',
+                        }}
+                      >
+                        <button onClick={() => handleAction('Mark as Reserved', index)}>Mark as Reserved</button>
+                        <button onClick={() => handleAction('Mark as Completed', index)}>Mark as Completed</button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

@@ -75,11 +75,10 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <div className="table-wrapper">
-        <table>
+        <table className="table-header">
           <thead>
             <tr>
               <th>NAME</th>
-              <th>EMAIL</th>
               <th>DATE</th>
               <th>TIME</th>
               <th>SERVICE</th>
@@ -87,39 +86,42 @@ const Dashboard = () => {
               <th>ACTION</th>
             </tr>
           </thead>
-          <tbody>
-            {appointments.length === 0 ? (
-              <tr>
-                <td colSpan="7">No appointments found.</td>
-              </tr>
-            ) : (
-              appointments.map((appointment, index) => (
-                <tr key={appointment.id || index}>
-                  <td>{appointment.name}</td>
-                  <td>{appointment.email}</td>
-                  <td>{appointment.date}</td>
-                  <td>{appointment.time}</td>
-                  <td>{appointment.service}</td>
-                  <td>
-                    <span className={`status-badge status-${appointment.status?.toLowerCase()}`}>
-                      {appointment.status.toUpperCase() || 'Unknown'}
-                    </span>
-                  </td>
-                  <td>
-                    {appointment.status.toLowerCase() === 'pending' && (
-                      <button
-                        className="action-btn"
-                        onClick={() => cancelAppointment(appointment.id)} 
-                      >
-                        Cancel
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
         </table>
+        <div className="table-body-wrapper">
+          <table className="table-body">
+            <tbody>
+              {appointments.length === 0 ? (
+                <tr>
+                  <td colSpan="6">No appointments found.</td>
+                </tr>
+              ) : (
+                appointments.map((appointment, index) => (
+                  <tr key={appointment.id || index}>
+                    <td>{appointment.name}</td>
+                    <td>{appointment.date}</td>
+                    <td>{appointment.time}</td>
+                    <td>{appointment.service}</td>
+                    <td>
+                      <span className={`status-badge status-${appointment.status?.toLowerCase()}`}>
+                        {appointment.status?.toUpperCase() || 'UNKNOWN'}
+                      </span>
+                    </td>
+                    <td>
+                      {appointment.status?.toLowerCase() === 'pending' && (
+                        <button
+                          className="action-btn"
+                          onClick={() => cancelAppointment(appointment.id)}
+                        >
+                          Cancel
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

@@ -14,10 +14,27 @@
 
 .table-wrapper {
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: hidden;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
+}
+
+.table-header {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.table-body-wrapper {
+  max-height: 400px; /* Set a fixed max-height for scrolling */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.table-body {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
 }
 
 .table-wrapper table {
@@ -120,6 +137,11 @@
     background-color: #e0e7ff;
     color: #5d5d5d;
 }
+
+.status-accepted {
+    background-color: #72fd89;
+    color: #0d8b14;
+}
   
 .status-line {
     margin-bottom: 4px;
@@ -172,7 +194,7 @@
 }
   
 .dropdown-menu button:first-child {
-    border-top-left-radius: 8px
+    border-top-left-radius: 8px;
 }  
 
 @media (max-width: 767px) {

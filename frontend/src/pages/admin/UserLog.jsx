@@ -23,7 +23,6 @@ const UserLog = () => {
     }
   };
 
-
   const fetchCurrentUser = async () => {
     try {
       const res = await fetch('http://localhost:3001/auth/fetch', {
@@ -40,7 +39,6 @@ const UserLog = () => {
       alert(error.message);
     }
   };
-
 
   const handleDelete = async (id) => {
     if (!currentUser || currentUser.role !== 'admin') {
@@ -75,7 +73,7 @@ const UserLog = () => {
   return (
     <div className="dashboard-container">
       <div className="table-wrapper">
-        <table>
+        <table className="table-header">
           <thead>
             <tr>
               <th>ID</th>
@@ -84,23 +82,27 @@ const UserLog = () => {
               <th>ACTION</th>
             </tr>
           </thead>
-          <tbody>
-            {users.map((user, index) => (
-              <tr key={index}>
-                <td>{user._id}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>
-                  {currentUser?.role === 'admin' && (
-                    <button className="action-btn" onClick={() => handleDelete(user._id)}>
-                      Delete
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
         </table>
+        <div className="table-body-wrapper">
+          <table className="table-body">
+            <tbody>
+              {users.map((user, index) => (
+                <tr key={index}>
+                  <td>{user._id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>
+                    {currentUser?.role === 'admin' && (
+                      <button className="action-btn" onClick={() => handleDelete(user._id)}>
+                        Delete
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
