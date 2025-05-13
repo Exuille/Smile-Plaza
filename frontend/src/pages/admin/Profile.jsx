@@ -125,7 +125,7 @@ const Profile = () => {
     <div className="profile-container">
       <div className="profile-wrapper">
         <div className="profile-top-container">
-          <img className="profile-top-pic" src={images.logo} />
+          <img className="profile-top-pic" src="/default-profile.png" />
           <div className="profile-top-info">
             <p className="name"><strong>{name}</strong></p>
             <p className="email">{email}</p>
