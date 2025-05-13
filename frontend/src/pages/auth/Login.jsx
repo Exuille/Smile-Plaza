@@ -60,14 +60,14 @@ const Login = ({data}) => {
       <h2>Login</h2>
       <hr />
       <form className="auth-form">
-          <label htmlFor="email" className="auth-label">Email</label>
-          <input ref={emailRef} type="email" id="email" className="auth-input" required />
-          <label htmlFor="password" className="auth-label">Password</label>
-          <input ref={passwordRef} type="password" id="password" className="auth-input" required />
-        <button onClick={login} type="submit" className="auth-btn">Login</button>
+        <label htmlFor="email" className="auth-label">Email</label>
+        <input ref={emailRef} type="email" id="email" className="auth-input" required />
+        <label htmlFor="password" className="auth-label">Password</label>
+        <input ref={passwordRef} type="password" id="password" className="auth-input" required />
         <div className="recapcha-container">
           <ReCAPTCHA ref={recaptcha} sitekey={import.meta.env.VITE_REACT_APP_SITE_KEY} />
         </div>
+        <button onClick={login} type="submit" className="auth-btn">Login</button>
       </form>
       <div className="signup-recovery-a">
         <a href="/signup" className="link"><strong>Create an account.</strong></a>
