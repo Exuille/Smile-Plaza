@@ -32,12 +32,9 @@ const createOrUpdateHolidayAnnouncement = async (holiday, userId) => {
       }
     }
 
-    const sentences = content.split('.').map(s => s.trim()).filter(s => s.length > 0);
-    const secondToLast = sentences[sentences.length - 2];
-
     if (existingAnnouncement) {
       existingAnnouncement.title = holiday.title
-      existingAnnouncement.content = secondToLast
+      existingAnnouncement.content = holiday.description
       existingAnnouncement.dateTime = holiday.date
       existingAnnouncement.priority = priority
       existingAnnouncement.timeRange = timeRange
@@ -374,7 +371,7 @@ export const deleteHoliday = catchAsync(async (req, res) => {
     })
   }
 
-  const holiday = await Holiday.findOne({ holidayID: req.params.id })
+  const holiday = await Holiday.findOne({ announcement: req.params.id })
 
   if (!holiday) {
     return res.status(404).json({
@@ -389,7 +386,7 @@ export const deleteHoliday = catchAsync(async (req, res) => {
   }
 
   // Delete the holiday
-  await Holiday.findOneAndDelete({ holidayID: req.params.id })
+  await Holiday.findOneAndDelete({ announcement: req.params.id })
 
   res.status(200).json({
     status: "success",

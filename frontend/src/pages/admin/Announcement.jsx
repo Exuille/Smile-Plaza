@@ -94,24 +94,35 @@ const Announcement = ({data}) => {
   }
 
   const deleteAppointment = async (idx) => {
-    const id = announcements[idx]["announcementID"]
+    // TODO add popup confirmation btn
 
-    try {
-      const res = await axios.delete(`http://localhost:3001/announcement/${id}`, {
-        headers: {Authorization: `Bearer ${token}`},
-        params: {id}
-      })
+    if (announcements[idx]['tag'] == "holiday") {
+      const id = announcements[idx]["_id"]
+      try {
+        const res = await axios.delete(`http://localhost:3001/holiday/${id}`, {
+          headers: { Authorization: `Bearer ${token}`}
+        })
+        console.log(res)
+      } catch(err) {
+        console.log(err)
+      }
+    } else {
+      const id = announcements[idx]["announcementID"]
+      try {
+        const res = await axios.delete(`http://localhost:3001/announcement/${id}`, {
+          headers: {Authorization: `Bearer ${token}`},
+          params: {id}
+        })
 
-      // TODO add popup confirmation btn
-      console.log(res.data)
-      setAnnouncements(prev => {
-        const newData = {...prev};
-        delete newData[idx];
-        return newData;
-      })
-    } catch (err) {
-      console.log(err)
+      } catch (err) {
+        console.log(err)
+      }
     }
+    setAnnouncements(prev => {
+      const newData = {...prev};
+      delete newData[idx];
+      return newData;
+    })
   }
 
   const selectTag = (e) => {
