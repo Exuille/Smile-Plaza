@@ -230,17 +230,24 @@ export const getAppointmentById = catchAsync(async (req, res) => {
 })
 
 export const updateAppointment = catchAsync(async (req, res) => {
+  const appointment = await Appointment.findById(req.params.id);
+
+  if (!appointment) {
+    return res.status(404).json({ status: "fail", message: "Appointment not found" });
+  }
+
+  if (appointment.status === 'Cancelled') {
+    return res.status(400).json({ status: "fail", message: "Cannot update a cancelled appointment" });
+  }
+
   const updated = await Appointment.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
-  })
+  });
 
-  if (!updated) {
-    return res.status(404).json({ status: "fail", message: "Appointment not found" })
-  }
+  res.status(200).json({ status: "success", data: { appointment: updated } });
+});
 
-  res.status(200).json({ status: "success", data: { appointment: updated } })
-})
 
 export const getAppointmentMetrics = catchAsync(async (req, res) => {
   const match = {}
