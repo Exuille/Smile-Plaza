@@ -8,7 +8,7 @@ const Dashboard = () => {
 
   const fetchUser = async () => {
     try {
-      const res = await fetch('http://localhost:3001/users/me', {
+      const res = await fetch('http://localhost:3001/auth/fetch', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,

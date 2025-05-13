@@ -1,6 +1,7 @@
 import Appointment from "../models/appointmentModel.js"
 import Holiday from "../models/holidayModel.js"
 import catchAsync from "../utils/catchAsync.js"
+import { sendEmail } from '../utils/emailService.js';
 
 export const createAppointment = catchAsync(async (req, res) => {
   const { selectedDate, selectedTimeSlot, service } = req.body
@@ -230,7 +231,7 @@ export const getAppointmentById = catchAsync(async (req, res) => {
 })
 
 export const updateAppointment = catchAsync(async (req, res) => {
-  const appointment = await Appointment.findById(req.params.id);
+  const appointment = await Appointment.findById(req.params.id).populate('patient', 'name email');
 
   if (!appointment) {
     return res.status(404).json({ status: "fail", message: "Appointment not found" });
@@ -240,10 +241,54 @@ export const updateAppointment = catchAsync(async (req, res) => {
     return res.status(400).json({ status: "fail", message: "Cannot update a cancelled appointment" });
   }
 
+  const statusChanged = req.body.status && req.body.status !== appointment.status;
+
   const updated = await Appointment.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
+
+  await updated.populate('patient', 'name email');
+
+  console.log(updated)
+  let message = '';
+
+  if (updated.status === 'accepted') {
+    message =
+      `Hi ${updated.patient.name || 'there'},\n\n` +
+      `Your appointment has been *accepted*.\n\n` +
+      `📅 Appointment Date & Time: ${new Date(updated.dateTime).toLocaleString()}\n` +
+      `🦷 Service: ${updated.service}\n\n` +
+      `Please arrive 10–15 minutes early. If you need to cancel or reschedule, let us know as soon as possible.\n\n` +
+      `Best regards,\n` +
+      `Smile Plaza Admin`;
+  } else if (updated.status === 'completed') {
+    message =
+      `Hi ${updated.patient.name || 'there'},\n\n` +
+      `Thank you for visiting Smile Plaza! Your appointment has been marked as *completed*.\n\n` +
+      `🦷 Service: ${updated.service}\n` +
+      `📅 Appointment Date & Time: ${new Date(updated.dateTime).toLocaleString()}\n\n` +
+      `We appreciate your trust in us. If you had a good experience, consider leaving a review or referring a friend!\n\n` +
+      `Best regards,\n` +
+      `Smile Plaza Admin`;
+  } else {
+    message =
+      `Hi ${updated.patient.name || 'there'},\n\n` +
+      `Your appointment status has been updated to: ${updated.status}.\n\n` +
+      `📅 Appointment Date & Time: ${new Date(updated.dateTime).toLocaleString()}\n` +
+      `🦷 Service: ${updated.service}\n\n` +
+      `Best regards,\n` +
+      `Smile Plaza Admin`;
+  }
+
+  if (statusChanged && appointment.patient.email) {
+    await sendEmail({
+    to: updated.patient.email,
+    subject: "Appointment Status Update",
+    text: message,
+  });
+
+  }
 
   res.status(200).json({ status: "success", data: { appointment: updated } });
 });

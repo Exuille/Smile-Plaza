@@ -23,6 +23,7 @@ app.use("/announcement", announcementRoutes)
 app.use("/holiday", holidayRoutes)
 app.use("/email", emailRoutes);
 
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500
