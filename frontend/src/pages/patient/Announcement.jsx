@@ -53,40 +53,37 @@ const Announcement = () => {
             <table className="clinic-table">
               <thead>
                 <tr>
-                  <th colSpan="2">Appointment Only</th>
+                  <th colSpan="2">Appointment Available</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
+                  <td>Sunday</td>
+                  <td>8:00 A.M. – 5:30 P.M.</td>
+                </tr>
+                <tr>
+                  <td>Monday</td>
+                  <td>8:00 A.M. – 5:30 P.M.</td>
+                </tr>
+                <tr>
                   <td>Tuesday</td>
-                  <td>9:00 A.M. – 4:00 P.M.</td>
+                  <td>8:00 A.M. – 5:30 P.M.</td>
                 </tr>
                 <tr>
                   <td>Wednesday</td>
-                  <td>9:00 A.M. – 4:00 P.M.</td>
+                  <td>8:00 A.M. – 5:30 P.M.</td>
                 </tr>
                 <tr>
                   <td>Thursday</td>
-                  <td>9:00 A.M. – 4:00 P.M.</td>
+                  <td>8:00 A.M. – 5:30 P.M.</td>
                 </tr>
                 <tr>
                   <td>Friday</td>
-                  <td>9:00 A.M. – 4:00 P.M.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr>
-                  <th colSpan="2">Walk-In Patient Only</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Tuesday</td>
-                  <td>9:00 A.M. – 4:00 P.M.</td>
+                  <td>8:00 A.M. – 5:30 P.M.</td>
                 </tr>
                 <tr>
-                  <td>Wednesday</td>
-                  <td>9:00 A.M. – 4:00 P.M.</td>
+                  <td>Saturday</td>
+                  <td>8:00 A.M. – 5:30 P.M.</td>
                 </tr>
               </tbody>
             </table>
