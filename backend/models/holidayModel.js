@@ -117,7 +117,7 @@ HolidaySchema.methods.generateAnnouncementContent = function () {
       content += ` ${this.description}`
     }
 
-    content += ". We apologize for any inconvenience and appreciate your understanding."
+    content += " We apologize for any inconvenience and appreciate your understanding."
   }
 
   return content

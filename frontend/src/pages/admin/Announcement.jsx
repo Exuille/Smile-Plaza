@@ -27,6 +27,8 @@ const Announcement = ({data}) => {
 
   const [announcements, setAnnouncements] = useState(null);
 
+  const [announcementsCnt, setAnnouncementsCnt] = useState(0);
+
   const titleInpRef = useRef();
   const dateInpRef = useRef();
   const contentInpRef = useRef();
@@ -39,7 +41,8 @@ const Announcement = ({data}) => {
           params: {priority: filteredPriority, tag: filteredTag}
         });
         if (res.data.status == "success") {
-          setAnnouncements(res.data.data.announcements)
+          setAnnouncements(res.data.data.announcements);
+          setAnnouncementsCnt(res.data.data.announcements.length)
         }
       } catch (err) {
         console.log(err)
@@ -47,7 +50,7 @@ const Announcement = ({data}) => {
     }
 
     getAllAnnouncements();
-  }, [announcementId, filteredTag, filteredPriority])
+  }, [announcementId, filteredTag, filteredPriority, announcementsCnt])
 
   const to12HourFormat = (time24) => {
     const [hour, minute] = time24.split(':').map(Number);
@@ -122,6 +125,9 @@ const Announcement = ({data}) => {
       const newData = {...prev};
       delete newData[idx];
       return newData;
+    })
+    setAnnouncementsCnt(prev => {
+      prev - 1
     })
   }
 
@@ -239,13 +245,16 @@ const Announcement = ({data}) => {
 
         console.log(res)
         alert("saved");
+        setAnnouncementsCnt(prev => prev + 1);
       } catch(err) {
         console.log(err)
       }
     }
 
     setSelectedTag("promo");
-    setSelectedPriority("normal")
+    setSelectedTime("fullDay");
+    setSelectedPriority("normal");
+
     setAnnouncementId(null);
     setPopupOpen(false);
     setId(null);
@@ -359,12 +368,24 @@ const Announcement = ({data}) => {
           </div>
           {announcements ? 
             Object.keys(announcements).map((idx) => {
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
               return (
-                <div key={idx} className="announcement-content-container">
+                <div
+                  key={idx}
+                  className="announcement-content-container"
+                  style={{
+                    backgroundColor:
+                      new Date(announcements[idx]['dateTime']) > today ? '' : '#e0e0e0'
+                  }}
+                >
                   <div className="announcement-title-container">
                     <h2>{announcements[idx]["title"]}</h2>
                     <div className="update-btn-container">
-                      <button id="edit" onClick={() => edit(idx)} className="green-btn"><i className='bx bx-edit-alt'></i></button>
+                      {new Date(announcements[idx]['dateTime']) > today ? 
+                        <button id="edit" onClick={() => edit(idx)} className="green-btn"><i className='bx bx-edit-alt'></i></button>
+                        : null
+                      }
                       <button onClick={() => deleteAppointment(idx)} className="red-btn"><i className='bx bx-trash' ></i></button>
                     </div>
                   </div>

@@ -74,16 +74,26 @@ export const getAllAnnouncements = catchAsync(async (req, res) => {
     filter.tag = tag
   }
 
-  const announcements = await Announcement.find(filter).sort({
-    priority: -1, // Sort by priority (urgent first)
-    dateTime: -1, // Then by date (newest first)
-  })
+  const pastFilter = {...filter}
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Set time to 00:00:00.000 (start of today)
+  filter.dateTime = { $gt: today };
+  pastFilter.dateTime = {$lte: today};
+
+  const announcements = await Announcement.find(filter).sort({dateTime: 1, priority: -1})
+  const pastAnnounements = await Announcement.find(pastFilter).sort({dateTime: 1, priority: -1})
+  
+  console.log(announcements)
+  console.log(pastAnnounements)
+
+  const combined = [...announcements, ...pastAnnounements]
+  
   res.status(200).json({
     status: "success",
     results: announcements.length,
     data: {
-      announcements,
+      "announcements": combined,
     },
   })
 })
