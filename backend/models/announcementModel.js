@@ -19,6 +19,13 @@ const AnnouncementSchema = new mongoose.Schema(
       required: true,
       default: Date.now,
     },
+    isFullDay: {
+      type: Boolean,
+      default: false,
+    },
+    halfDayAM: {
+      type: Boolean,
+    },
     tag: {
       type: String,
       enum: ["holiday", "promo", "others"],

@@ -5,11 +5,15 @@ import catchAsync from "../utils/catchAsync.js"
 
 // Helper function to create or update an announcement for a holiday
 const createOrUpdateHolidayAnnouncement = async (holiday, userId) => {
+  const halfDayAMstartTime = "08:00";
+
+
   // Generate announcement content
   const content = holiday.generateAnnouncementContent()
 
   // Determine priority based on how soon the holiday is
   const priority = holiday.determineAnnouncementPriority()
+
 
   // If there's already an associated announcement, update it
   if (holiday.announcement) {
@@ -26,14 +30,28 @@ const createOrUpdateHolidayAnnouncement = async (holiday, userId) => {
     }
   }
 
-  // Otherwise, create a new announcement
-  const newAnnouncement = await Announcement.create({
+  const newHolidayData = {
     title: `Holiday: ${holiday.title}`,
-    content: content,
-    dateTime: new Date(),
+    content,
+    dateTime: holiday.date,
+    isFullDay: holiday.isFullDay,
     priority: priority,
+    tag: "holiday",
     createdBy: userId,
-  })
+  }
+
+  if (!holiday.isFullDay) {
+    const extractedTime = holiday.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+    console.log(extractedTime)
+    if (!(holiday.isFullDay)) {
+      newHolidayData.halfDayAM = extractedTime == halfDayAMstartTime
+    }
+  }
+
+  console.log(newHolidayData)
+
+  // Otherwise, create a new announcement
+  const newAnnouncement = await Announcement.create(newHolidayData);
 
   // Update the holiday with the announcement reference
   holiday.announcement = newAnnouncement._id
@@ -154,8 +172,8 @@ export const createHoliday = catchAsync(async (req, res) => {
 
   // Add startTime and endTime only for partial day holidays
   if (isFullDay === false) {
-    holidayData.startTime = new Date(startTime)
-    holidayData.endTime = new Date(endTime)
+    holidayData.startTime = new Date(date + "T" + startTime)
+    holidayData.endTime = new Date(date + "T" + endTime)
   }
 
   const newHoliday = await Holiday.create(holidayData)

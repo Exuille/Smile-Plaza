@@ -5,9 +5,15 @@ import axios from "axios";
 const Announcement = ({data}) => {
   const token = data.token;
 
+  const halfDayAMstartTime = "08:00";
+  const halfDayAMendTime = "13:00";
+  const halfDayPMstartTime = "13:00";
+  const halfDayPMendTime = "17:00";
+
   const [popupOpen, setPopupOpen] = useState(false);
   const [popupAdd, setPopupAdd] = useState(true);
   const [selectedTag, setSelectedTag] = useState("promo");
+  const [selectedTime, setSelectedTime] = useState("fullDay");
   const [selectedPriority, setSelectedPriority] = useState("normal");
 
   const [filteredTag, setFilteredTag] = useState("");
@@ -17,6 +23,7 @@ const Announcement = ({data}) => {
   const [title, setTitle] = useState(null);
   const [date, setDate] = useState(null);
   const [content, setContent] = useState(null);
+  const [timeRange, setTimeRange] = useState(null);
 
   const [announcements, setAnnouncements] = useState(null);
 
@@ -42,6 +49,13 @@ const Announcement = ({data}) => {
 
     getAllAnnouncements();
   }, [announcementId, filteredTag, filteredPriority])
+
+  const to12HourFormat = (time24) => {
+    const [hour, minute] = time24.split(':').map(Number);
+    const period = hour >= 12 ? 'PM' : 'AM';
+    const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+    return `${hour12}:${minute.toString().padStart(2, '0')} ${period}`;
+  }
 
   const filterTag = (e) => {
     setFilteredTag(e.target.value)
@@ -95,11 +109,15 @@ const Announcement = ({data}) => {
   }
 
   const selectTag = (e) => {
-    setSelectedTag(e.target.value)
+    setSelectedTag(e.target.value);
   }
 
   const selectPriority = (e) => {
-    setSelectedPriority(e.target.value)
+    setSelectedPriority(e.target.value);
+  }
+
+  const selectTime = (e) => {
+    setSelectedTime(e.target.value);
   }
 
   const save = async () => {
@@ -141,14 +159,39 @@ const Announcement = ({data}) => {
       }
 
       try {
-        const res = await axios.post("http://localhost:3001/announcement/create", {
-          title, content, date, "priority": selectedPriority, "tag": selectedTag
-        }, {headers: {
-          Authorization: `Bearer ${token}`
-        }})
+        console.log(selectedTag)
+        let res;
+        if (selectedTag == "holiday") {
+          let startTime, endTime, isFullDay;
+          if (selectedTime == "fullDay") {
+            isFullDay = true
+          } else {
+            isFullDay = false
+            if (selectedTime == "halfDayAM") {
+              startTime = halfDayAMstartTime
+              endTime = halfDayAMendTime
+            } else if (selectedTime == "halfDayPM") {
+              startTime = halfDayPMstartTime
+              endTime = halfDayPMendTime
+            }
+          }
+          console.log(title, content, date, selectedTime, startTime, endTime);
+          res = await axios.post("http://localhost:3001/holiday/create", {
+            title, "description": content, date, isFullDay, startTime, endTime
+          }, {headers : {
+            Authorization: `Bearer ${token}`
+          }})
+        } else {
+          res = await axios.post("http://localhost:3001/announcement/create", {
+            title, content, date, "priority": selectedPriority, "tag": selectedTag
+          }, {headers: {
+            Authorization: `Bearer ${token}`
+          }})
+        }
 
         console.log(res)
         alert("saved");
+        location.reload()
       } catch(err) {
         console.log(err)
       }
@@ -199,17 +242,29 @@ const Announcement = ({data}) => {
               </select>
             </div>
             <div className="inp-container">
-              <label>Priority: </label>
-              <select onChange={selectPriority} value={selectedPriority}>
-                <option onChange={selectPriority} value="normal">Normal</option>
-                <option onChange={selectPriority} value="important">Important</option>
-                <option onChange={selectPriority} value="urgent">Urgent</option>
+              <label>Time: </label>
+              <select onChange={selectTime} value={selectedTime}>
+                <option onChange={selectTime} value="fullDay">Full Day</option>
+                <option onChange={selectTime} value="halfDayAM">Half Day (8:00 AM - 1:00 PM)</option>
+                <option onChange={selectTime} value="halfDayPM">Half Day (1:00 PM - 5:00 PM)</option>
               </select>
             </div>
             <div className="inp-container">
               <label>Date: </label>
               <input type="date" value={date ? date : ""} id="date" ref={dateInpRef} onChange={changeValue} />
             </div>
+            {selectedTag && selectedTag == "holiday" ?
+              null
+            :
+              <div className="inp-container">
+                <label>Priority: </label>
+                <select onChange={selectPriority} value={selectedPriority}>
+                  <option onChange={selectPriority} value="normal">Normal</option>
+                  <option onChange={selectPriority} value="important">Important</option>
+                  <option onChange={selectPriority} value="urgent">Urgent</option>
+                </select>
+              </div>
+            }
             <div className="inp-container">
               <label>Content: </label>
               <input value={content ? content : ""} id="content" ref={contentInpRef} onChange={changeValue} />
@@ -237,6 +292,8 @@ const Announcement = ({data}) => {
               </select>
             </div>
             <div>
+            </div>
+            <div>
               <label>Priority: </label>
               <select onChange={filterPriority} value={filteredPriority}>
                 <option onChange={filterPriority} value="">All</option>
@@ -261,10 +318,19 @@ const Announcement = ({data}) => {
                   {
                     new Date(announcements[idx]['dateTime']).toLocaleString('en-US', {
                       year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
+                      month: 'long',
+                      day: 'numeric',
                       timeZone: 'UTC'
-                    })
+                    }) 
+                  } | {announcements[idx]['halfDayAM'] !== undefined ? (
+                      announcements[idx]['halfDayAM'] == true ? (
+                        `${to12HourFormat(halfDayAMstartTime)} - ${to12HourFormat(halfDayAMendTime)}`
+                      ) : (
+                        `${to12HourFormat(halfDayPMstartTime)} - ${to12HourFormat(halfDayPMendTime)}`
+                      )
+                    ) : (
+                      `${to12HourFormat(halfDayAMstartTime)} - ${to12HourFormat(halfDayPMendTime)}`
+                    )
                   }
                   </h3>
                   <div className="tags-container">

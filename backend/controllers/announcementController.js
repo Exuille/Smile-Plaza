@@ -34,7 +34,7 @@ export const createAnnouncement = catchAsync(async (req, res) => {
     content,
     dateTime: announcementDate,
     priority: priority || "normal",
-    tag: tag || "holiday",
+    tag: tag || "promo",
     createdBy: req.user.id,
   })
 
@@ -116,6 +116,8 @@ export const updateAnnouncement = catchAsync(async (req, res) => {
   }
 
   const { title, content, date, tag, priority } = req.body
+
+  console.log(date, "aaaa")
 
   // Validate priority if provided
   if (priority && !["normal", "important", "urgent"].includes(priority)) {

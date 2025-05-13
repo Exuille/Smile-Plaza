@@ -100,7 +100,7 @@ const Announcement = () => {
               announcements.map((item, index) => (
                 <div className="announcement-content" key={index}>
                   <h5>Title: {item.title}</h5>
-                  <p className="date">{new Date(item.date).toLocaleDateString('en-US', {
+                  <p className="date">{new Date(item.dateTime).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric'
