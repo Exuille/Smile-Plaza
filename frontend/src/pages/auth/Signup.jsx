@@ -10,34 +10,45 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [feedback, setFeedback] = useState({});
 
-  const signup = async(e) => {
+  const signup = async (e) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
-      addValue("fields", "All fields are required.")
-    } else {
-      const name = firstName + " " + lastName
-      try {
-        const res = await axios.post("http://localhost:3001/auth/register", {
-          name, email, password, role:"patient"
-        })
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (res.status == 201) {
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      addValue("fields", "All fields are required.");
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      addValue("emailFormat", "Please enter a valid email address.");
+      return;
+    } else {
+      removeValue("emailFormat");
+    }
+
+    const name = firstName + " " + lastName;
+
+    try {
+      const res = await axios.post("http://localhost:3001/auth/register", {
+        name, email, password, role: "patient"
+      });
+
+      if (res.status == 201) {
+        setFeedback({ success: "Account created." });
+      }
+    } catch (err) {
+      if (err.response) {
+        if (err.response.status === 201 || err.response.data?.message?.includes("expiresIn")) {
           setFeedback({ success: "Account created." });
-        }
-      } catch(err) {
-        if (err.response) {
-          if (err.response.status === 201 || err.response.data?.message?.includes("expiresIn")) {
-            setFeedback({ success: "Account created." });
-          } else {
-            addValue("res", err.response.data.message);
-            console.error("Server error:", err.response.data.message);
-          }
-        } else if (err.request) {
-          console.error("No response:", err.request);
         } else {
-          console.error("Request error:", err.message);
+          addValue("res", err.response.data.message);
+          console.error("Server error:", err.response.data.message);
         }
+      } else if (err.request) {
+        console.error("No response:", err.request);
+      } else {
+        console.error("Request error:", err.message);
       }
     }
   }
