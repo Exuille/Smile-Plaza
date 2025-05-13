@@ -19,11 +19,28 @@ const createOrUpdateHolidayAnnouncement = async (holiday, userId) => {
   if (holiday.announcement) {
     const existingAnnouncement = await Announcement.findById(holiday.announcement)
 
+    console.log(holiday)
+    let timeRange
+    if (holiday.isFullDay == true) {
+      timeRange = "fullDay"
+    } else {
+      const time = holiday.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+      if (time == halfDayAMstartTime) {
+        timeRange = "halfDayAM"
+      } else {
+        timeRange = "halfDayPM"
+      }
+    }
+
+    const sentences = content.split('.').map(s => s.trim()).filter(s => s.length > 0);
+    const secondToLast = sentences[sentences.length - 2];
+
     if (existingAnnouncement) {
-      existingAnnouncement.title = `Holiday: ${holiday.title}`
-      existingAnnouncement.content = content
-      existingAnnouncement.dateTime = new Date()
+      existingAnnouncement.title = holiday.title
+      existingAnnouncement.content = secondToLast
+      existingAnnouncement.dateTime = holiday.date
       existingAnnouncement.priority = priority
+      existingAnnouncement.timeRange = timeRange
 
       await existingAnnouncement.save()
       return existingAnnouncement
@@ -194,6 +211,7 @@ export const createHoliday = catchAsync(async (req, res) => {
 
 export const updateHoliday = catchAsync(async (req, res) => {
   // Check if user is admin
+
   if (req.user.role !== "admin") {
     return res.status(403).json({
       status: "fail",
@@ -203,7 +221,7 @@ export const updateHoliday = catchAsync(async (req, res) => {
 
   const { title, description, date, isFullDay, startTime, endTime } = req.body
 
-  const holiday = await Holiday.findOne({ holidayID: req.params.id })
+  const holiday = await Holiday.findOne({ announcement: req.params.id })
 
   if (!holiday) {
     return res.status(404).json({
@@ -211,6 +229,7 @@ export const updateHoliday = catchAsync(async (req, res) => {
       message: "Holiday not found",
     })
   }
+
 
   // Store original values to check if we need to cancel appointments
   const originalDate = new Date(holiday.date)
@@ -238,8 +257,8 @@ export const updateHoliday = catchAsync(async (req, res) => {
     // If changing to full day, we can keep the existing times
     // If changing to partial day, we need times
     if (isFullDay === false) {
-      if (startTime) holiday.startTime = new Date(startTime)
-      if (endTime) holiday.endTime = new Date(endTime)
+      if (startTime) holiday.startTime = new Date(date + "T" + startTime)
+      if (endTime) holiday.endTime = new Date(date + "T" + endTime)
 
       // Validate that endTime is after startTime
       if (holiday.startTime >= holiday.endTime) {
@@ -252,8 +271,8 @@ export const updateHoliday = catchAsync(async (req, res) => {
   } else {
     // If not changing isFullDay but updating times for a partial day holiday
     if (!holiday.isFullDay) {
-      if (startTime) holiday.startTime = new Date(startTime)
-      if (endTime) holiday.endTime = new Date(endTime)
+      if (startTime) holiday.startTime = new Date(date + "T" + startTime)
+      if (endTime) holiday.endTime = new Date(date + "T" + endTime)
 
       // Validate that endTime is after startTime
       if (holiday.startTime >= holiday.endTime) {

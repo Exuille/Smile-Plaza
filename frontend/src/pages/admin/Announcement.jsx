@@ -20,6 +20,7 @@ const Announcement = ({data}) => {
   const [filteredPriority, setFilteredPriority] = useState("");
 
   const [announcementId, setAnnouncementId] = useState(null);
+  const [id, setId] = useState(null);
   const [title, setTitle] = useState(null);
   const [date, setDate] = useState(null);
   const [content, setContent] = useState(null);
@@ -71,10 +72,12 @@ const Announcement = ({data}) => {
       const dateValue = date.toISOString().split('T')[0];
 
       setAnnouncementId(announcements[idx]["announcementID"])
+      setId(announcements[idx]["_id"])
       setTitle(announcements[idx]["title"])
       setSelectedTag(announcements[idx]["tag"])
       setSelectedPriority(announcements[idx]["priority"])
       setDate(dateValue)
+      setSelectedTime(announcements[idx]["timeRange"])
       setContent(announcements[idx]["content"])
     } else {
       // create new announcement
@@ -82,6 +85,7 @@ const Announcement = ({data}) => {
       setTitle(null)
       setSelectedPriority("normal")
       setSelectedTag("promo");
+      setSelectedTime("fullDay");
       setDate(null)
       setContent(null)
     }
@@ -128,6 +132,7 @@ const Announcement = ({data}) => {
         titleInpRef.current.value,
         selectedTag,
         selectedPriority,
+        selectedTime,
         dateInpRef.current.value, 
         contentInpRef.current.value, 
       );
@@ -138,10 +143,28 @@ const Announcement = ({data}) => {
 
       if (selectedTag == "holiday") {
         console.log('call holiday route')
+        const isFullDay = selectedTime == "fullDay"
+        let startTime, endTime
+        if (!isFullDay) {
+          if (selectedTime == "halfDayAM") {
+            startTime = halfDayAMstartTime
+            endTime = halfDayAMendTime
+          } else if (selectedTime == "halfDayPM") {
+            startTime = halfDayPMstartTime
+            endTime = halfDayPMendTime
+          }
+        }
         try {
-          const res = await axios.put(`http://localhost:3001/holiday/${announcementId}`, {
-
-          })
+          const res = await axios.put(`http://localhost:3001/holiday/${id}`, {
+            "title": titleInpRef.current.value, 
+            "description": contentInpRef.current.value, 
+            "date": dateInpRef.current.value, 
+            isFullDay,
+            startTime, 
+            endTime
+          }, {headers: {
+            Authorization: `Bearer ${token}`
+          }})
         } catch(err) {
           console.log(err)
         }
