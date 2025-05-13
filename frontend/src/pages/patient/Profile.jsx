@@ -7,6 +7,8 @@ const Profile = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [contact, setContact] = useState('');
+  const [userId, setUserId] = useState(null); 
+  const [error, setError] = useState('');
 
   const infoBtns = useRef();
   const nameInp = useRef();
@@ -35,6 +37,7 @@ const Profile = () => {
         console.log('Fetched user:', data);
 
         // Set user data to state
+        setUserId(data.data.id);  
         setName(data.data.name || '');
         setEmail(data.data.email || '');
         setContact(data.data.contact || '');
@@ -61,13 +64,46 @@ const Profile = () => {
     contactInp.current.disabled = true;
   };
 
-  const save = () => {
+  const save = async () => {
+  try {
+    setError('');
     infoBtns.current.style.display = 'none';
     nameInp.current.disabled = true;
     emailInp.current.disabled = true;
     contactInp.current.disabled = true;
-    alert('Information saved (you can hook this up to a PUT route)');
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('You are not authorized to edit this account.');
+      return;
+    }
+
+    const response = await fetch(`http://localhost:3001/auth/account/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        contactInfo: contact,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to save changes');
+    }
+
+    alert('Information saved successfully');
+  } catch (err) {
+    console.error(err);
+    setError(err.message || 'Unable to save information');
+  }
   };
+
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -144,7 +180,7 @@ const Profile = () => {
             <button onClick={editProfile} className="btn defaultBtn">Edit Profile</button>
             <button className="btn defaultBtn">Reset Password</button>
           </div>
-          <button className="btn deleteBtn" onClick={deleteAcc}>Delete Profile</button>
+         {/*  <button className="btn deleteBtn" onClick={deleteAcc}>Delete Profile</button> */}
         </div>
       </div>
     </div>
