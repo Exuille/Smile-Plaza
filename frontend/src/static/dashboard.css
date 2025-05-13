@@ -26,9 +26,8 @@
 }
 
 .table-body-wrapper {
-  max-height: 400px; /* Set a fixed max-height for scrolling */
+  max-height: 400px;
   overflow-y: auto;
-  overflow-x: hidden;
 }
 
 .table-body {
