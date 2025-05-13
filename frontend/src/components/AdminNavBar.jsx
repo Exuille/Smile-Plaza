@@ -15,7 +15,7 @@ const AdminNavBar = () => {
   return (
     <nav className="navbar">
       <div className="nav-start">
-        <img src="logo.png" alt="Smile Plaza Logo" className="logo" />
+        <img src="/logo.png" alt="Smile Plaza Logo" className="logo" />
         <div className="text-container">
           <h2>Smile Plaza</h2>
           <h3>Dental Center</h3>
@@ -52,7 +52,7 @@ const AdminNavBar = () => {
 
       <div className={`nav-end admin ${menuOpen ? 'mobile-visible' : ''}`}>
         <a style={{cursor: "pointer"}} onClick={logout} className="login-btn">Logout</a>
-        <a href="/admin/profile"><img src="default-profile.png" className="profile-picture" alt="Profile Picture" /></a>
+        <a href="/admin/profile"><img src="/default-profile.png" className="profile-picture" alt="Profile Picture" /></a>
       </div>
     </nav>
   );

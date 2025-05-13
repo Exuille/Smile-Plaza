@@ -23,12 +23,16 @@ const Signup = () => {
         })
 
         if (res.status == 201) {
-          setFeedback("Account created.")
+          setFeedback({ success: "Account created." });
         }
       } catch(err) {
         if (err.response) {
-          addValue("res", err.response.data.message)
-          console.error("Server error:", err.response.data.message);
+          if (err.response.status === 201 || err.response.data?.message?.includes("expiresIn")) {
+            setFeedback({ success: "Account created." });
+          } else {
+            addValue("res", err.response.data.message);
+            console.error("Server error:", err.response.data.message);
+          }
         } else if (err.request) {
           console.error("No response:", err.request);
         } else {
@@ -159,13 +163,15 @@ const Signup = () => {
         <a href="/login" className="link"><strong>Already have an account?</strong></a>
       </div>
       <div className="feedback-container">
-        {feedback ? 
+        {feedback &&
           Object.keys(feedback).map((key) => {
+            const isSuccess = key === "success";
             return (
-              <p key={key} className="feedback">{feedback[key]}</p>
-            )
-          })
-        : null}
+              <p key={key} className={`feedback ${isSuccess ? 'success-feedback' : 'error-feedback'}`}>
+                {feedback[key]}
+              </p>
+            );
+          })}
       </div>
     </div>
   );

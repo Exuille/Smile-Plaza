@@ -1,6 +1,6 @@
-button {
+.announcement-container-admin button {
 	padding: 8px 18px;
-	font-size: 1.3rem;
+	border: none;
 	border-radius: 8px;
 	color: white;
 	cursor: pointer;
@@ -11,7 +11,7 @@ button {
     align-items: center;
     justify-content: stretch;
     flex-direction: column;
-    min-height: 80vh;
+    height: 80vh;
     width: 80%;
     margin: 0 auto 3rem;
     background: #ffffff;
@@ -67,8 +67,8 @@ button {
 
 .popup-btns button {
 	font-size: 1rem;
+	border: none;
 }
-
 
 .announcement-content-main {
 	display: flex;
@@ -86,6 +86,9 @@ button {
 
 .announcement-btn-container button {
 	background-color: green;
+	border: none;
+	font-size: 1rem;
+	font-weight: 500;
 }
 
 .announcement-content-container {
@@ -118,7 +121,7 @@ button {
 
 .update-btn-container {
 	display: flex;
-	gap: 18px;
+	gap: 6px;
 }
 
 .green-btn {
@@ -132,7 +135,6 @@ button {
 .announcement-content {
 	padding-left: 30px;
 }
-
 
 .filter-container {
 	display: flex;
@@ -150,8 +152,9 @@ button {
 	display: flex;
 	margin-top: 10px;
 	color: white;
-	font-size: 0.8rem;
-	gap: 10px;
+	font-size: 0.7rem;
+	font-weight: 400 !important;
+	gap: 6px;
 }
 
 .filter-priority, .filter-tag {
@@ -172,7 +175,6 @@ button {
 	.announcement-container-admin {
 	    min-height: 50%;
 	    width: 90%;
-	    overflow: hidden;
 	}
 
 	button {

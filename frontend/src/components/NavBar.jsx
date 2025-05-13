@@ -18,7 +18,7 @@ const NavBar = ({data}) => {
   return (
     <nav className="navbar">
       <div className="nav-start">
-        <img src="logo.png" alt="Smile Plaza Logo" className="logo" />
+        <img src="/logo.png" alt="Smile Plaza Logo" className="logo" />
         <div className="text-container">
           <h2>Smile Plaza</h2>
           <h3>Dental Center</h3>
@@ -61,7 +61,7 @@ const NavBar = ({data}) => {
         token ?
           <div className="nav-end-signin">
             <a style={{cursor: "pointer"}} onClick={logout} className="login-btn">Logout</a>
-            <a href="/profile"><img src="default-profile.png" className="profile-picture" alt="Profile Picture" /></a>
+            <a href="/profile"><img src="/default-profile.png" className="profile-picture" alt="Profile Picture" /></a>
           </div>
         : 
           <NavLink to="/login" className="login-btn">Login</NavLink>

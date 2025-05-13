@@ -201,8 +201,4 @@
         width: 90%;
         overflow-x: hidden;
     }
-    
-    .table-wrapper {
-        overflow-x: auto;
-    }
 }

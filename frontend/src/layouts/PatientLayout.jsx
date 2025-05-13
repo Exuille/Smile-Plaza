@@ -7,7 +7,7 @@ const PatientLayout = () => {
 
   return <div
       style={{
-        backgroundImage: "url('main-background.png')",
+        backgroundImage: "url('/main-background.png')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
