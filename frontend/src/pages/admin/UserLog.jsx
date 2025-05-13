@@ -1,16 +1,76 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const UserLog = () => {
-  const users = [
-    {
-      name: 'John Doe',
-      date: '2025-05-01',
-      time: '10:00 AM',
-      service: 'Dental Cleaning',
-      status: 'Completed',
-      feedback: 'Nice.'
+  const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const token = localStorage.getItem('token');
+
+  const fetchUsers = async () => {
+    try {
+      const res = await fetch('http://localhost:3001/auth/users', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Failed to fetch users');
+
+      setUsers(Array.isArray(data) ? data : data.users || []);
+    } catch (error) {
+      alert(error.message);
     }
-  ];
+  };
+
+
+  const fetchCurrentUser = async () => {
+    try {
+      const res = await fetch('http://localhost:3001/auth/fetch', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Failed to fetch current user');
+      
+      setCurrentUser(data.data); 
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+
+  const handleDelete = async (id) => {
+    if (!currentUser || currentUser.role !== 'admin') {
+      alert('Unauthorized: Only admins can delete users.');
+      return;
+    }
+
+    const confirmDelete = window.confirm('Are you sure you want to delete this user?');
+    if (!confirmDelete) return;
+
+    try {
+      const res = await fetch(`http://localhost:3001/auth/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Failed to delete user');
+      alert('User deleted successfully');
+      fetchUsers(); 
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchCurrentUser();
+    fetchUsers();
+  }, []);
 
   return (
     <div className="dashboard-container">
@@ -27,10 +87,16 @@ const UserLog = () => {
           <tbody>
             {users.map((user, index) => (
               <tr key={index}>
+                <td>{user._id}</td>
                 <td>{user.name}</td>
-                <td>{user.date}</td>
-                <td>{user.time}</td>
-                <td><button className="action-btn">Delete</button></td>
+                <td>{user.email}</td>
+                <td>
+                  {currentUser?.role === 'admin' && (
+                    <button className="action-btn" onClick={() => handleDelete(user._id)}>
+                      Delete
+                    </button>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>

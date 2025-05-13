@@ -153,26 +153,28 @@ export const fetchUser = catchAsync(async (req, res) => {
             id: user._id,
             name: user.name,
             email: user.email,
-            contact: user.contactInfo || null
+            contact: user.contactInfo || null,
+            role: user.role
         }
     });
 });
 
 export const fetchAllUsers = catchAsync(async (req, res) => {
-    const users = await User.find({}).select("-password -__v");
-    if (!users) {
-        return res.status(404).json({
-            status: "fail",
-            message: "No users found"
-        });
-    }
-    res.status(200).json({
-        status: "success",
-        data: {
-            users
-        }
+  const users = await User.find({}).select("-password -__v");
+
+  if (!users || users.length === 0) {
+    return res.status(404).json({
+      status: "fail",
+      message: "No users found"
     });
+  }
+
+  res.status(200).json({
+    status: "success",
+    users
+  });
 });
+
 
 export const updatePass = catchAsync(async (req, res) => {
     const { password } = req.body;
@@ -360,5 +362,30 @@ export const editAccount = catchAsync(async (req, res) => {
         data: {
             user: updatedUser
         }
+    });
+});
+
+export const deleteUser = catchAsync(async (req, res) => {
+    const userIdToDelete = req.params.id;
+
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({
+            status: 'fail',
+            message: 'Only admins are allowed to delete users'
+        });
+    }
+
+    const user = await User.findByIdAndDelete(userIdToDelete);
+
+    if (!user) {
+        return res.status(404).json({
+            status: 'fail',
+            message: 'User not found'
+        });
+    }
+
+    res.status(200).json({
+        status: 'success',
+        message: 'User deleted successfully'
     });
 });
