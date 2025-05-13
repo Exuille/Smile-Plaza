@@ -136,6 +136,16 @@ const Signup = () => {
     }
   }
 
+  useEffect(() => {
+    if (feedback.success) {
+      const timer = setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [feedback.success]);
+
   return (
     <div className="signup-container auth-container">
       <h2>Sign Up</h2>
