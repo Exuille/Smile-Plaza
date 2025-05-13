@@ -181,7 +181,7 @@ const Profile = () => {
             <button onClick={editProfile} className="btn defaultBtn">Edit Profile</button>
             <button className="btn defaultBtn">Reset Password</button>
           </div>
-          <button className="btn deleteBtn" onClick={deleteAcc}>Delete Profile</button>
+          {/* <button className="btn deleteBtn" onClick={deleteAcc}>Delete Profile</button> */}
         </div>
       </div>
     </div>
